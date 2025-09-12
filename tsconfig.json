@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@messages/*": ["./messages/*"],
-      "@i18/*": ["./src/shared/configs/i18/index.ts"]
+      "@i18/*": ["./src/shared/configs/i18/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

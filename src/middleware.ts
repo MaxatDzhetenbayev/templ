@@ -1,6 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 
-import { routing } from "@i18/";
+import { routing } from "@i18/routing";
 
 export default createMiddleware(routing);
 
