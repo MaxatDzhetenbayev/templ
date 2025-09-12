@@ -5,3 +5,4 @@
 export * from "./axios-client";
 export * from "./query-client";
 export * from "./useCustomMutation";
+export * from "./custom-instance";

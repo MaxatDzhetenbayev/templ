@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 
 import { useUpdateUserProfile } from "../application/use-cases/update-user-profile";
 import { IUser } from "../types";
+import { useUpdatePet } from '@/shared/api/generated';
 
 export const UpdateUserForm = () => {
   const { register, handleSubmit, reset } = useForm<IUser>();
   const { mutate } = useUpdateUserProfile({ reset });
+	useUpdatePet()
 
   return (
     <form
