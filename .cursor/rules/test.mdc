@@ -58,6 +58,9 @@ alwaysApply: true
 - Tests must be **clear, isolated, and independent**.
 - Use mocks (`jest.mock` / `vi.mock`) for API calls or dependencies.
 - UI tests must follow RTL best practices: `screen`, `userEvent`, `findByRole`.
+- Все названия и описания тестов должны быть написаны на русском языке.
+  - Тексты в `describe`, `it` и `test` — только на русском.
+  - Требование распространяется на все типы тестов: unit, component, integration и e2e.
 
 # 🚦 TDD Rule (Test-Driven Development)
 
