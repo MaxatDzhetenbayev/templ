@@ -53,7 +53,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
       setIsEditing(false);
       onUserUpdate?.(user);
     } catch (error) {
-      console.error("Failed to update user:", error);
+      void error;
     }
   };
 
