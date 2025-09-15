@@ -2,6 +2,22 @@
 
 Этот репозиторий — эталон реализации «Crystal Architecture» для Next.js 13+ с App Router. Архитектура делает проект модульным, предсказуемым и масштабируемым: каждая функциональность изолирована в собственном модуле внутри `src/modules/`, общие части — в `src/shared/`.
 
+### Оглавление
+
+- [Быстрый старт](#быстрый-старт)
+- [Структура проекта](#структура-проекта)
+- [Как создать новый модуль](#как-создать-новый-модуль)
+- [Импорты и код-стайл](#импорты-и-код-стайл)
+- [Тестирование (Vitest, RTL, Playwright)](#тестирование-vitest-rtl-playwright)
+- [Работа с API (orval, axios, react-query)](#работа-с-api-orval-axios-react-query)
+- [Локализация](#локализация)
+- [UI: shadcn/ui](#ui-shadcnui)
+- [Баррели (barrelsby)](#баррели-barrelsby)
+- [Storybook](#storybook)
+- [Пример использования модуля](#пример-использования-модуля)
+- [Требования к качеству](#требования-к-качеству)
+- [Полезные ссылки](#полезные-ссылки)
+
 ### Ключевые принципы
 
 - **Модульность**: всё, что относится к фиче, живёт в её модуле.
@@ -252,3 +268,153 @@ const { updateUser, isUpdating } = useUser(userId);
 - Playwright — `https://playwright.dev/`
 - Zod — `https://zod.dev/`
 - Orval — `https://orval.dev/`
+
+---
+
+## UI: shadcn/ui
+
+Проект использует библиотеку компонентов shadcn/ui на базе Tailwind CSS v4.
+
+- **Инициализация (уже выполнено):**
+
+  - Конфигурация хранится в `components.json`.
+  - Tailwind подключён в `src/styles/globals.css`.
+  - Алиасы настроены на `src/shared`.
+
+- **Пути и алиасы (components.json):**
+
+  - `components`: `@/shared/components`
+  - `ui`: `@/shared/components/ui`
+  - `utils`: `@/shared/lib/utils`
+
+- **Где лежат компоненты:** `src/shared/components/ui/*`
+
+- **Добавление компонентов:**
+
+  - Командой:
+    ```bash
+    pnpx shadcn@latest add {component}
+    ```
+  - Примеры:
+    ```bash
+    pnpx shadcn@latest add input label card
+    pnpx shadcn@latest add dialog dropdown-menu select
+    ```
+
+- **Уже добавлено:** `button`, `accordion` и набор базовых компонентов (form, input/label, card, dialog, dropdown-menu, select, табы и др.). Если потребуется — добавляйте точечно любой недостающий компонент той же командой.
+
+- **Импорт в коде:**
+
+  ```tsx
+  import { Button } from "@/shared/components/ui/button";
+  import { Accordion, AccordionItem } from "@/shared/components/ui/accordion";
+  ```
+
+- **Замечание по toast:** компонент `toast` помечен как устаревший у shadcn/ui. Рекомендуется использовать `sonner`.
+
+- **ESLint для shared:** правило сортировки импортов `simple-import-sort/imports` отключено для `src/shared/**/*.{ts,tsx}`.
+
+- **Документация:** `https://ui.shadcn.com/`
+
+---
+
+## Баррели (barrelsby)
+
+Для автоматической генерации файла с реэкспортами компонентов (`index.tsx`) используем `barrelsby`.
+
+- **Где генерируем:** `src/shared/components/ui/index.tsx`
+- **Команда:**
+  ```bash
+  pnpx barrelsby \
+    --directory src/shared/components/ui \
+    --delete \
+    --barrelName index.tsx \
+    --structure flat \
+    --exclude index
+  ```
+
+Пояснения:
+
+- **--delete**: удаляет старые баррели перед генерацией
+- **--barrelName index.tsx**: имя файла-барреля
+- **--structure flat**: плоская структура реэкспортов из текущей директории
+- **--exclude index**: не реэкспортировать сам файл `index.*`
+
+После генерации можно импортировать компоненты так:
+
+```ts
+import { Button, Card } from "@/shared/components/ui";
+```
+
+### Примеры команд
+
+- Сгенерировать точь‑в‑точь как текущий `@index.ts` (только именованные экспорты, без default):
+
+  ```bash
+  pnpx barrelsby \
+    --directory src/shared/components/ui \
+    --delete \
+    --barrelName index.ts \
+    --structure flat \
+    --exclude index \
+    --no-default-exports
+  ```
+
+- Сгенерировать `index.tsx` с default‑экспортами ПЛЮС именованными:
+
+  ```bash
+  pnpx barrelsby \
+    --directory src/shared/components/ui \
+    --delete \
+    --barrelName index.tsx \
+    --structure flat \
+    --exclude index \
+    --exportDefault
+  ```
+
+- Иерархическая структура по подпапкам (filesystem):
+
+  ```bash
+  pnpx barrelsby \
+    --directory src/shared/components \
+    --delete \
+    --barrelName index.ts \
+    --structure filesystem \
+    --exclude index
+  ```
+
+- Для другого каталога (например, компоненты модуля users):
+
+  ```bash
+  pnpx barrelsby \
+    --directory src/modules/users/ui/components \
+    --delete \
+    --barrelName index.ts \
+    --structure flat \
+    --exclude index
+  ```
+
+- Исключить сториз и тесты:
+
+  ```bash
+  pnpx barrelsby \
+    --directory src/shared/components/ui \
+    --delete \
+    --barrelName index.ts \
+    --structure flat \
+    --exclude "**/*.stories.*" "**/__tests__/**" index
+  ```
+
+- Удобный npm‑скрипт:
+  Добавьте в `package.json`:
+  ```json
+  {
+    "scripts": {
+      "barrels:ui": "barrelsby --directory src/shared/components/ui --delete --barrelName index.ts --structure flat --exclude index --no-default-exports"
+    }
+  }
+  ```
+  И запускайте:
+  ```bash
+  pnpm barrels:ui
+  ```
