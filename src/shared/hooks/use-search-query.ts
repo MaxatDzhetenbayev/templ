@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useUrlFilter } from "@/shared/hooks/use-url-filter";
 
 interface UseSearchQuery {
   delay?: number;
@@ -15,37 +14,41 @@ export const useSearchQuery = ({
   searchKey = "query",
   deleteKeys,
 }: UseSearchQuery) => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const keys = useMemo(
+    () => [searchKey, ...(deleteKeys ?? [])],
+    [searchKey, deleteKeys]
+  );
 
-  const initialQuery = searchParams.get(searchKey) || "";
+  const { getParam, setMany } = useUrlFilter(keys, {
+    resetPageOnChange: true,
+    mode: "replace",
+  });
+
+  const initialQuery = getParam(searchKey) ?? "";
   const [inputValue, setInputValue] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (inputValue.trim()) {
-        params.set(searchKey, inputValue);
-
+      const trimmed = inputValue.trim();
+      if (trimmed) {
+        const entries: Record<string, string | null | undefined> = {
+          [searchKey]: trimmed,
+        };
         if (deleteKeys && deleteKeys.length > 0) {
           for (const key of deleteKeys) {
-            if (params.has(key)) {
-              params.delete(key);
-            }
+            entries[key] = undefined; // удаляем сопряжённые ключи при поиске
           }
         }
+        setMany(entries);
       } else {
-        params.delete(searchKey);
+        setMany({ [searchKey]: undefined });
       }
-
-      router.replace(`?${params.toString()}`);
       setDebouncedQuery(inputValue);
     }, delay);
 
     return () => clearTimeout(handler);
-  }, [inputValue, delay, router, searchParams, searchKey]);
+  }, [inputValue, delay, setMany, searchKey, deleteKeys]);
 
   return {
     inputValue,
