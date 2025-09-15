@@ -1,12 +1,16 @@
 import { useCustomMutation } from "@/shared/lib/client";
-import { User, UpdateUser } from "../schemas/user.schema";
+
 import {
-  USER_SUCCESS_MESSAGES,
   USER_ERROR_MESSAGES,
+  USER_SUCCESS_MESSAGES,
 } from "../constants/user.constants";
+import { UpdateUser, User } from "../schemas/user.schema";
 
 /**
  * Хук для работы с пользователем
+ *
+ * @param userId - ID пользователя для работы с данными
+ * @returns Объект с функциями для обновления пользователя и состоянием загрузки
  */
 export const useUser = (userId: number) => {
   /**
@@ -23,7 +27,9 @@ export const useUser = (userId: number) => {
     customConfig: {
       invalidateQueries: [["users"], ["user", userId]],
       onSuccess: (data) => {
-        console.log("User updated:", data);
+        // User updated successfully
+        // TODO: Add proper logging or analytics tracking
+        void data;
       },
     },
   });
@@ -37,6 +43,9 @@ export const useUser = (userId: number) => {
 
 /**
  * Хук для проверки прав пользователя
+ *
+ * @param currentUser - Текущий пользователь для проверки прав
+ * @returns Объект с функциями для проверки различных прав доступа
  */
 export const useUserPermissions = (currentUser: User) => {
   const canEditProfile = (targetUserId: number) => {

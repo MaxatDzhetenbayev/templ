@@ -3,25 +3,29 @@ import { z } from "zod";
 /**
  * Схема для валидации данных пользователя
  */
-export const userSchema = z.object({
-  id: z.number().positive(),
-  email: z.string(),
-  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
-  avatar: z.string().optional(),
-  role: z.enum(["admin", "user", "moderator"]),
-  isActive: z.boolean().default(true),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+export const userSchema = z
+  .object({
+    id: z.number().positive(),
+    email: z.string().email("Некорректный email адрес"),
+    name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+    avatar: z.string().optional(),
+    role: z.enum(["admin", "user", "moderator"]),
+    isActive: z.boolean().default(true),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+  })
+  .strict();
 
 /**
  * Схема для создания пользователя
  */
-export const createUserSchema = userSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
+export const createUserSchema = userSchema
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .strict();
 
 /**
  * Схема для обновления пользователя
