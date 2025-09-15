@@ -1,9 +1,8 @@
+import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
 import { queryClient } from "./query-client";
-
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 
 /**
  * Кастомный хук для выполнения мутаций с использованием React Query и Axios.
@@ -49,7 +48,7 @@ export function useCustomMutation<
     onSuccess: (data, variables, context) => {
       if (customConfig?.invalidateQueries) {
         customConfig.invalidateQueries.forEach((queryKey) => {
-          queryClient.invalidateQueries({ queryKey: [queryKey] });
+          queryClient.invalidateQueries({ queryKey });
         });
       }
 

@@ -14,7 +14,7 @@ module.exports = {
         query: {
           useQuery: true,
           useInfinite: true,
-        я},
+        },
         mutation: {
           useMutation: true,
         },

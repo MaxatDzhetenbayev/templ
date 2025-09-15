@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { User } from "@/modules/users/schemas/user.schema";
-import { UserAvatar } from "@/modules/users/ui/components/UserAvatar/UserAvatar";
+
+import { USER_ROLES } from "@/modules/users/constants/user.constants";
 import { useUser } from "@/modules/users/hooks/useUser";
 import { useUserPermissions } from "@/modules/users/hooks/useUser";
+import { User } from "@/modules/users/schemas/user.schema";
+import { UserAvatar } from "@/modules/users/ui/components/UserAvatar/UserAvatar";
 import {
-  getUserDisplayName,
   formatUserCreatedDate,
+  getUserDisplayName,
 } from "@/modules/users/utils/user.utils";
-import { USER_ROLES } from "@/modules/users/constants/user.constants";
 
 export interface UserProfileProps {
   user: User;

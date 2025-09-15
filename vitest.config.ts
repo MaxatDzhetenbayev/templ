@@ -22,6 +22,23 @@ export default defineConfig({
       exclude: [
         "node_modules/",
         "src/test/",
+        // Общие слои и папки, которые не покрываются тестами
+        "src/shared/**",
+        // Папки модулей без необходимости покрытия
+        "src/**/constants/**",
+        "src/**/schemas/**",
+        "src/**/model/**",
+        "src/**/types/**",
+        // Баррели и реэкспорты
+        "src/**/index.ts",
+        "src/**/index.tsx",
+        // Источники Storybook и собранные статики
+        ".storybook/**",
+        "storybook-static/**",
+        "src/**/*.stories.*",
+        // Файлы app router и middleware (не цель unit coverage)
+        "src/app/**",
+        "src/middleware.ts",
         "**/*.d.ts",
         "**/*.config.*",
         "**/coverage/**",
