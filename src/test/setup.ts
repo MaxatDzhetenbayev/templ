@@ -33,8 +33,8 @@ vi.mock("next-intl", () => ({
   useLocale: () => "ru",
 }));
 
-// Mock react-toastify
-vi.mock("react-toastify", () => ({
+// Mock sonner toast
+vi.mock("sonner", () => ({
   toast: {
     success: vi.fn(),
     error: vi.fn(),

@@ -4,8 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { ToastContainer } from "react-toastify";
 
+import { Toaster } from "@/shared/components/ui";
 import { QueryProvider } from "@/shared/providers";
 
 import "@/styles/globals.css";
@@ -48,7 +48,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>
-        <ToastContainer />
+        <Toaster richColors closeButton />
       </body>
     </html>
   );

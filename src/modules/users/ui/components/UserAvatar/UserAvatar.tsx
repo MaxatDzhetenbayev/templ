@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
+
 import { User } from "../../../schemas/user.schema";
 import {
-  getUserInitials,
-  getUserAvatarUrl,
   generateAvatarColor,
+  getUserAvatarUrl,
+  getUserInitials,
 } from "../../../utils/user.utils";
 
 export interface UserAvatarProps {

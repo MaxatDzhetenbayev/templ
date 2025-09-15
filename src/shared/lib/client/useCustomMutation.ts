@@ -1,6 +1,6 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 import { queryClient } from "./query-client";
 

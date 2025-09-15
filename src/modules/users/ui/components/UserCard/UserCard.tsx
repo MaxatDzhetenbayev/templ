@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { User } from "../../../schemas/user.schema";
-import { UserAvatar } from "../UserAvatar/UserAvatar";
-import {
-  getUserDisplayName,
-  formatUserCreatedDate,
-} from "../../../utils/user.utils";
+
 import { USER_ROLES } from "../../../constants/user.constants";
+import { User } from "../../../schemas/user.schema";
+import {
+  formatUserCreatedDate,
+  getUserDisplayName,
+} from "../../../utils/user.utils";
+import { UserAvatar } from "../UserAvatar/UserAvatar";
 
 export interface UserCardProps {
   user: User;
