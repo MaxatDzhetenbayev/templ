@@ -15,7 +15,7 @@ vi.mock("@/shared/lib/client", () => ({
   })),
 }));
 
-describe("useUser", () => {
+describe("useUser — хук пользователя", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -23,8 +23,8 @@ describe("useUser", () => {
   const OTHER_USER_ID = 999 as const;
   const DEFAULT_ISO_DATE = "2023-01-01T00:00:00Z" as const;
 
-  describe("useUser hook", () => {
-    it("should return user mutation functions", () => {
+  describe("хук useUser", () => {
+    it("возвращает функции мутаций пользователя", () => {
       const { result } = renderHook(() => useUser(1));
 
       expect(result.current).toHaveProperty("updateUser");
@@ -34,7 +34,7 @@ describe("useUser", () => {
       expect(typeof result.current.isUpdating).toBe("boolean");
     });
 
-    it("should call updateUser with correct data", async () => {
+    it("вызывает updateUser с корректными данными", async () => {
       const mockMutate = vi.fn();
       const mutationMock = {
         mutate: mockMutate,
@@ -52,7 +52,7 @@ describe("useUser", () => {
       expect(mockMutate).toHaveBeenCalledWith(updateData);
     });
 
-    it("should return loading state", async () => {
+    it("возвращает состояние загрузки", async () => {
       const mutationMock = {
         mutate: vi.fn(),
         isPending: true,
@@ -66,7 +66,7 @@ describe("useUser", () => {
       expect(result.current.isUpdating).toBe(true);
     });
 
-    it("should return error state", async () => {
+    it("возвращает состояние ошибки", async () => {
       const mockError = new Error("Update failed");
       const mutationMock = {
         mutate: vi.fn(),
@@ -82,7 +82,7 @@ describe("useUser", () => {
     });
   });
 
-  describe("useUserPermissions hook", () => {
+  describe("хук useUserPermissions", () => {
     const mockCurrentUser: User = {
       id: 1,
       email: "admin@example.com",
@@ -105,7 +105,7 @@ describe("useUser", () => {
       updatedAt: DEFAULT_ISO_DATE,
     };
 
-    it("should return permission functions", () => {
+    it("возвращает функции проверки прав", () => {
       const { result } = renderHook(() => useUserPermissions(mockCurrentUser));
 
       expect(result.current).toHaveProperty("canEditProfile");
@@ -117,7 +117,7 @@ describe("useUser", () => {
     });
 
     describe("canEditProfile", () => {
-      it("should allow admin to edit any profile", () => {
+      it("разрешает администратору редактировать любой профиль", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockCurrentUser)
         );
@@ -127,7 +127,7 @@ describe("useUser", () => {
         expect(result.current.canEditProfile(OTHER_USER_ID)).toBe(true);
       });
 
-      it("should allow user to edit their own profile", () => {
+      it("разрешает пользователю редактировать свой профиль", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockRegularUser)
         );
@@ -135,7 +135,7 @@ describe("useUser", () => {
         expect(result.current.canEditProfile(2)).toBe(true);
       });
 
-      it("should not allow user to edit other profiles", () => {
+      it("запрещает пользователю редактировать чужие профили", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockRegularUser)
         );
@@ -146,7 +146,7 @@ describe("useUser", () => {
     });
 
     describe("canDeleteUser", () => {
-      it("should allow admin to delete other users", () => {
+      it("разрешает администратору удалять других пользователей", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockCurrentUser)
         );
@@ -155,7 +155,7 @@ describe("useUser", () => {
         expect(result.current.canDeleteUser(OTHER_USER_ID)).toBe(true);
       });
 
-      it("should not allow admin to delete themselves", () => {
+      it("запрещает администратору удалять самого себя", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockCurrentUser)
         );
@@ -163,7 +163,7 @@ describe("useUser", () => {
         expect(result.current.canDeleteUser(1)).toBe(false);
       });
 
-      it("should not allow regular user to delete anyone", () => {
+      it("запрещает обычному пользователю удалять кого-либо", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockRegularUser)
         );
@@ -175,7 +175,7 @@ describe("useUser", () => {
     });
 
     describe("canViewUserDetails", () => {
-      it("should allow admin to view any user details", () => {
+      it("позволяет администратору просматривать любые данные пользователя", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockCurrentUser)
         );
@@ -185,7 +185,7 @@ describe("useUser", () => {
         expect(result.current.canViewUserDetails(OTHER_USER_ID)).toBe(true);
       });
 
-      it("should allow user to view their own details", () => {
+      it("позволяет пользователю просматривать свои данные", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockRegularUser)
         );
@@ -193,7 +193,7 @@ describe("useUser", () => {
         expect(result.current.canViewUserDetails(2)).toBe(true);
       });
 
-      it("should not allow user to view other user details", () => {
+      it("запрещает пользователю просматривать данные других пользователей", () => {
         const { result } = renderHook(() =>
           useUserPermissions(mockRegularUser)
         );
@@ -203,7 +203,7 @@ describe("useUser", () => {
       });
     });
 
-    it("should handle moderator role correctly", () => {
+    it("корректно обрабатывает роль модератора", () => {
       const mockModerator: User = {
         ...mockRegularUser,
         id: 3,

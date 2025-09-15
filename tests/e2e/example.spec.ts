@@ -1,13 +1,13 @@
-import { expect,test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-test("homepage has title", async ({ page }) => {
+test("главная страница имеет заголовок", async ({ page }) => {
   await page.goto("/");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Crystal Architecture/);
 });
 
-test("get started link", async ({ page }) => {
+test("ссылка 'Get started by editing' работает", async ({ page }) => {
   await page.goto("/");
 
   // Click the get started link.

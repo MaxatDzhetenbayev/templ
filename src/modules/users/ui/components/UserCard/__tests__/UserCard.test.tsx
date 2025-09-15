@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { User } from "../../../../schemas/user.schema";
 import { UserCard } from "../UserCard";
 
-describe("UserCard", () => {
+describe("UserCard — карточка пользователя", () => {
   const ACTION_BUTTONS = ["Просмотр", "Редактировать", "Удалить"] as const;
 
   const mockUser: User = {
@@ -30,7 +30,7 @@ describe("UserCard", () => {
     isActive: false,
   };
 
-  it("should render user information correctly", () => {
+  it("корректно отображает информацию о пользователе", () => {
     render(<UserCard user={mockUser} />);
 
     expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -40,19 +40,19 @@ describe("UserCard", () => {
     expect(screen.getByText(/Зарегистрирован:/)).toBeInTheDocument();
   });
 
-  it("should render admin user with correct role label", () => {
+  it("отображает администратора с правильной меткой роли", () => {
     render(<UserCard user={mockAdminUser} />);
 
     expect(screen.getByText("Администратор")).toBeInTheDocument();
   });
 
-  it("should render inactive user with correct status", () => {
+  it("отображает неактивного пользователя со статусом", () => {
     render(<UserCard user={mockInactiveUser} />);
 
     expect(screen.getByText("Неактивен")).toBeInTheDocument();
   });
 
-  it("should render action buttons when showActions is true", () => {
+  it("показывает кнопки действий при showActions=true", () => {
     const onView = vi.fn();
     const onEdit = vi.fn();
     const onDelete = vi.fn();
@@ -72,7 +72,7 @@ describe("UserCard", () => {
     });
   });
 
-  it("should not render action buttons when showActions is false", () => {
+  it("не показывает кнопки действий при showActions=false", () => {
     render(<UserCard user={mockUser} showActions={false} />);
 
     ACTION_BUTTONS.forEach((buttonText) => {
@@ -80,7 +80,7 @@ describe("UserCard", () => {
     });
   });
 
-  it("should call onView when view button is clicked", () => {
+  it("вызывает onView при клике по кнопке Просмотр", () => {
     const onView = vi.fn();
 
     render(<UserCard user={mockUser} onView={onView} />);
@@ -89,7 +89,7 @@ describe("UserCard", () => {
     expect(onView).toHaveBeenCalledWith(mockUser);
   });
 
-  it("should call onEdit when edit button is clicked", () => {
+  it("вызывает onEdit при клике по кнопке Редактировать", () => {
     const onEdit = vi.fn();
 
     render(<UserCard user={mockUser} onEdit={onEdit} />);
@@ -98,7 +98,7 @@ describe("UserCard", () => {
     expect(onEdit).toHaveBeenCalledWith(mockUser);
   });
 
-  it("should call onDelete when delete button is clicked", () => {
+  it("вызывает onDelete при клике по кнопке Удалить", () => {
     const onDelete = vi.fn();
 
     render(<UserCard user={mockUser} onDelete={onDelete} />);
@@ -107,7 +107,7 @@ describe("UserCard", () => {
     expect(onDelete).toHaveBeenCalledWith(mockUser);
   });
 
-  it("should only render available action buttons", () => {
+  it("отображает только доступные кнопки действий", () => {
     const onView = vi.fn();
 
     render(<UserCard user={mockUser} onView={onView} />);
@@ -117,14 +117,14 @@ describe("UserCard", () => {
     expect(screen.queryByText(ACTION_BUTTONS[2])).not.toBeInTheDocument();
   });
 
-  it("should apply custom className", () => {
+  it("применяет переданный className", () => {
     render(<UserCard user={mockUser} className="custom-class" />);
 
     const cardElement = screen.getByText("John Doe").closest(".bg-white");
     expect(cardElement).toHaveClass("custom-class");
   });
 
-  it("should render user avatar", () => {
+  it("отображает аватар пользователя", () => {
     const { container } = render(<UserCard user={mockUser} />);
 
     // UserAvatar component should render with default avatar
@@ -134,21 +134,21 @@ describe("UserCard", () => {
     expect(avatarContainer).toBeInTheDocument();
   });
 
-  it("should handle user without name (fallback to email)", () => {
+  it("обрабатывает пользователя без имени (фолбэк к email)", () => {
     const userWithoutName = { ...mockUser, name: "" };
     render(<UserCard user={userWithoutName} />);
 
     expect(screen.getByText("test")).toBeInTheDocument(); // Email prefix
   });
 
-  it("should render moderator role correctly", () => {
+  it("корректно отображает роль модератора", () => {
     const moderatorUser = { ...mockUser, role: "moderator" as const };
     render(<UserCard user={moderatorUser} />);
 
     expect(screen.getByText("Модератор")).toBeInTheDocument();
   });
 
-  it("should format created date correctly", () => {
+  it("корректно форматирует дату регистрации", () => {
     render(<UserCard user={mockUser} />);
 
     expect(
@@ -156,7 +156,7 @@ describe("UserCard", () => {
     ).toBeInTheDocument();
   });
 
-  it("should handle all action callbacks together", () => {
+  it("корректно обрабатывает все колбэки действий вместе", () => {
     const onView = vi.fn();
     const onEdit = vi.fn();
     const onDelete = vi.fn();

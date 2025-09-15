@@ -11,7 +11,7 @@ import {
   isAdmin,
 } from "../user.utils";
 
-describe("user.utils", () => {
+describe("user.utils — утилиты пользователя", () => {
   const mockUser: User = {
     id: 1,
     email: "test@example.com",
@@ -30,18 +30,18 @@ describe("user.utils", () => {
   };
 
   describe("getUserDisplayName", () => {
-    it("should return user name when available", () => {
+    it("возвращает имя пользователя при наличии", () => {
       const result = getUserDisplayName(mockUser);
       expect(result).toBe("John Doe");
     });
 
-    it("should return email prefix when name is not available", () => {
+    it("возвращает префикс email при отсутствии имени", () => {
       const userWithoutName = { ...mockUser, name: "" };
       const result = getUserDisplayName(userWithoutName);
       expect(result).toBe("test");
     });
 
-    it("should handle email without @ symbol", () => {
+    it("обрабатывает email без символа @", () => {
       const userWithInvalidEmail = {
         ...mockUser,
         name: "",
@@ -53,24 +53,24 @@ describe("user.utils", () => {
   });
 
   describe("getUserInitials", () => {
-    it("should return initials from full name", () => {
+    it("возвращает инициалы из полного имени", () => {
       const result = getUserInitials(mockUser);
       expect(result).toBe("JD");
     });
 
-    it("should return first two characters when single name", () => {
+    it("возвращает первые две буквы при одном имени", () => {
       const userWithSingleName = { ...mockUser, name: "John" };
       const result = getUserInitials(userWithSingleName);
       expect(result).toBe("JO");
     });
 
-    it("should handle empty name", () => {
+    it("обрабатывает пустое имя", () => {
       const userWithoutName = { ...mockUser, name: "" };
       const result = getUserInitials(userWithoutName);
       expect(result).toBe("TE");
     });
 
-    it("should handle multiple words in name", () => {
+    it("обрабатывает имя из нескольких слов", () => {
       const userWithLongName = { ...mockUser, name: "John Michael Doe Smith" };
       const result = getUserInitials(userWithLongName);
       expect(result).toBe("JM");
@@ -78,17 +78,17 @@ describe("user.utils", () => {
   });
 
   describe("isAdmin", () => {
-    it("should return true for admin user", () => {
+    it("возвращает true для администратора", () => {
       const result = isAdmin(mockAdminUser);
       expect(result).toBe(true);
     });
 
-    it("should return false for regular user", () => {
+    it("возвращает false для обычного пользователя", () => {
       const result = isAdmin(mockUser);
       expect(result).toBe(false);
     });
 
-    it("should return false for moderator user", () => {
+    it("возвращает false для модератора", () => {
       const moderatorUser = { ...mockUser, role: "moderator" as const };
       const result = isAdmin(moderatorUser);
       expect(result).toBe(false);
@@ -96,41 +96,41 @@ describe("user.utils", () => {
   });
 
   describe("canEditUser", () => {
-    it("should allow admin to edit any user", () => {
+    it("разрешает администратору редактировать любого пользователя", () => {
       const result = canEditUser(mockAdminUser, mockUser);
       expect(result).toBe(true);
     });
 
-    it("should allow user to edit themselves", () => {
+    it("разрешает пользователю редактировать себя", () => {
       const result = canEditUser(mockUser, mockUser);
       expect(result).toBe(true);
     });
 
-    it("should not allow user to edit other users", () => {
+    it("запрещает пользователю редактировать других пользователей", () => {
       const otherUser = { ...mockUser, id: 3 };
       const result = canEditUser(mockUser, otherUser);
       expect(result).toBe(false);
     });
 
-    it("should allow admin to edit themselves", () => {
+    it("разрешает администратору редактировать себя", () => {
       const result = canEditUser(mockAdminUser, mockAdminUser);
       expect(result).toBe(true);
     });
   });
 
   describe("getUserAvatarUrl", () => {
-    it("should return user avatar when available", () => {
+    it("возвращает аватар пользователя при наличии", () => {
       const userWithAvatar = { ...mockUser, avatar: "/custom-avatar.jpg" };
       const result = getUserAvatarUrl(userWithAvatar);
       expect(result).toBe("/custom-avatar.jpg");
     });
 
-    it("should return default neutral avatar when no avatar", () => {
+    it("возвращает аватар по умолчанию при отсутствии avatar", () => {
       const result = getUserAvatarUrl(mockUser);
       expect(result).toBe("/avatars/default-neutral.png");
     });
 
-    it("should return default neutral avatar when avatar is empty string", () => {
+    it("возвращает аватар по умолчанию при пустой строке avatar", () => {
       const userWithEmptyAvatar = { ...mockUser, avatar: "" };
       const result = getUserAvatarUrl(userWithEmptyAvatar);
       expect(result).toBe("/avatars/default-neutral.png");
@@ -138,12 +138,12 @@ describe("user.utils", () => {
   });
 
   describe("formatUserCreatedDate", () => {
-    it("should format date correctly in Russian locale", () => {
+    it("корректно форматирует дату в русской локали", () => {
       const result = formatUserCreatedDate(mockUser);
       expect(result).toBe("1 января 2023 г.");
     });
 
-    it("should handle different dates", () => {
+    it("обрабатывает различные даты", () => {
       const userWithDifferentDate = {
         ...mockUser,
         createdAt: "2022-12-25T10:30:00Z",
@@ -154,29 +154,29 @@ describe("user.utils", () => {
   });
 
   describe("generateAvatarColor", () => {
-    it("should return consistent color for same user ID", () => {
+    it("возвращает стабильный цвет для одинакового ID пользователя", () => {
       const color1 = generateAvatarColor(1);
       const color2 = generateAvatarColor(1);
       expect(color1).toBe(color2);
     });
 
-    it("should return different colors for different user IDs", () => {
+    it("возвращает разные цвета для разных ID пользователей", () => {
       const color1 = generateAvatarColor(1);
       const color2 = generateAvatarColor(2);
       expect(color1).not.toBe(color2);
     });
 
-    it("should return valid hex color", () => {
+    it("возвращает валидный шестнадцатеричный цвет", () => {
       const color = generateAvatarColor(1);
       expect(color).toMatch(/^#[0-9A-F]{6}$/i);
     });
 
-    it("should handle large user IDs", () => {
+    it("обрабатывает большие значения ID", () => {
       const color = generateAvatarColor(999999);
       expect(color).toMatch(/^#[0-9A-F]{6}$/i);
     });
 
-    it("should handle zero user ID", () => {
+    it("обрабатывает нулевой ID пользователя", () => {
       const color = generateAvatarColor(0);
       expect(color).toMatch(/^#[0-9A-F]{6}$/i);
     });
