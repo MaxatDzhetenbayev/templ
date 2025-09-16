@@ -136,7 +136,7 @@ const eslintConfig = [
     files: [
       "src/app/**/page.tsx",
       "src/app/**/layout.tsx",
-      "src/shared/**/*.tsx",
+      "src/shared/**/*.{ts,tsx}",
     ],
     rules: {
       "jsdoc/require-jsdoc": "off",
@@ -146,6 +146,16 @@ const eslintConfig = [
     files: ["src/shared/**/*.{ts,tsx}"],
     rules: {
       "simple-import-sort/imports": "off",
+    },
+  },
+  {
+    files: ["src/shared/api/generated.ts"],
+    rules: {
+      "jsdoc/require-jsdoc": "off",
+      "jsdoc/require-returns": "off",
+      "jsdoc/require-param": "off",
+      "jsdoc/check-param-names": "off",
+      "jsdoc/check-tag-names": "off",
     },
   },
   ...storybook.configs["flat/recommended"],

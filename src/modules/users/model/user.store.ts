@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+
 import { User } from "../schemas/user.schema";
 
 interface UserState {
@@ -33,7 +34,7 @@ const initialState = {
 
 export const useUserStore = create<UserState>()(
   devtools(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
 
       setCurrentUser: (user) => set({ currentUser: user }),

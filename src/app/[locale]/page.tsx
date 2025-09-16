@@ -10,7 +10,7 @@ export default async function Home() {
     name: "John Doe",
     email: "john.doe@example.com",
     avatar: "https://via.placeholder.com/150",
-    role: "admin",
+    role: "admin" as const,
   };
 
   return (

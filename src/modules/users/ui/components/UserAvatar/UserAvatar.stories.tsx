@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+
 import { UserAvatar } from "./UserAvatar";
-import { User } from "../../../schemas/user.schema";
+
+const DEFAULT_DATE = "2024-01-01T00:00:00Z";
 
 const meta: Meta<typeof UserAvatar> = {
   title: "Modules/Users/UserAvatar",
@@ -12,8 +14,8 @@ const meta: Meta<typeof UserAvatar> = {
       name: "John Doe",
       role: "user",
       isActive: true,
-      createdAt: "2024-01-01T00:00:00Z",
-      updatedAt: "2024-01-01T00:00:00Z",
+      createdAt: DEFAULT_DATE,
+      updatedAt: DEFAULT_DATE,
     },
     size: "md",
     showOnline: false,
@@ -37,8 +39,8 @@ export const WithAvatar: Story = {
         "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
       role: "admin",
       isActive: true,
-      createdAt: "2024-01-01T00:00:00Z",
-      updatedAt: "2024-01-01T00:00:00Z",
+      createdAt: DEFAULT_DATE,
+      updatedAt: DEFAULT_DATE,
     },
   },
 };
@@ -77,8 +79,8 @@ export const LongName: Story = {
       name: "Very Long Name User",
       role: "moderator",
       isActive: true,
-      createdAt: "2024-01-01T00:00:00Z",
-      updatedAt: "2024-01-01T00:00:00Z",
+      createdAt: DEFAULT_DATE,
+      updatedAt: DEFAULT_DATE,
     },
   },
 };
