@@ -52,7 +52,11 @@ type UseUrlFilterMethods = {
   getParam: (key: string) => string | null;
   setParam: (key: string, value: string | null | undefined) => void;
   setMany: (entries: Record<string, string | null | undefined>) => void;
-  clearAll: (preserveKeys?: string[]) => void;
+  /**
+   * If called without arguments, removes all tracked keys.
+   * If array of keys is provided, removes only those keys.
+   */
+  clearAll: (keysToDelete?: string[]) => void;
 };
 
 type UseUrlFilterReturn = UseUrlFilterMethods & Record<string, string | null>;
@@ -264,10 +268,18 @@ export function useUrlFilter(
   );
 
   const clearAll = useCallback(
-    (preserveKeys: string[] = []) => {
+    (keysToDelete?: string[]) => {
       const params = new URLSearchParams(searchParams.toString());
-      for (const key of keys) {
-        if (!preserveKeys.includes(key)) params.delete(key);
+      if (Array.isArray(keysToDelete) && keysToDelete.length > 0) {
+        // Delete only listed keys
+        for (const key of keysToDelete) {
+          params.delete(key);
+        }
+      } else {
+        // Delete all tracked keys
+        for (const key of keys) {
+          params.delete(key);
+        }
       }
       if (resetPageOnChange && params.has(pageKey)) {
         params.delete(pageKey);
