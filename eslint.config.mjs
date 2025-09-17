@@ -1,6 +1,4 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import { FlatCompat } from "@eslint/eslintrc";
-// import boundaries from "eslint-plugin-boundaries";
 import eslintJsDoc from "eslint-plugin-jsdoc";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sonarJs from "eslint-plugin-sonarjs";
@@ -22,7 +20,6 @@ const eslintConfig = [
   },
   {
     plugins: {
-      // boundaries,
       jsdoc: eslintJsDoc,
       sonarjs: sonarJs,
       "simple-import-sort": simpleImportSort,
@@ -33,17 +30,6 @@ const eslintConfig = [
           project: "./tsconfig.json",
         },
       },
-      // "boundaries/elements": [
-      //   { type: "app", pattern: "src/app/**" },
-      //   { type: "features", pattern: "src/features/**" },
-      //   { type: "shared", pattern: "src/shared/**" },
-      // ],
-      // "boundaries/resolve": {
-      //   alias: {
-      //     "@": "./src",
-      //   },
-      //   extensions: [".ts", ".tsx", ".js", ".jsx"],
-      // },
     },
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
@@ -78,6 +64,7 @@ const eslintConfig = [
       "jsdoc/check-param-names": "error",
       "jsdoc/check-tag-names": "error",
 
+      // simple-import-sort rules
       "simple-import-sort/imports": [
         "error",
         {
@@ -91,71 +78,29 @@ const eslintConfig = [
           ],
         },
       ],
-      // "boundaries/element-types": [
-      //   "error",
-      //   {
-      //     default: "allow",
-      //     rules: [
-      //       {
-      //         from: "shared",
-      //         disallow: ["features", "app"],
-      //         message:
-      //           "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
-      //       },
-      //       {
-      //         from: "features",
-      //         disallow: ["app"],
-      //         message:
-      //           "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
-      //       },
-      //     ],
-      //   },
-      // ],
-      // "boundaries/entry-point": [
-      //   2,
-      //   {
-      //     default: "disallow",
-      //     message:
-      //       "Модуль (${file.type}) должен импортироваться через public API. Прямой импорт из ${dependency.source} запрещен",
-
-      //     rules: [
-      //       {
-      //         target: ["shared", "app"],
-      //         allow: "**",
-      //       },
-      //       {
-      //         target: ["features"],
-      //         allow: "index.(ts|tsx)",
-      //       },
-      //     ],
-      //   },
-      // ],
     },
   },
   {
+    // jsdoc exclude
     files: [
       "src/app/**/page.tsx",
       "src/app/**/layout.tsx",
       "src/shared/**/*.{ts,tsx}",
+      "src/shared/api/generated.ts",
     ],
-    rules: {
-      "jsdoc/require-jsdoc": "off",
-    },
-  },
-  {
-    files: ["src/shared/**/*.{ts,tsx}"],
-    rules: {
-      "simple-import-sort/imports": "off",
-    },
-  },
-  {
-    files: ["src/shared/api/generated.ts"],
     rules: {
       "jsdoc/require-jsdoc": "off",
       "jsdoc/require-returns": "off",
       "jsdoc/require-param": "off",
       "jsdoc/check-param-names": "off",
       "jsdoc/check-tag-names": "off",
+    },
+  },
+  {
+    // simple-import-sort exclude
+    files: ["src/shared/**/*.{ts,tsx}"],
+    rules: {
+      "simple-import-sort/imports": "off",
     },
   },
   ...storybook.configs["flat/recommended"],
