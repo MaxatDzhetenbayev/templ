@@ -22,8 +22,15 @@ vi.mock("next/navigation", () => ({
 // Mock Next.js image
 vi.mock("next/image", () => ({
   __esModule: true,
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    return React.createElement("img", props);
+  default: (
+    props: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }
+  ) => {
+    // Omit Next.js-only props like `fill` that are invalid on <img>
+    const { fill: _fill, ...rest } = props as Record<string, unknown>;
+    return React.createElement(
+      "img",
+      rest as React.ImgHTMLAttributes<HTMLImageElement>
+    );
   },
 }));
 
@@ -31,6 +38,8 @@ vi.mock("next/image", () => ({
 vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,
   useLocale: () => "ru",
+  NextIntlClientProvider: ({ children }: { children: React.ReactNode }) =>
+    React.createElement(React.Fragment, null, children),
 }));
 
 // Mock sonner toast
