@@ -213,14 +213,16 @@ export function useUrlFilter(
 
   const commit = useCallback(
     (params: URLSearchParams) => {
-      const qs = params.toString();
+      const nextQs = params.toString();
+      const currentQs = searchParams.toString();
+      if (nextQs === currentQs) return; // avoid redundant navigation triggering rerenders
       if (mode === "push") {
-        router.push(qs ? `?${qs}` : "?", { scroll });
+        router.push(nextQs ? `?${nextQs}` : "?", { scroll });
       } else {
-        router.replace(qs ? `?${qs}` : "?", { scroll });
+        router.replace(nextQs ? `?${nextQs}` : "?", { scroll });
       }
     },
-    [router, mode, scroll]
+    [router, mode, scroll, searchParams]
   );
 
   const applyEntriesToParams = useCallback(
