@@ -211,13 +211,33 @@
     background-size: 1000px 100%;
   }
 
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
+  .animated-auth-bg {
+    background: linear-gradient(
+      to bottom,
+      #1a1a1a,  /* neutral-900 */
+      #0d0d0d,  /* neutral-950 */
+      #000000   /* black */
+    );
+    background-size: 300% 300%;
+    animation: bgMove 12s ease-in-out infinite;
+  }
+  
+  @keyframes bgMove {
+    0% {
+      background-position: 50% 0%;
     }
     50% {
-      background-position: 100% 50%;
+      background-position: 50% 100%;
     }
+    100% {
+      background-position: 50% 0%;
+    }
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .bg-gradient-animated {
