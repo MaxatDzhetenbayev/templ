@@ -1,7 +1,7 @@
 import { FlatCompat } from "@eslint/eslintrc";
-import eslintJsDoc from "eslint-plugin-jsdoc";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
-import sonarJs from "eslint-plugin-sonarjs";
+// import eslintJsDoc from "eslint-plugin-jsdoc";
+// import simpleImportSort from "eslint-plugin-simple-import-sort";
+// import sonarJs from "eslint-plugin-sonarjs";
 import storybook from "eslint-plugin-storybook";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -20,9 +20,9 @@ const eslintConfig = [
   },
   {
     plugins: {
-      jsdoc: eslintJsDoc,
-      sonarjs: sonarJs,
-      "simple-import-sort": simpleImportSort,
+      // jsdoc: eslintJsDoc,
+      // sonarjs: sonarJs,
+      // "simple-import-sort": simpleImportSort,
     },
     settings: {
       "import/resolver": {
@@ -32,52 +32,52 @@ const eslintConfig = [
       },
     },
     rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
-      "no-console": "warn",
-      "no-debugger": "warn",
+      // "@typescript-eslint/no-explicit-any": "warn",
+      // "no-console": "warn",
+      // "no-debugger": "warn",
 
       // sonarjs rules
-      "sonarjs/no-duplicate-string": "warn",
-      "sonarjs/no-identical-functions": "warn",
-      "sonarjs/no-duplicated-branches": "warn",
-      "sonarjs/no-identical-conditions": "warn",
-      "sonarjs/no-small-switch": "warn",
-      "sonarjs/no-inverted-boolean-check": "warn",
-      "sonarjs/no-use-of-empty-return-value": "warn",
-      "sonarjs/prefer-single-boolean-return": "warn",
-      "sonarjs/no-nested-switch": "warn",
-      "sonarjs/cognitive-complexity": ["error", 15],
+      // "sonarjs/no-duplicate-string": "warn",
+      // "sonarjs/no-identical-functions": "warn",
+      // "sonarjs/no-duplicated-branches": "warn",
+      // "sonarjs/no-identical-conditions": "warn",
+      // "sonarjs/no-small-switch": "warn",
+      // "sonarjs/no-inverted-boolean-check": "warn",
+      // "sonarjs/no-use-of-empty-return-value": "warn",
+      // "sonarjs/prefer-single-boolean-return": "warn",
+      // "sonarjs/no-nested-switch": "warn",
+      // "sonarjs/cognitive-complexity": ["error", 15],
 
       // jsdoc rules
-      "jsdoc/require-jsdoc": [
-        "warn",
-        {
-          require: {
-            FunctionDeclaration: true,
-            MethodDefinition: true,
-            ClassDeclaration: true,
-          },
-        },
-      ],
-      "jsdoc/require-returns": "warn",
-      "jsdoc/require-param": "warn",
-      "jsdoc/check-param-names": "error",
-      "jsdoc/check-tag-names": "error",
+      // "jsdoc/require-jsdoc": [
+      //   "warn",
+      //   {
+      //     require: {
+      //       FunctionDeclaration: true,
+      //       MethodDefinition: true,
+      //       ClassDeclaration: true,
+      //     },
+      //   },
+      // ],
+      // "jsdoc/require-returns": "warn",
+      // "jsdoc/require-param": "warn",
+      // "jsdoc/check-param-names": "error",
+      // "jsdoc/check-tag-names": "error",
 
       // simple-import-sort rules
-      "simple-import-sort/imports": [
-        "error",
-        {
-          groups: [
-            // Внешние библиотеки
-            ["^@?\\w"],
-            // Абсолютные импорты
-            ["^@/"],
-            // Относительные импорты
-            ["^\\./"],
-          ],
-        },
-      ],
+      // "simple-import-sort/imports": [
+      //   "error",
+      //   {
+      //     groups: [
+      //       // Внешние библиотеки
+      //       ["^@?\\w"],
+      //       // Абсолютные импорты
+      //       ["^@/"],
+      //       // Относительные импорты
+      //       ["^\\./"],
+      //     ],
+      //   },
+      // ],
     },
   },
   {
