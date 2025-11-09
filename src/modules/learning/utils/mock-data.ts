@@ -85,6 +85,12 @@ export const mockModules: Module[] = [
             correctAnswerId: "opt-1",
             points: 10,
           },
+          {
+            id: "task-1-1-6",
+            type: "ai-chat",
+            topic: "Приветствия и знакомство",
+            points: 25,
+          },
         ],
       },
       {
@@ -122,12 +128,6 @@ export const mockModules: Module[] = [
           },
           {
             id: "task-1-2-3",
-            type: "ai-chat",
-            topic: "Приветствия и знакомство",
-            points: 25,
-          },
-          {
-            id: "task-1-2-4",
             type: "riddle",
             riddle: "Это слово используется для прощания на казахском языке",
             options: [
@@ -138,6 +138,12 @@ export const mockModules: Module[] = [
             ],
             correctAnswerId: "opt-1",
             points: 20,
+          },
+          {
+            id: "task-1-2-4",
+            type: "ai-chat",
+            topic: "Приветствия и знакомство",
+            points: 25,
           },
         ],
       },
