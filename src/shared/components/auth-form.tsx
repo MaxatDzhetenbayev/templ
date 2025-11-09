@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/shared/lib/utils"
 import { Button } from "@/shared/components/ui/button"
 import {
@@ -27,6 +28,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { axiosApi } from "../lib/client"
 
 export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
+  const t = useTranslations("auth")
   const [name, setName] = useState("")
   const [isLogin, setIsLogin] = useState(true)
   const [login, setLogin] = useState('')
@@ -64,9 +66,9 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className=" rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl text-white">
+      <Card className="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur-xl shadow-xl text-neutral-900 dark:border-white/10 dark:bg-white/5 dark:text-white">
         <CardHeader >
-          <CardTitle className="flex justify-center text-2xl">{isLogin ? "Авторизация" : "Регистрация"}</CardTitle>
+          <CardTitle className="flex justify-center text-2xl">{isLogin ? t("title") : t("titleRegister")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form>
@@ -87,13 +89,14 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
                       <Field>
-                        <FieldLabel htmlFor="name">Имя</FieldLabel>
+                        <FieldLabel htmlFor="name" className="text-neutral-600 dark:text-white/60">{t("name")}</FieldLabel>
                         <Input
                           id="name"
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Введите имя"
+                          placeholder={t("namePlaceholder")}
+                          className="border-black/10 bg-white/60 text-neutral-900 placeholder:text-neutral-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/40"
                           required
                         />
                       </Field>
@@ -109,13 +112,14 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   <Field>
-                    <FieldLabel htmlFor="login">Логин</FieldLabel>
+                    <FieldLabel htmlFor="login" className="text-neutral-600 dark:text-white/60">{t("loginLabel")}</FieldLabel>
                     <Input
                       id="login"
                       type="text"
-                      placeholder="Введите логин"
+                      placeholder={t("loginPlaceholder")}
                       value={login}
                       onChange={(e) => setLogin(e.target.value)}
+                      className="border-black/10 bg-white/60 text-neutral-900 placeholder:text-neutral-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/40"
                       required
                     />
                   </Field>
@@ -129,13 +133,14 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                   transition={{ duration: 0.5, ease: "easeInOut", delay: 0.05 }}
                 >
                   <Field>
-                    <FieldLabel htmlFor="password">Пароль</FieldLabel>
+                    <FieldLabel htmlFor="password" className="text-neutral-600 dark:text-white/60">{t("password")}</FieldLabel>
                     <Input
                       id="password"
                       type="password"
-                      placeholder="Введите пароль"
+                      placeholder={t("passwordPlaceholder")}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      className="border-black/10 bg-white/60 text-neutral-900 placeholder:text-neutral-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/40"
                       required
                     />
                   </Field>
@@ -152,10 +157,10 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                       transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }}
                     >
                       <Field>
-                        <FieldLabel htmlFor="language">Выберите язык</FieldLabel>
+                        <FieldLabel htmlFor="language" className="text-neutral-600 dark:text-white/60">{t("language")}</FieldLabel>
                         <Select value={language} onValueChange={setLanguage}>
-                          <SelectTrigger id="language">
-                            <SelectValue placeholder="Выберите язык" />
+                          <SelectTrigger id="language" className="w-full border-black/10 bg-white/60 text-neutral-900 dark:border-white/10 dark:bg-white/5 dark:text-white">
+                            <SelectValue placeholder={t("languagePlaceholder")} />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="kk">Қазақ тілі</SelectItem>
@@ -176,31 +181,31 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                   transition={{ duration: 0.5, ease: "easeInOut", delay: 0.15 }}
                 >
                   <Field>
-                    <Button type="submit" onClick={handleSubmit} className="w-full bg-sky-400/80">
-                      {isLogin ? "Войти" : "Зарегистрироваться"}
+                    <Button type="submit" onClick={handleSubmit} className="w-full bg-sky-400 text-neutral-950 hover:bg-sky-300 dark:bg-sky-400/80 dark:text-white dark:hover:bg-sky-300">
+                      {isLogin ? t("submit") : t("submitRegister")}
                     </Button>
 
-                    <FieldDescription className="text-center mt-2">
+                    <FieldDescription className="text-center mt-2 text-neutral-600 dark:text-white/70">
                       {isLogin ? (
                         <>
-                          Нет аккаунта?{" "}
+                          {t("noAccount")}{" "}
                           <button
                             type="button"
                             onClick={toggleForm}
-                            className="underline underline-offset-4 hover:text-sky-600"
+                            className="underline underline-offset-4 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300"
                           >
-                            Зарегистрироваться
+                            {t("switchToRegister")}
                           </button>
                         </>
                       ) : (
                         <>
-                          Уже есть аккаунт?{" "}
+                          {t("hasAccount")}{" "}
                           <button
                             type="button"
                             onClick={toggleForm}
-                            className="underline underline-offset-4 hover:text-sky-600"
+                            className="underline underline-offset-4 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300"
                           >
-                            Войти
+                            {t("switchToLogin")}
                           </button>
                         </>
                       )}
