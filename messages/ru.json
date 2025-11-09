@@ -6,6 +6,7 @@
   "nav": {
     "home": "Главная",
     "courses": "Курсы",
+    "learning": "Обучение",
     "materials": "Материалы"
   },
   "auth": {
@@ -99,7 +100,7 @@
     "video": "Видео",
     "open": "Открыть",
     "gamificationEyebrow": "Геймификация",
-    "topTitle": "ТОП-5 учеников",
+    "topTitle": "ТОП учеников",
     "topDesc": "Баллы за уроки, тесты и задания. Сохраняйте серию дней.",
     "top": {
       "table": {
@@ -375,341 +376,324 @@
         "title": "Активность по месяцам",
         "points": "Баллы",
         "lessons": "Уроки"
-      },
-      "language": {
-        "0": {
-          "title": "Алфавит и звуки",
-          "desc": "Быстрый разбор особенностей фонетики"
-        }
-      },
-      "cuisine": {
-        "0": {
-          "title": "Традиционные блюда",
-          "desc": "Бешбармак, кумыс и баурсаки"
-        }
-      },
-      "music": {
-        "0": {
-          "title": "Домбра и кюи",
-          "desc": "История инструмента и известные композиторы"
-        }
-      },
-      "geography": {
-        "0": {
-          "title": "Степи и горы",
-          "desc": "Основные регионы и природные зоны"
-        }
       }
-    },
-    "historyPage": {
-      "title": "История",
-      "intro": "Материалы по истории казахского народа, ключевые события, личности и краткие обзоры.",
-      "back": "Назад",
-      "empty": "Материалы скоро появятся.",
-      "breadcrumbs": {
-        "materials": "Материалы"
-      },
-      "filters": {
-        "title": "Фильтры",
-        "article": "Статьи",
-        "brief": "Краткие материалы",
-        "test": "Тесты"
-      },
-      "footer": {
-        "legal": "Все права защищены"
-      },
-      "videos": {
-        "0": {
-          "id": "Q-QZTyBxf54",
-          "title": "История Казахстана — Выпуск 1",
-          "channel": "QazaqHistory",
-          "length": "12:41",
-          "desc": "Первый выпуск серии о ключевых периодах истории Казахстана."
-        },
-        "1": {
-          "id": "cfB-cFqUptA",
-          "title": "История Казахстана — Выпуск 2",
-          "channel": "QazaqHistory",
-          "length": "13:02",
-          "desc": "Продолжение рассказа о древних тюркских племенах и ханствах."
-        }
-      },
-
-      "list": {
-        "0": {
-          "title": "Древняя история Казахстана",
-          "desc": "Краткое введение в ранние эпохи и формирование племен.",
-          "slug": "ancient-history",
-          "tag": "Статья",
-          "level": "Начальный",
-          "length": "6 мин"
-        },
-        "1": {
-          "title": "Тюркские каганаты",
-          "desc": "Рост и влияние тюркских государств на территории Центральной Азии.",
-          "slug": "turkic-kaganates",
-          "tag": "Статья",
-          "level": "Средний",
-          "length": "8 мин"
-        }
-      }
-    },
-    "traditionsPage": {
-      "title": "Традиции",
-      "back": "Назад",
-      "breadcrumbs": {
-        "materials": "Материалы"
-      },
-      "videosSection": {
-        "eyebrow": "Видео",
-        "title": "Традиции Казахстана — видео",
-        "desc": "Подборка видеоматериалов о казахских обычаях и обрядах",
-        "empty": "Видео появятся позже"
-      },
-      "openPlaylist": "Открыть весь плейлист на YouTube",
-      "playlistUrl": "https://www.youtube.com/playlist?list=PLrsl6dUjLkmG1kHWc_0KByLc5-X1VaIN3",
-      "fallbackTitle": "Видео",
-      "videos": {
-        "0": {
-          "title": "Казахские традиции — Выпуск 1",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Основные казахские обычаи и культурные элементы."
-        },
-        "1": {
-          "title": "Казахские традиции — Выпуск 2",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Обряды, праздники и уклад жизни."
-        },
-        "2": {
-          "title": "Казахские традиции — Выпуск 3",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Развитие традиций и их значение."
-        },
-        "3": {
-          "title": "Казахские традиции — Выпуск 4",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Семейные обычаи, гостеприимство и этикет."
-        },
-        "4": {
-          "title": "Казахские традиции — Выпуск 5",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Ритуалы, символы и культурные основы."
-        },
-        "5": {
-          "title": "Казахские традиции — Выпуск 6",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Обряды и традиции, сохранившиеся до наших дней."
-        }
-      },
-      "footer": {
-        "legal": "Все права защищены"
-      }
-    },
-    "languagePage": {
-      "title": "Язык",
-      "back": "Назад",
-      "breadcrumbs": { "materials": "Материалы" },
-      "videosSection": {
-        "eyebrow": "Видео",
-        "title": "Казахский язык — видео",
-        "desc": "Подборка роликов по алфавиту, звукам, лексике, грамматике и практике речи",
-        "empty": "Видео появятся позже"
-      },
-      "openPlaylist": "Открыть весь плейлист на YouTube",
-      "playlistUrl": "https://www.youtube.com/playlist?list=PLzjHT6KjLRg3Qg_dvuZN05FxBuwWqRqHe",
-      "fallbackTitle": "Видео",
-      "videos": {
-        "0": {
-          "id": "_HcG3vOIe1E",
-          "title": "Казахский язык — Введение",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Обзор курса и подхода к изучению."
-        },
-        "1": {
-          "id": "efrRh4HptmY",
-          "title": "Алфавит и звуки",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Базовые буквы, особенности произношения."
-        },
-        "2": {
-          "id": "jBvnlISPovU",
-          "title": "Гласные и гармония",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Гармония гласных и влияние на слова."
-        },
-        "3": {
-          "id": "iarTeKGwRrk",
-          "title": "Согласные и чтение",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Чтение, стечения и типичные пары."
-        },
-        "4": {
-          "id": "4bFtc1FVvso",
-          "title": "Базовая лексика",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Мини-словарь на каждый день."
-        },
-        "5": {
-          "id": "synbpls4fEA",
-          "title": "Простая грамматика",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Аффиксы, порядок слов, падежные формы."
-        },
-        "6": {
-          "id": "SjTaMBuOBzY",
-          "title": "Полезные фразы",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Приветствия, знакомство, вежливые формы."
-        },
-        "7": {
-          "id": "xNNbGYCQwrE",
-          "title": "Числительные и время",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Счёт, даты, дни недели."
-        },
-        "8": {
-          "id": "0q2X61Ebr2w",
-          "title": "Практика чтения",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Короткие тексты и разбор произношения."
-        },
-        "9": {
-          "id": "kFUkbYz_ox4",
-          "title": "Повседневные диалоги",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Ролевые сцены и полезные речевые паттерны."
-        }
-      },
-      "footer": { "legal": "Все права защищены" }
-    },
-    "cuisinePage": {
-      "title": "Казахская кухня",
-      "back": "Назад",
-      "breadcrumbs": {
-        "materials": "Материалы"
-      },
-      "videosSection": {
-        "eyebrow": "Видео",
-        "title": "Казахская кухня — видео",
-        "desc": "Подборка видеороликов о казахских блюдах, традициях питания и кулинарной культуре.",
-        "empty": "Видео скоро появятся"
-      },
-      "openPlaylist": "Открыть плейлист",
-      "playlistUrl": "",
-      "fallbackTitle": "Видео",
-      "videos": {
-        "0": {
-          "url": "https://www.youtube.com/watch?v=7SMUQqf6GnE",
-          "title": "Казахская кухня — традиционные блюда",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Обзор основных блюд казахской кухни и их особенности."
-        },
-        "1": {
-          "url": "https://www.youtube.com/watch?v=nyG3Obuvasg",
-          "title": "Национальные блюда Казахстана",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Видео о популярных национальных блюдах и способах их приготовления."
-        },
-        "2": {
-          "url": "https://www.youtube.com/watch?v=4NvRfH9oBPQ",
-          "title": "Традиции питания у казахов",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "О традициях приема пищи и культуре гостеприимства."
-        },
-        "3": {
-          "url": "https://www.youtube.com/watch?v=WWmuyN4Eti8",
-          "title": "История казахской кухни",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Как формировалась национальная кухня и её особенности."
-        },
-        "4": {
-          "url": "https://www.youtube.com/watch?v=HDJxEj2zeR8",
-          "title": "Казахские мясные блюда",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Сюжет о традиционных мясных блюдах и их значении."
-        },
-        "5": {
-          "url": "https://www.youtube.com/watch?v=m9gvfmd-UvM",
-          "title": "Национальные напитки Казахстана",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Кумыс, шубат, айран — напитки казахской кухни."
-        },
-        "6": {
-          "url": "https://www.youtube.com/watch?v=cjdF2ksuL-s",
-          "title": "Традиционная кулинария Казахстана",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Подробнее о казахской кулинарной культуре."
-        }
-      },
-      "footer": {
-        "legal": "Все права защищены"
-      }
-    },
-    "musicPage": {
-      "title": "Музыка",
-      "back": "Назад",
-      "breadcrumbs": { "materials": "Материалы" },
-      "videosSection": {
-        "eyebrow": "Видео",
-        "title": "Казахская музыка — видео",
-        "desc": "Домбра, кюи и современные интерпретации",
-        "empty": "Видео появятся позже"
-      },
-      "audiosSection": {
-        "eyebrow": "Аудио",
-        "title": "Кюи — аудио",
-        "desc": "Подборка аудиозаписей традиционных кюев",
-        "empty": "Аудио появится позже",
-        "note": "Важно: для внешних mp3 может потребоваться корректный CORS с вашего домена."
-      },
-      "fallbackTitle": "Видео",
-      "fallbackAudioTitle": "Кюй",
-      "videos": {},
-      "audios": {
-        "0": {
-          "title": "Адай",
-          "performer": "Құрманғазы",
-          "length": "2:57",
-          "src": "https://example.com/audio/kui/aday.mp3",
-          "cover": "https://example.com/covers/aday.jpg"
-        },
-        "1": {
-          "title": "Балбырауын",
-          "performer": "Құрманғазы",
-          "length": "3:10",
-          "src": "https://example.com/audio/kui/balbyraun.mp3"
-        },
-        "2": {
-          "title": "Сарыарқа",
-          "performer": "Құрманғазы",
-          "externalUrl": "https://open.spotify.com/track/...",
-          "desc": "Ссылка на внешний сервис"
-        }
-      },
-      "footer": { "legal": "Все права защищены" }
     }
+  },
+  "historyPage": {
+    "title": "История",
+    "intro": "Материалы по истории казахского народа, ключевые события, личности и краткие обзоры.",
+    "back": "Назад",
+    "empty": "Материалы скоро появятся.",
+    "breadcrumbs": {
+      "materials": "Материалы"
+    },
+    "filters": {
+      "title": "Фильтры",
+      "article": "Статьи",
+      "brief": "Краткие материалы",
+      "test": "Тесты"
+    },
+    "footer": {
+      "legal": "Все права защищены"
+    },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "История Казахстана — видео",
+      "desc": "Подборка роликов по ключевым темам",
+      "empty": "Видео скоро появятся"
+    },
+    "openPlaylist": "Открыть весь плейлист на YouTube",
+    "videos": {
+      "0": {
+        "id": "Q-QZTyBxf54",
+        "title": "История Казахстана — Выпуск 1",
+        "channel": "QazaqHistory",
+        "length": "12:41",
+        "desc": "Первый выпуск серии о ключевых периодах истории Казахстана."
+      },
+      "1": {
+        "id": "cfB-cFqUptA",
+        "title": "История Казахстана — Выпуск 2",
+        "channel": "QazaqHistory",
+        "length": "13:02",
+        "desc": "Продолжение рассказа о древних тюркских племенах и ханствах."
+      }
+    },
+
+    "list": {
+      "0": {
+        "title": "Древняя история Казахстана",
+        "desc": "Краткое введение в ранние эпохи и формирование племен.",
+        "slug": "ancient-history",
+        "tag": "Статья",
+        "level": "Начальный",
+        "length": "6 мин"
+      },
+      "1": {
+        "title": "Тюркские каганаты",
+        "desc": "Рост и влияние тюркских государств на территории Центральной Азии.",
+        "slug": "turkic-kaganates",
+        "tag": "Статья",
+        "level": "Средний",
+        "length": "8 мин"
+      }
+    }
+  },
+  "traditionsPage": {
+    "title": "Традиции",
+    "back": "Назад",
+    "breadcrumbs": {
+      "materials": "Материалы"
+    },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "Традиции Казахстана — видео",
+      "desc": "Подборка видеоматериалов о казахских обычаях и обрядах",
+      "empty": "Видео появятся позже"
+    },
+    "openPlaylist": "Открыть весь плейлист на YouTube",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLrsl6dUjLkmG1kHWc_0KByLc5-X1VaIN3",
+    "fallbackTitle": "Видео",
+    "videos": {
+      "0": {
+        "title": "Казахские традиции — Выпуск 1",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Основные казахские обычаи и культурные элементы."
+      },
+      "1": {
+        "title": "Казахские традиции — Выпуск 2",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Обряды, праздники и уклад жизни."
+      },
+      "2": {
+        "title": "Казахские традиции — Выпуск 3",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Развитие традиций и их значение."
+      },
+      "3": {
+        "title": "Казахские традиции — Выпуск 4",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Семейные обычаи, гостеприимство и этикет."
+      },
+      "4": {
+        "title": "Казахские традиции — Выпуск 5",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Ритуалы, символы и культурные основы."
+      },
+      "5": {
+        "title": "Казахские традиции — Выпуск 6",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Обряды и традиции, сохранившиеся до наших дней."
+      }
+    },
+    "footer": {
+      "legal": "Все права защищены"
+    }
+  },
+  "languagePage": {
+    "title": "Язык",
+    "back": "Назад",
+    "breadcrumbs": { "materials": "Материалы" },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "Казахский язык — видео",
+      "desc": "Подборка роликов по алфавиту, звукам, лексике, грамматике и практике речи",
+      "empty": "Видео появятся позже"
+    },
+    "openPlaylist": "Открыть весь плейлист на YouTube",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLzjHT6KjLRg3Qg_dvuZN05FxBuwWqRqHe",
+    "fallbackTitle": "Видео",
+    "videos": {
+      "0": {
+        "id": "_HcG3vOIe1E",
+        "title": "Казахский язык — Введение",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Обзор курса и подхода к изучению."
+      },
+      "1": {
+        "id": "efrRh4HptmY",
+        "title": "Алфавит и звуки",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Базовые буквы, особенности произношения."
+      },
+      "2": {
+        "id": "jBvnlISPovU",
+        "title": "Гласные и гармония",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Гармония гласных и влияние на слова."
+      },
+      "3": {
+        "id": "iarTeKGwRrk",
+        "title": "Согласные и чтение",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Чтение, стечения и типичные пары."
+      },
+      "4": {
+        "id": "4bFtc1FVvso",
+        "title": "Базовая лексика",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Мини-словарь на каждый день."
+      },
+      "5": {
+        "id": "synbpls4fEA",
+        "title": "Простая грамматика",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Аффиксы, порядок слов, падежные формы."
+      },
+      "6": {
+        "id": "SjTaMBuOBzY",
+        "title": "Полезные фразы",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Приветствия, знакомство, вежливые формы."
+      },
+      "7": {
+        "id": "xNNbGYCQwrE",
+        "title": "Числительные и время",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Счёт, даты, дни недели."
+      },
+      "8": {
+        "id": "0q2X61Ebr2w",
+        "title": "Практика чтения",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Короткие тексты и разбор произношения."
+      },
+      "9": {
+        "id": "kFUkbYz_ox4",
+        "title": "Повседневные диалоги",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Ролевые сцены и полезные речевые паттерны."
+      }
+    },
+    "footer": { "legal": "Все права защищены" }
+  },
+  "cuisinePage": {
+    "title": "Казахская кухня",
+    "back": "Назад",
+    "breadcrumbs": {
+      "materials": "Материалы"
+    },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "Казахская кухня — видео",
+      "desc": "Подборка видеороликов о казахских блюдах, традициях питания и кулинарной культуре.",
+      "empty": "Видео скоро появятся"
+    },
+    "openPlaylist": "Открыть плейлист",
+    "playlistUrl": "",
+    "fallbackTitle": "Видео",
+    "videos": {
+      "0": {
+        "url": "https://www.youtube.com/watch?v=7SMUQqf6GnE",
+        "title": "Казахская кухня — традиционные блюда",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Обзор основных блюд казахской кухни и их особенности."
+      },
+      "1": {
+        "url": "https://www.youtube.com/watch?v=nyG3Obuvasg",
+        "title": "Национальные блюда Казахстана",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Видео о популярных национальных блюдах и способах их приготовления."
+      },
+      "2": {
+        "url": "https://www.youtube.com/watch?v=4NvRfH9oBPQ",
+        "title": "Традиции питания у казахов",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "О традициях приема пищи и культуре гостеприимства."
+      },
+      "3": {
+        "url": "https://www.youtube.com/watch?v=WWmuyN4Eti8",
+        "title": "История казахской кухни",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Как формировалась национальная кухня и её особенности."
+      },
+      "4": {
+        "url": "https://www.youtube.com/watch?v=HDJxEj2zeR8",
+        "title": "Казахские мясные блюда",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Сюжет о традиционных мясных блюдах и их значении."
+      },
+      "5": {
+        "url": "https://www.youtube.com/watch?v=m9gvfmd-UvM",
+        "title": "Национальные напитки Казахстана",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Кумыс, шубат, айран — напитки казахской кухни."
+      },
+      "6": {
+        "url": "https://www.youtube.com/watch?v=cjdF2ksuL-s",
+        "title": "Традиционная кулинария Казахстана",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Подробнее о казахской кулинарной культуре."
+      }
+    },
+    "footer": {
+      "legal": "Все права защищены"
+    }
+  },
+  "musicPage": {
+    "title": "Музыка",
+    "back": "Назад",
+    "breadcrumbs": { "materials": "Материалы" },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "Казахская музыка — видео",
+      "desc": "Домбра, кюи и современные интерпретации",
+      "empty": "Видео появятся позже"
+    },
+    "audiosSection": {
+      "eyebrow": "Аудио",
+      "title": "Кюи — аудио",
+      "desc": "Подборка аудиозаписей традиционных кюев",
+      "empty": "Аудио появится позже",
+      "note": "Важно: для внешних mp3 может потребоваться корректный CORS с вашего домена."
+    },
+    "fallbackTitle": "Видео",
+    "fallbackAudioTitle": "Кюй",
+    "videos": {},
+    "audios": {
+      "0": {
+        "title": "Адай",
+        "performer": "Құрманғазы",
+        "length": "2:57",
+        "src": "https://example.com/audio/kui/aday.mp3",
+        "cover": "https://example.com/covers/aday.jpg"
+      },
+      "1": {
+        "title": "Балбырауын",
+        "performer": "Құрманғазы",
+        "length": "3:10",
+        "src": "https://example.com/audio/kui/balbyraun.mp3"
+      },
+      "2": {
+        "title": "Сарыарқа",
+        "performer": "Құрманғазы",
+        "externalUrl": "https://open.spotify.com/track/...",
+        "desc": "Ссылка на внешний сервис"
+      }
+    },
+    "footer": { "legal": "Все права защищены" }
   }
 }

@@ -1,16 +1,26 @@
 "use client";
-import React from "react";
+import { Header } from "@/shared/components/header";
 import { motion } from "framer-motion";
-import NextLink from "next/link";
-import Header from "@/shared/components/header";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import NextLink from "next/link";
+import React from "react";
 
 const LOCALES = ["ru", "kk", "en"] as const;
 type Locale = (typeof LOCALES)[number];
-const stripLeadingLocale = (path: string) => path.replace(/^\/(ru|kk|en)(?=\/|$)/, "");
-const withLeadingSlash = (path: string) => (path.startsWith("/") ? path : `/${path}`);
-function LocalizedLink({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
+const stripLeadingLocale = (path: string) =>
+  path.replace(/^\/(ru|kk|en)(?=\/|$)/, "");
+const withLeadingSlash = (path: string) =>
+  path.startsWith("/") ? path : `/${path}`;
+function LocalizedLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
   const locale = useLocale() as Locale;
   const clean = stripLeadingLocale(withLeadingSlash(href));
   const finalHref = `/${locale}${clean}`;
@@ -25,9 +35,16 @@ const brand = { primary: "#38bdf8", secondary: "#22d3ee", accent: "#93c5fd" };
 
 const container = {
   hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { staggerChildren: 0.06, ease: "easeOut", duration: 0.5 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.06, ease: "easeOut", duration: 0.5 },
+  },
 };
-const item = { hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.45 } } };
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.45 } },
+};
 
 function YouTubeCard({
   href,
@@ -35,7 +52,7 @@ function YouTubeCard({
   channel,
   length,
   thumb,
-  desc
+  desc,
 }: {
   href: string;
   title: string;
@@ -64,7 +81,9 @@ function YouTubeCard({
         )}
         <span className="absolute inset-0 grid place-items-center">
           <span className="grid h-12 w-12 place-items-center rounded-full bg-white/90 text-neutral-900 shadow-md transition group-hover:scale-105 dark:bg-white/80">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7-11-7Z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7-11-7Z" />
+            </svg>
           </span>
         </span>
         {length && (
@@ -74,9 +93,19 @@ function YouTubeCard({
         )}
       </div>
       <div className="p-4">
-        <div className="line-clamp-2 text-sm font-medium text-neutral-900 dark:text-white">{title}</div>
-        {channel && <div className="mt-1 text-xs text-neutral-600 dark:text-white/60">{channel}</div>}
-        {desc && <p className="mt-2 line-clamp-3 text-xs text-neutral-700 dark:text-white/60">{desc}</p>}
+        <div className="line-clamp-2 text-sm font-medium text-neutral-900 dark:text-white">
+          {title}
+        </div>
+        {channel && (
+          <div className="mt-1 text-xs text-neutral-600 dark:text-white/60">
+            {channel}
+          </div>
+        )}
+        {desc && (
+          <p className="mt-2 line-clamp-3 text-xs text-neutral-700 dark:text-white/60">
+            {desc}
+          </p>
+        )}
       </div>
     </a>
   );
@@ -89,7 +118,7 @@ function AudioCard({
   cover,
   src,
   externalUrl,
-  desc
+  desc,
 }: {
   title: string;
   performer?: string;
@@ -105,16 +134,35 @@ function AudioCard({
         {cover ? (
           <Image src={cover} alt="" className="h-full w-full object-cover" />
         ) : (
-          <svg width="28" height="28" viewBox="0 0 24 24" className="opacity-70">
-            <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z"/>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            className="opacity-70"
+          >
+            <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z" />
           </svg>
         )}
       </div>
       <div className="min-w-0">
-        <div className="truncate text-sm font-medium text-neutral-900 dark:text-white">{title}</div>
-        {performer && <div className="text-xs text-neutral-600 dark:text-white/60">{performer}</div>}
-        {desc && <div className="mt-1 line-clamp-2 text-xs text-neutral-700 dark:text-white/60">{desc}</div>}
-        {length && <div className="mt-1 text-[11px] text-neutral-500 dark:text-white/50">{length}</div>}
+        <div className="truncate text-sm font-medium text-neutral-900 dark:text-white">
+          {title}
+        </div>
+        {performer && (
+          <div className="text-xs text-neutral-600 dark:text-white/60">
+            {performer}
+          </div>
+        )}
+        {desc && (
+          <div className="mt-1 line-clamp-2 text-xs text-neutral-700 dark:text-white/60">
+            {desc}
+          </div>
+        )}
+        {length && (
+          <div className="mt-1 text-[11px] text-neutral-500 dark:text-white/50">
+            {length}
+          </div>
+        )}
         {src ? (
           <audio controls preload="none" className="mt-2 w-full">
             <source src={src} />
@@ -142,7 +190,15 @@ function AudioCard({
 }
 
 /* ========= Заголовок секции ========= */
-function SectionTitle({ eyebrow, title, desc }: { eyebrow?: string; title: string; desc?: string }) {
+function SectionTitle({
+  eyebrow,
+  title,
+  desc,
+}: {
+  eyebrow?: string;
+  title: string;
+  desc?: string;
+}) {
   return (
     <motion.div
       variants={container}
@@ -159,10 +215,20 @@ function SectionTitle({ eyebrow, title, desc }: { eyebrow?: string; title: strin
           {eyebrow}
         </motion.div>
       )}
-      <motion.h2 variants={item} className="text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white">
+      <motion.h2
+        variants={item}
+        className="text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white"
+      >
         {title}
       </motion.h2>
-      {desc && <motion.p variants={item} className="mt-3 text-neutral-700 dark:text-white/70">{desc}</motion.p>}
+      {desc && (
+        <motion.p
+          variants={item}
+          className="mt-3 text-neutral-700 dark:text-white/70"
+        >
+          {desc}
+        </motion.p>
+      )}
     </motion.div>
   );
 }
@@ -185,32 +251,42 @@ export default function MusicPage() {
     if (!url && !id) return [];
     const href = url ?? `https://www.youtube.com/watch?v=${id}`;
     const thumb = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : undefined;
-    return [{
-      href,
-      thumb,
-      title: (t.optional?.(`videos.${i}.title`) as string | undefined) ??
-             (t.optional?.("fallbackTitle") as string | undefined) ?? "",
-      channel: t.optional?.(`videos.${i}.channel`) as string | undefined,
-      length: t.optional?.(`videos.${i}.length`) as string | undefined,
-      desc: t.optional?.(`videos.${i}.desc`) as string | undefined
-    }];
+    return [
+      {
+        href,
+        thumb,
+        title:
+          (t.optional?.(`videos.${i}.title`) as string | undefined) ??
+          (t.optional?.("fallbackTitle") as string | undefined) ??
+          "",
+        channel: t.optional?.(`videos.${i}.channel`) as string | undefined,
+        length: t.optional?.(`videos.${i}.length`) as string | undefined,
+        desc: t.optional?.(`videos.${i}.desc`) as string | undefined,
+      },
+    ];
   });
 
   // АУДИО кюи из переводов
   const audios = Array.from({ length: 24 }).flatMap((_, i) => {
     const src = t.optional?.(`audios.${i}.src`) as string | undefined; // прямой mp3/ogg
-    const externalUrl = t.optional?.(`audios.${i}.externalUrl`) as string | undefined; // если нет прямого файла
+    const externalUrl = t.optional?.(`audios.${i}.externalUrl`) as
+      | string
+      | undefined; // если нет прямого файла
     if (!src && !externalUrl) return [];
-    return [{
-      src,
-      externalUrl,
-      title: (t.optional?.(`audios.${i}.title`) as string | undefined) ??
-             (t.optional?.("fallbackAudioTitle") as string | undefined) ?? "Kui",
-      performer: t.optional?.(`audios.${i}.performer`) as string | undefined,
-      length: t.optional?.(`audios.${i}.length`) as string | undefined,
-      cover: t.optional?.(`audios.${i}.cover`) as string | undefined,
-      desc: t.optional?.(`audios.${i}.desc`) as string | undefined
-    }];
+    return [
+      {
+        src,
+        externalUrl,
+        title:
+          (t.optional?.(`audios.${i}.title`) as string | undefined) ??
+          (t.optional?.("fallbackAudioTitle") as string | undefined) ??
+          "Kui",
+        performer: t.optional?.(`audios.${i}.performer`) as string | undefined,
+        length: t.optional?.(`audios.${i}.length`) as string | undefined,
+        cover: t.optional?.(`audios.${i}.cover`) as string | undefined,
+        desc: t.optional?.(`audios.${i}.desc`) as string | undefined,
+      },
+    ];
   });
 
   return (
@@ -219,14 +295,18 @@ export default function MusicPage() {
       <div className="pointer-events-none fixed inset-0 -z-10">
         <motion.div
           className="absolute -top-28 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
-          style={{ background: `radial-gradient(50% 50% at 50% 50%, ${brand.primary} 0%, rgba(34,211,238,0) 70%)` }}
+          style={{
+            background: `radial-gradient(50% 50% at 50% 50%, ${brand.primary} 0%, rgba(34,211,238,0) 70%)`,
+          }}
           initial={{ scale: 0.98, opacity: 0.16 }}
           animate={{ scale: 1.02, opacity: 0.24 }}
           transition={{ duration: 6, repeat: Infinity, repeatType: "reverse" }}
         />
         <motion.div
           className="absolute -bottom-28 left-1/4 h-[360px] w-[360px] rounded-full opacity-15 blur-3xl"
-          style={{ background: `radial-gradient(50% 50% at 50% 50%, ${brand.secondary} 0%, rgba(147,197,253,0) 70%)` }}
+          style={{
+            background: `radial-gradient(50% 50% at 50% 50%, ${brand.secondary} 0%, rgba(147,197,253,0) 70%)`,
+          }}
           initial={{ scale: 0.98, opacity: 0.12 }}
           animate={{ scale: 1.03, opacity: 0.2 }}
           transition={{ duration: 7, repeat: Infinity, repeatType: "reverse" }}
@@ -239,23 +319,39 @@ export default function MusicPage() {
       <nav className="mx-auto w-full max-w-6xl px-4 pt-6 text-sm">
         <ol className="flex flex-wrap items-center gap-2 text-neutral-600 dark:text-white/60">
           <li>
-            <LocalizedLink href="/materials" className="underline-offset-2 hover:underline">
+            <LocalizedLink
+              href="/materials"
+              className="underline-offset-2 hover:underline"
+            >
               {t("breadcrumbs.materials")}
             </LocalizedLink>
           </li>
           <li className="opacity-60">/</li>
-          <li className="font-medium text-neutral-900 dark:text-white">{t("title")}</li>
+          <li className="font-medium text-neutral-900 dark:text-white">
+            {t("title")}
+          </li>
         </ol>
       </nav>
 
       {/* Hero */}
       <section className="relative">
         <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 py-10 md:grid-cols-[1.2fr_0.8fr]">
-          <motion.div variants={container} initial="hidden" animate="show" className="space-y-5">
-            <motion.h1 variants={item} className="text-4xl md:text-5xl font-semibold leading-[1.1] dark:text-white">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="space-y-5"
+          >
+            <motion.h1
+              variants={item}
+              className="text-4xl md:text-5xl font-semibold leading-[1.1] dark:text-white"
+            >
               {t("title")}
             </motion.h1>
-            <motion.p variants={item} className="text-neutral-700 dark:text-white/70">
+            <motion.p
+              variants={item}
+              className="text-neutral-700 dark:text-white/70"
+            >
               {t.optional?.("videosSection.desc")}
             </motion.p>
             <motion.div variants={item} className="flex gap-3 pt-2">
@@ -301,7 +397,11 @@ export default function MusicPage() {
                 <motion.div key={idx} variants={item}>
                   <YouTubeCard
                     href={v.href}
-                    title={v.title || (t.optional?.("fallbackTitle") as string) || "Video"}
+                    title={
+                      v.title ||
+                      (t.optional?.("fallbackTitle") as string) ||
+                      "Video"
+                    }
                     channel={v.channel}
                     length={v.length}
                     thumb={v.thumb}
@@ -363,10 +463,19 @@ export default function MusicPage() {
       <footer className="border-t border-black/10 py-10 dark:border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 md:flex-row">
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded-lg" style={{ background: `linear-gradient(135deg, ${brand.primary}, ${brand.accent})` }} />
-            <span className="text-sm text-neutral-700 dark:text-white/70">© {new Date().getFullYear()} Kazakh Learn</span>
+            <div
+              className="h-6 w-6 rounded-lg"
+              style={{
+                background: `linear-gradient(135deg, ${brand.primary}, ${brand.accent})`,
+              }}
+            />
+            <span className="text-sm text-neutral-700 dark:text-white/70">
+              © {new Date().getFullYear()} Kazakh Learn
+            </span>
           </div>
-          <div className="text-xs text-neutral-500 dark:text-white/50">{t("footer.legal")}</div>
+          <div className="text-xs text-neutral-500 dark:text-white/50">
+            {t("footer.legal")}
+          </div>
         </div>
       </footer>
     </div>

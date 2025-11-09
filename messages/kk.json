@@ -6,6 +6,7 @@
   "nav": {
     "home": "Басты бет",
     "courses": "Курстар",
+    "learning": "Оқу",
     "materials": "Материалдар"
   },
   "auth": {
@@ -99,7 +100,7 @@
     "video": "Бейне",
     "open": "Ашу",
     "gamificationEyebrow": "Геймификация",
-    "topTitle": "ТОП-5 оқушы",
+    "topTitle": "ТОП оқушылар",
     "topDesc": "Сабақтар, тесттер және тапсырмалар үшін ұпайлар. Күндер сериясын сақтаңыз.",
     "top": {
       "table": {
@@ -272,416 +273,423 @@
         "points": "Ұпайлар",
         "lessons": "Сабақтар"
       }
-    },
-    "historyPage": {
-      "title": "Тарих",
-      "intro": "Қазақ халқының тарихы, маңызды кезеңдер мен тұлғалар туралы материалдар.",
-      "back": "Артқа",
-      "empty": "Материалдар жақында қосылады.",
-      "breadcrumbs": {
-        "materials": "Материалдар"
-      },
-      "filters": {
-        "title": "Фильтрлер",
-        "article": "Мақалалар",
-        "brief": "Қысқаша",
-        "test": "Тесттер"
-      },
-      "footer": {
-        "legal": "Барлық құқықтар қорғалған"
-      },
-      "videos": {
-        "0": {
-          "id": "Q-QZTyBxf54",
-          "title": "Қазақстан тарихы — 1-бөлім",
-          "channel": "QazaqHistory",
-          "length": "12:41",
-          "desc": "Қазақстан тарихындағы негізгі кезеңдерге кіріспе."
-        }
-      },
-
-      "list": {
-        "0": {
-          "title": "Қазақстанның ежелгі тарихы",
-          "desc": "Ежелгі дәуірлер мен тайпалардың қалыптасуы.",
-          "slug": "ancient-history",
-          "tag": "Мақала",
-          "level": "Бастапқы",
-          "length": "6 мин"
-        },
-        "1": {
-          "title": "Түрік қағанаттары",
-          "desc": "Орталық Азиядағы түрік мемлекеттерінің қалыптасуы мен әсері.",
-          "slug": "turkic-kaganates",
-          "tag": "Мақала",
-          "level": "Орта",
-          "length": "8 мин"
-        }
-      }
-    },
-    "materialsPage": {
-      "hero": {
-        "title": "Материалдар",
-        "text": "Бейне және мақалалар топтамасы: тарих, дәстүрлер, тіл, асхана, музыка және география.",
-        "back": "Басты бетке"
-      },
-      "filters": {
-        "title": "Фильтрлер",
-        "searchPh": "Атауы немесе сипаттамасы бойынша іздеу"
-      },
-      "cats": {
-        "history": "Тарих",
-        "traditions": "Дәстүрлер",
-        "language": "Тіл",
-        "cuisine": "Асхана",
-        "music": "Музыка",
-        "geography": "География"
-      },
-      "tags": {
-        "history": "Тарих",
-        "traditions": "Дәстүрлер",
-        "language": "Тіл",
-        "cuisine": "Асхана",
-        "music": "Музыка",
-        "geography": "География"
-      },
-      "grid": {
-        "eyebrow": "Кітапхана",
-        "desc": "Категорияны таңдап, танысуды бастаңыз"
-      },
-      "labels": {
-        "video": "бейне",
-        "items": "материал"
-      },
-      "buttons": {
-        "watch": "Көру",
-        "openCourse": "Курсты ашу",
-        "playInline": "Осында ойнату",
-        "playAll": "Барлығын көру",
-        "more": "Толығырақ"
-      },
-      "empty": {
-        "title": "Ештеңе табылмады",
-        "desc": "Іздеу сөзін өзгертіңіз немесе басқа категорияны көріңіз"
-      },
-      "collections": {
-        "eyebrow": "Таңдаулы топтамалар",
-        "title": "Дайын плейлисттер",
-        "desc": "Тақырыптар бойынша ең үздік материалдарды жинадық",
-        "playlist": "Плейлист",
-        "playlistA": {
-          "title": "Мәдениет және дәстүрлер",
-          "desc": "Ритуалдар, мерекелер және отбасы құндылықтары"
-        },
-        "playlistB": {
-          "title": "Қазақстан тарихы",
-          "desc": "Ежелгі қағанаттардан қазіргі заманға дейін"
-        }
-      },
-      "footer": {
-        "legal": "Барлық құқықтар қорғалған. Материалдар оқу мақсатында ұсынылған."
-      },
-
-      "history": {
-        "0": {
-          "title": "Көшпелі империялар",
-          "desc": "Маңызды кезеңдер мен тайпаларға қысқаша шолу"
-        },
-        "1": {
-          "title": "Қазақ хандығы",
-          "desc": "Құрылуы, билеушілері және өңірге әсері"
-        }
-      },
-      "traditions": {
-        "0": {
-          "title": "Наурыз: дәстүрлер",
-          "desc": "Мерекенің негізгі символдары мен ғұрыптары"
-        },
-        "1": {
-          "title": "Түркі қонақжайлығы",
-          "desc": "Этикет, шай және дастархан"
-        }
-      },
-      "language": {
-        "0": {
-          "title": "Алфавит және дыбыстар",
-          "desc": "Фонетикалық ерекшеліктерге қысқаша талдау"
-        }
-      },
-      "cuisine": {
-        "0": {
-          "title": "Дәстүрлі тағамдар",
-          "desc": "Бешбармақ, қымыз және бауырсақ"
-        }
-      },
-      "music": {
-        "0": {
-          "title": "Домбыра және күйлер",
-          "desc": "Аспап тарихы және белгілі күйшілер"
-        }
-      },
-      "geography": {
-        "0": {
-          "title": "Далалар мен таулар",
-          "desc": "Негізгі өңірлер және табиғи аймақтар"
-        }
-      }
-    },
-    "traditionsPage": {
-      "title": "Дәстүрлер",
-      "back": "Артқа",
-      "breadcrumbs": {
-        "materials": "Материалдар"
-      },
-      "videosSection": {
-        "eyebrow": "Бейне",
-        "title": "Қазақ дәстүрлері — бейнелер",
-        "desc": "Қазақтың әдет-ғұрыптары мен салт-дәстүрлері туралы бейнематериалдар",
-        "empty": "Бейнелер жақында болады"
-      },
-      "openPlaylist": "Толық плейлистті ашу",
-      "playlistUrl": "https://www.youtube.com/playlist?list=PLrsl6dUjLkmG1kHWc_0KByLc5-X1VaIN3",
-      "fallbackTitle": "Бейне",
-      "videos": {
-        "0": {
-          "title": "Қазақ дәстүрлері — 1-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Негізгі қазақ әдет-ғұрыптары мен мәдениет элементтері."
-        },
-        "1": {
-          "title": "Қазақ дәстүрлері — 2-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Салт-дәстүрлер, мерекелер және тұрмыс ерекшеліктері."
-        },
-        "2": {
-          "title": "Қазақ дәстүрлері — 3-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Дәстүрлердің даму тарихы мен маңызы."
-        },
-        "3": {
-          "title": "Қазақ дәстүрлері — 4-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Отбасылық әдет-ғұрыптар, қонақжайлық, этикет."
-        },
-        "4": {
-          "title": "Қазақ дәстүрлері — 5-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Ритуалдар, символдар және мәдени негіздер."
-        },
-        "5": {
-          "title": "Қазақ дәстүрлері — 6-бөлім",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Бүгінге дейін сақталған әдет-ғұрыптар мен дәстүрлер."
-        }
-      },
-      "footer": {
-        "legal": "Барлық құқықтар сақталған"
-      }
-    },
-    "languagePage": {
-      "title": "Тіл",
-      "back": "Артқа",
-      "breadcrumbs": { "materials": "Материалдар" },
-      "videosSection": {
-        "eyebrow": "Бейне",
-        "title": "Қазақ тілі — бейнелер",
-        "desc": "Әліпби, дыбыстар, лексика, грамматика және сөйлеу тәжірибесі туралы бейнелер топтамасы",
-        "empty": "Бейнелер жақында болады"
-      },
-      "openPlaylist": "Толық плейлистті ашу",
-      "playlistUrl": "https://www.youtube.com/playlist?list=PLzjHT6KjLRg3Qg_dvuZN05FxBuwWqRqHe",
-      "fallbackTitle": "Бейне",
-      "videos": {
-        "0": {
-          "id": "_HcG3vOIe1E",
-          "title": "Қазақ тілі — кіріспе",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Курстың жалпы таныстырылымы мен тәсілі."
-        },
-        "1": {
-          "id": "efrRh4HptmY",
-          "title": "Әліпби және дыбыстар",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Негізгі әріптер, айтылым ерекшеліктері."
-        },
-        "2": {
-          "id": "jBvnlISPovU",
-          "title": "Дауыстылар және үндестік",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Дауыстылар үндестігі және оның сөзге әсері."
-        },
-        "3": {
-          "id": "iarTeKGwRrk",
-          "title": "Дауыссыздар және оқу",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Оқу ережелері, тіркесулер және жиі жұптар."
-        },
-        "4": {
-          "id": "4bFtc1FVvso",
-          "title": "Негізгі лексика",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Күнделікті қолданылатын шағын сөздік."
-        },
-        "5": {
-          "id": "synbpls4fEA",
-          "title": "Қарапайым грамматика",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Аффикстер, сөз тәртібі, негізгі септік үлгілері."
-        },
-        "6": {
-          "id": "SjTaMBuOBzY",
-          "title": "Пайдалы тіркестер",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Амандасу, танысу, сыпайылық формалары."
-        },
-        "7": {
-          "id": "xNNbGYCQwrE",
-          "title": "Сандар және уақыт",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Санау, күндер, апта күндері."
-        },
-        "8": {
-          "id": "0q2X61Ebr2w",
-          "title": "Оқу тәжірибесі",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Қысқа мәтіндер және айтылымды талдау."
-        },
-        "9": {
-          "id": "kFUkbYz_ox4",
-          "title": "Күнделікті диалогтар",
-          "channel": "YouTube Playlist",
-          "length": "",
-          "desc": "Рөлдік көріністер және пайдалы сөйлеу үлгілері."
-        }
-      },
-      "footer": { "legal": "Барлық құқықтар сақталған" }
-    },
-    "cuisinePage": {
-      "title": "Qazaq as uy-asy",
-      "back": "Artqa",
-      "breadcrumbs": {
-        "materials": "Materialdar"
-      },
-      "videosSection": {
-        "eyebrow": "Video",
-        "title": "Qazaq as uy-asy — video",
-        "desc": "Qazaqtyn ulttyq tagamdary men as madeni-eti turaly video materialdar.",
-        "empty": "Videolar zhuqaryda bolady"
-      },
-      "openPlaylist": "Pleilistti ashu",
-      "playlistUrl": "",
-      "fallbackTitle": "Video",
-      "videos": {
-        "0": {
-          "url": "https://www.youtube.com/watch?v=7SMUQqf6GnE",
-          "title": "Qazaq as-asy — dәstүrli tagamdar",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Qazaq ulttyq tagamdarynyng negizgi tүrleri men erekshelikteri."
-        },
-        "1": {
-          "url": "https://www.youtube.com/watch?v=nyG3Obuvasg",
-          "title": "Qazaqtyn ulttyq tagamdary",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Eñ tanymal tagamdardyn dayyndalu erekshelikteri."
-        },
-        "2": {
-          "url": "https://www.youtube.com/watch?v=4NvRfH9oBPQ",
-          "title": "Qazaq halqynyng as іsіndegi dәstүrleri",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "As іsі dәstүrleri men qonaqqarsylyq madenieti."
-        },
-        "3": {
-          "url": "https://www.youtube.com/watch?v=WWmuyN4Eti8",
-          "title": "Qazaq as uy-asynyng tarıhy",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Ulttyq as-asy qalay qalyptasty men damu zholy."
-        },
-        "4": {
-          "url": "https://www.youtube.com/watch?v=HDJxEj2zeR8",
-          "title": "Qazaqtyng et tagamdary",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Et tagamdary men olardyn manyzy turaly video."
-        },
-        "5": {
-          "url": "https://www.youtube.com/watch?v=m9gvfmd-UvM",
-          "title": "Ulttyq susindar",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Qymyz, shubat, airan syaqty ulttyq susindar turaly."
-        },
-        "6": {
-          "url": "https://www.youtube.com/watch?v=cjdF2ksuL-s",
-          "title": "Qazaq as madenieti",
-          "channel": "YouTube",
-          "length": "",
-          "desc": "Qazaqtyn kүlynarlyq dәstүrleri turaly keñinen."
-        }
-      },
-      "footer": {
-        "legal": "Barlyq quqyq sakhtalgan"
-      }
-    },
-    "musicPage": {
-      "title": "Музыка",
-      "back": "Артка",
-      "breadcrumbs": { "materials": "Материалдар" },
-      "videosSection": {
-        "eyebrow": "Видео",
-        "title": "Казак музыкасы — видео",
-        "desc": "Домбра, кюйлер және заманауи интерпретациялар",
-        "empty": "Видео жакында болады"
-      },
-      "audiosSection": {
-        "eyebrow": "Аудио",
-        "title": "Кюйлер — аудио",
-        "desc": "Дәстурли кюйлердин аудиожазбалары",
-        "empty": "Аудио жакында болады",
-        "note": "Ескерту: сырткы mp3 ушин CORS баптауы керек болуы мумкин."
-      },
-      "fallbackTitle": "Видео",
-      "fallbackAudioTitle": "Кюй",
-      "videos": {},
-      "audios": {
-        "0": {
-          "title": "Адай",
-          "performer": "Курмангазы",
-          "length": "2:57",
-          "src": "https://example.com/audio/kui/aday.mp3",
-          "cover": "https://example.com/covers/aday.jpg"
-        },
-        "1": {
-          "title": "Балбырауын",
-          "performer": "Курмангазы",
-          "length": "3:10",
-          "src": "https://example.com/audio/kui/balbyraun.mp3"
-        },
-        "2": {
-          "title": "Сарыарка",
-          "performer": "Курмангазы",
-          "externalUrl": "https://open.spotify.com/track/..."
-        }
-      },
-      "footer": { "legal": "Барлык кукыктер сакталган" }
     }
+  },
+  "historyPage": {
+    "title": "Тарих",
+    "intro": "Қазақ халқының тарихы, маңызды кезеңдер мен тұлғалар туралы материалдар.",
+    "back": "Артқа",
+    "empty": "Материалдар жақында қосылады.",
+    "breadcrumbs": {
+      "materials": "Материалдар"
+    },
+    "filters": {
+      "title": "Фильтрлер",
+      "article": "Мақалалар",
+      "brief": "Қысқаша",
+      "test": "Тесттер"
+    },
+    "footer": {
+      "legal": "Барлық құқықтар қорғалған"
+    },
+    "videosSection": {
+      "eyebrow": "Бейне",
+      "title": "Қазақстан тарихы — бейне",
+      "desc": "Негізгі тақырыптар бойынша бейнелер жинағы",
+      "empty": "Бейнелер жақында қосылады"
+    },
+    "openPlaylist": "Толық плейлистті YouTube-та ашу",
+    "videos": {
+      "0": {
+        "id": "Q-QZTyBxf54",
+        "title": "Қазақстан тарихы — 1-бөлім",
+        "channel": "QazaqHistory",
+        "length": "12:41",
+        "desc": "Қазақстан тарихындағы негізгі кезеңдерге кіріспе."
+      }
+    },
+
+    "list": {
+      "0": {
+        "title": "Қазақстанның ежелгі тарихы",
+        "desc": "Ежелгі дәуірлер мен тайпалардың қалыптасуы.",
+        "slug": "ancient-history",
+        "tag": "Мақала",
+        "level": "Бастапқы",
+        "length": "6 мин"
+      },
+      "1": {
+        "title": "Түрік қағанаттары",
+        "desc": "Орталық Азиядағы түрік мемлекеттерінің қалыптасуы мен әсері.",
+        "slug": "turkic-kaganates",
+        "tag": "Мақала",
+        "level": "Орта",
+        "length": "8 мин"
+      }
+    }
+  },
+  "materialsPage": {
+    "hero": {
+      "title": "Материалдар",
+      "text": "Бейне және мақалалар топтамасы: тарих, дәстүрлер, тіл, асхана, музыка және география.",
+      "back": "Басты бетке"
+    },
+    "filters": {
+      "title": "Фильтрлер",
+      "searchPh": "Атауы немесе сипаттамасы бойынша іздеу"
+    },
+    "cats": {
+      "history": "Тарих",
+      "traditions": "Дәстүрлер",
+      "language": "Тіл",
+      "cuisine": "Асхана",
+      "music": "Музыка",
+      "geography": "География"
+    },
+    "tags": {
+      "history": "Тарих",
+      "traditions": "Дәстүрлер",
+      "language": "Тіл",
+      "cuisine": "Асхана",
+      "music": "Музыка",
+      "geography": "География"
+    },
+    "grid": {
+      "eyebrow": "Кітапхана",
+      "desc": "Категорияны таңдап, танысуды бастаңыз"
+    },
+    "labels": {
+      "video": "бейне",
+      "items": "материал"
+    },
+    "buttons": {
+      "watch": "Көру",
+      "openCourse": "Курсты ашу",
+      "playInline": "Осында ойнату",
+      "playAll": "Барлығын көру",
+      "more": "Толығырақ"
+    },
+    "empty": {
+      "title": "Ештеңе табылмады",
+      "desc": "Іздеу сөзін өзгертіңіз немесе басқа категорияны көріңіз"
+    },
+    "collections": {
+      "eyebrow": "Таңдаулы топтамалар",
+      "title": "Дайын плейлисттер",
+      "desc": "Тақырыптар бойынша ең үздік материалдарды жинадық",
+      "playlist": "Плейлист",
+      "playlistA": {
+        "title": "Мәдениет және дәстүрлер",
+        "desc": "Ритуалдар, мерекелер және отбасы құндылықтары"
+      },
+      "playlistB": {
+        "title": "Қазақстан тарихы",
+        "desc": "Ежелгі қағанаттардан қазіргі заманға дейін"
+      }
+    },
+    "footer": {
+      "legal": "Барлық құқықтар қорғалған. Материалдар оқу мақсатында ұсынылған."
+    },
+
+    "history": {
+      "0": {
+        "title": "Көшпелі империялар",
+        "desc": "Маңызды кезеңдер мен тайпаларға қысқаша шолу"
+      },
+      "1": {
+        "title": "Қазақ хандығы",
+        "desc": "Құрылуы, билеушілері және өңірге әсері"
+      }
+    },
+    "traditions": {
+      "0": {
+        "title": "Наурыз: дәстүрлер",
+        "desc": "Мерекенің негізгі символдары мен ғұрыптары"
+      },
+      "1": {
+        "title": "Түркі қонақжайлығы",
+        "desc": "Этикет, шай және дастархан"
+      }
+    },
+    "language": {
+      "0": {
+        "title": "Алфавит және дыбыстар",
+        "desc": "Фонетикалық ерекшеліктерге қысқаша талдау"
+      }
+    },
+    "cuisine": {
+      "0": {
+        "title": "Дәстүрлі тағамдар",
+        "desc": "Бешбармақ, қымыз және бауырсақ"
+      }
+    },
+    "music": {
+      "0": {
+        "title": "Домбыра және күйлер",
+        "desc": "Аспап тарихы және белгілі күйшілер"
+      }
+    },
+    "geography": {
+      "0": {
+        "title": "Далалар мен таулар",
+        "desc": "Негізгі өңірлер және табиғи аймақтар"
+      }
+    }
+  },
+  "traditionsPage": {
+    "title": "Дәстүрлер",
+    "back": "Артқа",
+    "breadcrumbs": {
+      "materials": "Материалдар"
+    },
+    "videosSection": {
+      "eyebrow": "Бейне",
+      "title": "Қазақ дәстүрлері — бейнелер",
+      "desc": "Қазақтың әдет-ғұрыптары мен салт-дәстүрлері туралы бейнематериалдар",
+      "empty": "Бейнелер жақында болады"
+    },
+    "openPlaylist": "Толық плейлистті ашу",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLrsl6dUjLkmG1kHWc_0KByLc5-X1VaIN3",
+    "fallbackTitle": "Бейне",
+    "videos": {
+      "0": {
+        "title": "Қазақ дәстүрлері — 1-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Негізгі қазақ әдет-ғұрыптары мен мәдениет элементтері."
+      },
+      "1": {
+        "title": "Қазақ дәстүрлері — 2-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Салт-дәстүрлер, мерекелер және тұрмыс ерекшеліктері."
+      },
+      "2": {
+        "title": "Қазақ дәстүрлері — 3-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Дәстүрлердің даму тарихы мен маңызы."
+      },
+      "3": {
+        "title": "Қазақ дәстүрлері — 4-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Отбасылық әдет-ғұрыптар, қонақжайлық, этикет."
+      },
+      "4": {
+        "title": "Қазақ дәстүрлері — 5-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Ритуалдар, символдар және мәдени негіздер."
+      },
+      "5": {
+        "title": "Қазақ дәстүрлері — 6-бөлім",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Бүгінге дейін сақталған әдет-ғұрыптар мен дәстүрлер."
+      }
+    },
+    "footer": {
+      "legal": "Барлық құқықтар сақталған"
+    }
+  },
+  "languagePage": {
+    "title": "Тіл",
+    "back": "Артқа",
+    "breadcrumbs": { "materials": "Материалдар" },
+    "videosSection": {
+      "eyebrow": "Бейне",
+      "title": "Қазақ тілі — бейнелер",
+      "desc": "Әліпби, дыбыстар, лексика, грамматика және сөйлеу тәжірибесі туралы бейнелер топтамасы",
+      "empty": "Бейнелер жақында болады"
+    },
+    "openPlaylist": "Толық плейлистті ашу",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLzjHT6KjLRg3Qg_dvuZN05FxBuwWqRqHe",
+    "fallbackTitle": "Бейне",
+    "videos": {
+      "0": {
+        "id": "_HcG3vOIe1E",
+        "title": "Қазақ тілі — кіріспе",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Курстың жалпы таныстырылымы мен тәсілі."
+      },
+      "1": {
+        "id": "efrRh4HptmY",
+        "title": "Әліпби және дыбыстар",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Негізгі әріптер, айтылым ерекшеліктері."
+      },
+      "2": {
+        "id": "jBvnlISPovU",
+        "title": "Дауыстылар және үндестік",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Дауыстылар үндестігі және оның сөзге әсері."
+      },
+      "3": {
+        "id": "iarTeKGwRrk",
+        "title": "Дауыссыздар және оқу",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Оқу ережелері, тіркесулер және жиі жұптар."
+      },
+      "4": {
+        "id": "4bFtc1FVvso",
+        "title": "Негізгі лексика",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Күнделікті қолданылатын шағын сөздік."
+      },
+      "5": {
+        "id": "synbpls4fEA",
+        "title": "Қарапайым грамматика",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Аффикстер, сөз тәртібі, негізгі септік үлгілері."
+      },
+      "6": {
+        "id": "SjTaMBuOBzY",
+        "title": "Пайдалы тіркестер",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Амандасу, танысу, сыпайылық формалары."
+      },
+      "7": {
+        "id": "xNNbGYCQwrE",
+        "title": "Сандар және уақыт",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Санау, күндер, апта күндері."
+      },
+      "8": {
+        "id": "0q2X61Ebr2w",
+        "title": "Оқу тәжірибесі",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Қысқа мәтіндер және айтылымды талдау."
+      },
+      "9": {
+        "id": "kFUkbYz_ox4",
+        "title": "Күнделікті диалогтар",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Рөлдік көріністер және пайдалы сөйлеу үлгілері."
+      }
+    },
+    "footer": { "legal": "Барлық құқықтар сақталған" }
+  },
+  "cuisinePage": {
+    "title": "Qazaq as uy-asy",
+    "back": "Artqa",
+    "breadcrumbs": {
+      "materials": "Materialdar"
+    },
+    "videosSection": {
+      "eyebrow": "Video",
+      "title": "Qazaq as uy-asy — video",
+      "desc": "Qazaqtyn ulttyq tagamdary men as madeni-eti turaly video materialdar.",
+      "empty": "Videolar zhuqaryda bolady"
+    },
+    "openPlaylist": "Pleilistti ashu",
+    "playlistUrl": "",
+    "fallbackTitle": "Video",
+    "videos": {
+      "0": {
+        "url": "https://www.youtube.com/watch?v=7SMUQqf6GnE",
+        "title": "Qazaq as-asy — dәstүrli tagamdar",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Qazaq ulttyq tagamdarynyng negizgi tүrleri men erekshelikteri."
+      },
+      "1": {
+        "url": "https://www.youtube.com/watch?v=nyG3Obuvasg",
+        "title": "Qazaqtyn ulttyq tagamdary",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Eñ tanymal tagamdardyn dayyndalu erekshelikteri."
+      },
+      "2": {
+        "url": "https://www.youtube.com/watch?v=4NvRfH9oBPQ",
+        "title": "Qazaq halqynyng as іsіndegi dәstүrleri",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "As іsі dәstүrleri men qonaqqarsylyq madenieti."
+      },
+      "3": {
+        "url": "https://www.youtube.com/watch?v=WWmuyN4Eti8",
+        "title": "Qazaq as uy-asynyng tarıhy",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Ulttyq as-asy qalay qalyptasty men damu zholy."
+      },
+      "4": {
+        "url": "https://www.youtube.com/watch?v=HDJxEj2zeR8",
+        "title": "Qazaqtyng et tagamdary",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Et tagamdary men olardyn manyzy turaly video."
+      },
+      "5": {
+        "url": "https://www.youtube.com/watch?v=m9gvfmd-UvM",
+        "title": "Ulttyq susindar",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Qymyz, shubat, airan syaqty ulttyq susindar turaly."
+      },
+      "6": {
+        "url": "https://www.youtube.com/watch?v=cjdF2ksuL-s",
+        "title": "Qazaq as madenieti",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Qazaqtyn kүlynarlyq dәstүrleri turaly keñinen."
+      }
+    },
+    "footer": {
+      "legal": "Barlyq quqyq sakhtalgan"
+    }
+  },
+  "musicPage": {
+    "title": "Музыка",
+    "back": "Артка",
+    "breadcrumbs": { "materials": "Материалдар" },
+    "videosSection": {
+      "eyebrow": "Видео",
+      "title": "Казак музыкасы — видео",
+      "desc": "Домбра, кюйлер және заманауи интерпретациялар",
+      "empty": "Видео жакында болады"
+    },
+    "audiosSection": {
+      "eyebrow": "Аудио",
+      "title": "Кюйлер — аудио",
+      "desc": "Дәстурли кюйлердин аудиожазбалары",
+      "empty": "Аудио жакында болады",
+      "note": "Ескерту: сырткы mp3 ушин CORS баптауы керек болуы мумкин."
+    },
+    "fallbackTitle": "Видео",
+    "fallbackAudioTitle": "Кюй",
+    "videos": {},
+    "audios": {
+      "0": {
+        "title": "Адай",
+        "performer": "Курмангазы",
+        "length": "2:57",
+        "src": "https://example.com/audio/kui/aday.mp3",
+        "cover": "https://example.com/covers/aday.jpg"
+      },
+      "1": {
+        "title": "Балбырауын",
+        "performer": "Курмангазы",
+        "length": "3:10",
+        "src": "https://example.com/audio/kui/balbyraun.mp3"
+      },
+      "2": {
+        "title": "Сарыарка",
+        "performer": "Курмангазы",
+        "externalUrl": "https://open.spotify.com/track/..."
+      }
+    },
+    "footer": { "legal": "Барлык кукыктер сакталган" }
   }
 }

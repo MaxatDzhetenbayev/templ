@@ -91,6 +91,18 @@ export function Header(): React.JSX.Element {
           </span>
         </Link>
 
+        <nav className="hidden gap-6 text-sm text-white/80 md:flex">
+          <Link href="/modules" className="hover:text-white transition-colors">
+            {tCommon("nav.learning")}
+          </Link>
+          <Link
+            href="/materials"
+            className="hover:text-white transition-colors"
+          >
+            {tCommon("nav.materials")}
+          </Link>
+        </nav>
+
         <div className="flex items-center gap-4">
           {user && isMounted && (
             <>

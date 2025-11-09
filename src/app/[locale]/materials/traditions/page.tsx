@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import Header from "@/shared/components/header";
+import {Header} from "@/shared/components/header";
 import { useLocale, useTranslations } from "next-intl";
 
 /* ========= Локализация ========= */
