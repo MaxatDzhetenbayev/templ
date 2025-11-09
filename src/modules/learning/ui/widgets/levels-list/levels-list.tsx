@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ArrowLeft, Check, Lock } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
@@ -23,6 +24,13 @@ import {
 } from "../../../utils/mock-data";
 import { getNextLevelTasks } from "../../../utils/task-randomizer";
 import { LevelStepper } from "../../widgets";
+
+// Брендовая палитра
+const brand = {
+  primary: "#38bdf8",
+  secondary: "#22d3ee",
+  accent: "#93c5fd",
+};
 
 /**
  * Виджет списка уровней модуля
@@ -252,11 +260,13 @@ export function LevelsList(): React.JSX.Element {
   // Предотвращаем гидратацию, пока данные не загружены
   if (!isMounted || !module) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-500 via-purple-600 to-blue-700">
-        <div className="text-center">
-          <p className="text-white text-xl">
-            {!isMounted ? t("loading") : t("moduleNotFound")}
-          </p>
+      <div className="min-h-screen w-full bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white">
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <p className="text-xl text-neutral-900 dark:text-white">
+              {!isMounted ? t("loading") : t("moduleNotFound")}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -265,90 +275,157 @@ export function LevelsList(): React.JSX.Element {
   const moduleProgress = getModuleProgress(moduleId, userProgress);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-600 to-blue-700 py-8">
-      <div className="container mx-auto px-4">
-        <div className="mb-8">
-          <Button
-            onClick={() => router.push("/modules")}
-            variant="ghost"
-            className="mb-4 text-white hover:bg-white/20"
+    <div className="min-h-screen w-full bg-white text-neutral-900 scroll-smooth dark:bg-neutral-950 dark:text-white">
+      {/* Фоновые градиенты */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <motion.div
+          className="absolute -top-32 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
+          style={{
+            background: `radial-gradient(50% 50% at 50% 50%, ${brand.primary} 0%, rgba(34,211,238,0) 70%)`,
+          }}
+          initial={{ scale: 0.9, opacity: 0.18 }}
+          animate={{ scale: 1.05, opacity: 0.35 }}
+          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+        />
+        <motion.div
+          className="absolute -bottom-32 left-1/4 h-[520px] w-[520px] rounded-full opacity-20 blur-3xl"
+          style={{
+            background: `radial-gradient(50% 50% at 50% 50%, ${brand.secondary} 0%, rgba(147,197,253,0) 70%)`,
+          }}
+          initial={{ scale: 0.9, opacity: 0.15 }}
+          animate={{ scale: 1.08, opacity: 0.28 }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      </div>
+
+      {/* Hero секция */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
           >
-            <ArrowLeft className="mr-2 size-4" />
-            {t("backToModules")}
-          </Button>
-          <h1 className="mb-2 text-3xl font-bold text-white">{module.title}</h1>
-          <p className="text-white/90">{module.description}</p>
+            <Button
+              onClick={() => router.push("/modules")}
+              variant="ghost"
+              className="mb-4 text-neutral-700 hover:bg-neutral-100 dark:text-white/70 dark:hover:bg-white/10"
+            >
+              <ArrowLeft className="mr-2 size-4" />
+              {t("backToModules")}
+            </Button>
+            <h1 className="text-4xl md:text-5xl font-semibold leading-[1.1] text-neutral-900 dark:text-white">
+              {module.title}
+            </h1>
+            {module.description && (
+              <p className="text-lg text-neutral-700 dark:text-white/70">
+                {module.description}
+              </p>
+            )}
+          </motion.div>
         </div>
+      </section>
 
-        <div className="flex flex-col gap-4">
-          {module.levels.map((level, index) => {
-            const levelProgress = getLevelProgress(level.id, moduleProgress);
-            const isAvailable = isLevelAvailable(
-              level,
-              index,
-              moduleProgress,
-              module || undefined
-            );
-            const isCompleted = levelProgress?.isCompleted ?? false;
+      {/* Список уровней */}
+      <section className="py-8 md:py-12">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="flex flex-col gap-4">
+            {module.levels.map((level, index) => {
+              const levelProgress = getLevelProgress(level.id, moduleProgress);
+              const isAvailable = isLevelAvailable(
+                level,
+                index,
+                moduleProgress,
+                module || undefined
+              );
+              const isCompleted = levelProgress?.isCompleted ?? false;
 
-            return (
-              <button
-                key={level.id}
-                onClick={() => handleLevelClick(level, index)}
-                disabled={!isAvailable}
-                className={cn(
-                  "flex items-center justify-between rounded-lg border-2 p-4 text-left transition-all",
-                  isCompleted
-                    ? "border-green-500 bg-green-500/20 text-white"
-                    : isAvailable
-                    ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
-                    : "border-gray-400/30 bg-gray-500/20 text-gray-300 cursor-not-allowed opacity-50"
-                )}
-              >
-                <div className="flex items-center gap-4">
-                  <div
+              return (
+                <motion.div
+                  key={level.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.5 }}
+                >
+                  <button
+                    onClick={() => handleLevelClick(level, index)}
+                    disabled={!isAvailable}
                     className={cn(
-                      "flex size-12 items-center justify-center rounded-full text-xl font-bold",
+                      "group relative flex w-full items-center justify-between rounded-2xl border p-5 text-left transition-all hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50",
                       isCompleted
-                        ? "bg-green-500"
+                        ? "border-green-500/30 bg-green-50/50 dark:border-green-500/20 dark:bg-green-500/10"
                         : isAvailable
-                        ? "bg-white/20"
-                        : "bg-gray-500/30"
+                        ? "border-black/10 bg-white/70 backdrop-blur-xl shadow-md hover:shadow-xl dark:border-white/10 dark:bg-white/5"
+                        : "border-gray-300/50 bg-gray-100/50 dark:border-gray-700/50 dark:bg-gray-800/30"
                     )}
                   >
-                    {isCompleted ? (
-                      <Check className="size-6 text-white" />
-                    ) : isAvailable ? (
-                      index + 1
-                    ) : (
-                      <Lock className="size-5 text-gray-400" />
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={cn(
+                          "flex size-14 items-center justify-center rounded-xl text-xl font-bold shadow-md transition-all",
+                          isCompleted
+                            ? "bg-gradient-to-br from-green-400 to-green-500 text-white"
+                            : isAvailable
+                            ? "bg-gradient-to-br from-sky-400 to-sky-500 text-white group-hover:from-sky-500 group-hover:to-sky-600"
+                            : "bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400"
+                        )}
+                      >
+                        {isCompleted ? (
+                          <Check className="size-6" />
+                        ) : isAvailable ? (
+                          index + 1
+                        ) : (
+                          <Lock className="size-5" />
+                        )}
+                      </div>
+                      <div>
+                        <p className="text-lg font-semibold text-neutral-900 dark:text-white">
+                          {level.title || `${t("level")} ${index + 1}`}
+                        </p>
+                        <p className="mt-1 text-sm text-neutral-600 dark:text-white/60">
+                          {level.tasksPerLevel} {t("tasksCount")}
+                        </p>
+                      </div>
+                    </div>
+                    {isAvailable && (
+                      <div className="text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-white/40 dark:group-hover:text-white/70">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          className="size-5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     )}
-                  </div>
-                  <div>
-                    <p className="font-semibold">
-                      {level.title || `${t("level")} ${index + 1}`}
-                    </p>
-                    <p className="text-sm opacity-80">
-                      {level.tasksPerLevel} {t("tasksCount")}
-                    </p>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
+      </section>
 
-        {selectedLevel && currentTasks.length > 0 && (
-          <LevelStepper
-            level={selectedLevel}
-            tasks={currentTasks}
-            onComplete={handleLevelComplete}
-            onClose={handleStepperClose}
-            onTaskAnswer={handleTaskAnswer}
-            onTasksShuffle={handleTasksShuffle}
-          />
-        )}
-      </div>
+      {selectedLevel && currentTasks.length > 0 && (
+        <LevelStepper
+          level={selectedLevel}
+          tasks={currentTasks}
+          onComplete={handleLevelComplete}
+          onClose={handleStepperClose}
+          onTaskAnswer={handleTaskAnswer}
+          onTasksShuffle={handleTasksShuffle}
+        />
+      )}
     </div>
   );
 }
