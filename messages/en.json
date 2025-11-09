@@ -1,0 +1,170 @@
+{
+  "welcome": "Welcome",
+  "goodbye": "Goodbye",
+  "landing": {
+    "hero": {
+      "title": "Learn Kazakh language easily and effectively",
+      "subtitle": "Interactive lessons, practice with native speakers and progress tracking in one place",
+      "cta": {
+        "primary": "Start learning",
+        "secondary": "Learn more"
+      },
+      "stats": {
+        "students": "Active students",
+        "count": "10,000+"
+      }
+    },
+    "features": {
+      "title": "Why choose us",
+      "subtitle": "Everything you need for effective Kazakh language learning",
+      "interactive": {
+        "title": "Interactive lessons",
+        "description": "Engaging exercises and games for quick material absorption"
+      },
+      "progress": {
+        "title": "Progress tracking",
+        "description": "Monitor your development with detailed statistics"
+      },
+      "community": {
+        "title": "Community",
+        "description": "Communicate with other students and practice the language together"
+      },
+      "mobile": {
+        "title": "Mobile app",
+        "description": "Learn anytime, anywhere with our convenient app"
+      }
+    },
+    "ratings": {
+      "title": "Top 5 students",
+      "subtitle": "Best results this month",
+      "points": "points"
+    },
+    "courses": {
+      "title": "Our courses",
+      "subtitle": "Choose a learning program that suits you",
+      "button": "Start course",
+      "beginner": {
+        "title": "Beginner level",
+        "description": "Perfect for those just starting to learn Kazakh. Master the basics of grammar and vocabulary.",
+        "duration": "3 months"
+      },
+      "intermediate": {
+        "title": "Intermediate level",
+        "description": "Improve your communication skills and expand your vocabulary. Practice with native speakers.",
+        "duration": "4 months"
+      },
+      "advanced": {
+        "title": "Advanced level",
+        "description": "Achieve fluency in the language. In-depth study of culture and traditions.",
+        "duration": "6 months"
+      },
+      "business": {
+        "title": "Business Kazakh",
+        "description": "Specialized course for business. Business correspondence, negotiations and presentations.",
+        "duration": "3 months"
+      }
+    },
+    "testimonials": {
+      "title": "Student reviews",
+      "subtitle": "What our students say about us",
+      "1": {
+        "name": "Aizhan Kasymova",
+        "text": "In 3 months I was able to start communicating freely in Kazakh. Great platform!",
+        "role": "Student, Beginner level"
+      },
+      "2": {
+        "name": "Marat Abdullaev",
+        "text": "Interactive lessons and practice with native speakers helped me quickly improve my skills. I recommend!",
+        "role": "Student, Intermediate level"
+      },
+      "3": {
+        "name": "Saule Nurlanova",
+        "text": "Best investment in myself! Now I can work with Kazakh clients without a translator.",
+        "role": "Business student"
+      }
+    },
+    "stats": {
+      "title": "Our achievements",
+      "subtitle": "Numbers that speak for themselves",
+      "students": {
+        "value": "10,000+",
+        "label": "Active students"
+      },
+      "lessons": {
+        "value": "50,000+",
+        "label": "Lessons conducted"
+      },
+      "teachers": {
+        "value": "150+",
+        "label": "Experienced teachers"
+      },
+      "countries": {
+        "value": "45+",
+        "label": "Countries around the world"
+      }
+    },
+    "cta": {
+      "title": "Ready to start?",
+      "subtitle": "Join thousands of students who are already learning Kazakh",
+      "button": "Start for free"
+    },
+    "footer": {
+      "about": {
+        "title": "About us",
+        "description": "Platform for learning Kazakh language with modern teaching methods"
+      },
+      "links": {
+        "title": "Links",
+        "courses": "Courses",
+        "pricing": "Pricing",
+        "about": "About us"
+      },
+      "support": {
+        "title": "Support",
+        "help": "Help",
+        "contact": "Contact"
+      },
+      "social": {
+        "title": "Social networks",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "telegram": "Telegram"
+      },
+      "copyright": "© 2024 Kazakh language learning. All rights reserved."
+    }
+  },
+  "learning": {
+    "title": "Learning modules",
+    "subtitle": "Choose a module and start learning Kazakh",
+    "tasks": {
+      "missingWord": "Missing word",
+      "listening": "Listening",
+      "riddle": "Riddle",
+      "aiChat": "AI Chat"
+    },
+    "taskExplanations": {
+      "missingWord": "Choose the correct word to fill in the blank in the sentence",
+      "listening": "Listen to the audio and choose the correct answer option",
+      "riddle": "Solve the riddle and choose the correct answer in Kazakh",
+      "aiChat": "Chat with AI on the module topic to practice conversational skills"
+    },
+    "points": "points",
+    "totalPoints": "Total points",
+    "taskTitles": {
+      "missingWord": "Missing word",
+      "listening": "Listening",
+      "riddle": "Riddle",
+      "aiChat": "AI Chat"
+    },
+    "buttons": {
+      "check": "Check",
+      "close": "Close"
+    },
+    "messages": {
+      "success": "Excellent! You earned {points} points!",
+      "audioHint": "Click the button to listen to the audio",
+      "selectAnswer": "Choose the correct answer in Kazakh:",
+      "aiChatPlaceholder": "AI chat feature will be implemented later"
+    }
+  }
+}

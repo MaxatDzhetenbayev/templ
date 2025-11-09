@@ -1,7 +1,5 @@
+import { ModulesList } from "@/modules/learning";
+
 export default function ModulesPage() {
-  return (
-    <div>
-      <h1>Modules</h1>
-    </div>
-  );
+  return <ModulesList />;
 }
