@@ -2,10 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import {
-  BookOpen,
+  Activity,
   Clock,
-  Target,
-  TrendingUp,
+  UserPlus,
+  Users,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/shared/components/ui";
@@ -18,34 +18,34 @@ export function DashboardStats() {
 
   const stats = [
     {
-      title: t("lessonsCompleted"),
-      value: "127",
-      change: "+12%",
-      icon: BookOpen,
+      title: t("totalUsers"),
+      value: "8,234",
+      change: "+234",
+      icon: Users,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
     },
     {
-      title: t("studyTime"),
-      value: "24ч 30м",
-      change: "+8%",
-      icon: Clock,
+      title: t("activeUsers"),
+      value: "3,456",
+      change: "+12%",
+      icon: Activity,
       color: "text-green-500",
       bgColor: "bg-green-500/10",
     },
     {
-      title: t("currentStreak"),
-      value: "15",
-      change: "+3",
-      icon: Target,
+      title: t("newRegistrations"),
+      value: "456",
+      change: "+23%",
+      icon: UserPlus,
       color: "text-orange-500",
       bgColor: "bg-orange-500/10",
     },
     {
-      title: t("totalPoints"),
-      value: "2,450",
-      change: "+180",
-      icon: TrendingUp,
+      title: t("studyTime"),
+      value: "2,450ч",
+      change: "+8%",
+      icon: Clock,
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
     },

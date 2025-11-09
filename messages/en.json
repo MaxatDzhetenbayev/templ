@@ -174,12 +174,12 @@
   },
   "dashboards": {
     "title": "Analytics and Dashboards",
-    "subtitle": "Track your progress and analyze learning statistics",
+    "subtitle": "Analyze statistics of all users and track overall platform activity",
     "stats": {
-      "lessonsCompleted": "Lessons Completed",
-      "studyTime": "Study Time",
-      "currentStreak": "Current Streak",
-      "totalPoints": "Total Points"
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "newRegistrations": "New Registrations",
+      "studyTime": "Study Time"
     },
     "charts": {
       "days": {

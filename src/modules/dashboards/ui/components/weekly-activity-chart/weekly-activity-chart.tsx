@@ -22,13 +22,13 @@ export function WeeklyActivityChart() {
   const t = useTranslations("dashboards.charts");
 
   const data = [
-    { day: t("days.monday"), lessons: 12, time: 120 },
-    { day: t("days.tuesday"), lessons: 19, time: 180 },
-    { day: t("days.wednesday"), lessons: 15, time: 150 },
-    { day: t("days.thursday"), lessons: 22, time: 210 },
-    { day: t("days.friday"), lessons: 18, time: 170 },
-    { day: t("days.saturday"), lessons: 10, time: 90 },
-    { day: t("days.sunday"), lessons: 8, time: 75 },
+    { day: t("days.monday"), lessons: 1247, time: 12450 },
+    { day: t("days.tuesday"), lessons: 1890, time: 18900 },
+    { day: t("days.wednesday"), lessons: 1523, time: 15230 },
+    { day: t("days.thursday"), lessons: 2210, time: 22100 },
+    { day: t("days.friday"), lessons: 1876, time: 18760 },
+    { day: t("days.saturday"), lessons: 1098, time: 10980 },
+    { day: t("days.sunday"), lessons: 856, time: 8560 },
   ];
 
   return (

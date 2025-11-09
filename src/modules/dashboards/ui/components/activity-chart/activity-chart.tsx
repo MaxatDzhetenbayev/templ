@@ -22,12 +22,12 @@ export function ActivityChart() {
   const t = useTranslations("dashboards.charts");
 
   const data = [
-    { month: t("months.january"), points: 400, lessons: 20 },
-    { month: t("months.february"), points: 600, lessons: 35 },
-    { month: t("months.march"), points: 500, lessons: 28 },
-    { month: t("months.april"), points: 800, lessons: 45 },
-    { month: t("months.may"), points: 700, lessons: 38 },
-    { month: t("months.june"), points: 900, lessons: 52 },
+    { month: t("months.january"), points: 40240, lessons: 2012 },
+    { month: t("months.february"), points: 60180, lessons: 3509 },
+    { month: t("months.march"), points: 50120, lessons: 2806 },
+    { month: t("months.april"), points: 80240, lessons: 4523 },
+    { month: t("months.may"), points: 70160, lessons: 3808 },
+    { month: t("months.june"), points: 90180, lessons: 5214 },
   ];
 
   return (
@@ -57,12 +57,12 @@ export function ActivityChart() {
               <linearGradient id="colorLessons" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="hsl(217, 91%, 60%)"
-                  stopOpacity={0.4}
+                  stopColor="hsl(142, 76%, 50%)"
+                  stopOpacity={0.6}
                 />
                 <stop
                   offset="95%"
-                  stopColor="hsl(217, 91%, 60%)"
+                  stopColor="hsl(142, 76%, 50%)"
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -92,7 +92,7 @@ export function ActivityChart() {
             <Area
               type="monotone"
               dataKey="lessons"
-              stroke="hsl(217, 91%, 60%)"
+              stroke="hsl(142, 76%, 50%)"
               fillOpacity={1}
               fill="url(#colorLessons)"
               name={t("activity.lessons")}
