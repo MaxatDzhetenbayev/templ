@@ -1,75 +1,98 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import { cn } from "@/shared/lib/utils"
-import { Button } from "@/shared/components/ui/button"
+import { Button } from "@/shared/components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card"
+} from "@/shared/components/ui/card";
 import {
   Field,
+  FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldDescription,
-} from "@/shared/components/ui/field"
-import { Input } from "@/shared/components/ui/input"
+} from "@/shared/components/ui/field";
+import { Input } from "@/shared/components/ui/input";
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
-} from "@/shared/components/ui/select"
-import { motion, AnimatePresence } from "framer-motion"
-import { axiosApi } from "../lib/client"
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/components/ui/select";
+import { cn } from "@/shared/lib/utils";
+import { useRouter } from "@i18/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { mockLogin, mockRegister } from "../lib/mock-auth";
 
 export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
-  const [name, setName] = useState("")
-  const [isLogin, setIsLogin] = useState(true)
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-  const [language, setLanguage] = useState('ru')
-  const toggleForm = () => setIsLogin(!isLogin)
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [language, setLanguage] = useState("ru");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+    setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
+
     try {
       if (isLogin) {
-        const res = await axiosApi.post("/auth/login", { login, password })
-        console.log("Login success:", res.data)
+        const user = await mockLogin(login, password);
+        console.log("Login success:", user);
+        router.push("/modules");
       } else {
-        const res = await axiosApi.post("/auth/register", { name, login, password, language })
-        console.log("Register success:", res.data)
+        const user = await mockRegister(name, login, password, language);
+        console.log("Register success:", user);
+        // После успешной регистрации можно автоматически войти
+        setIsLogin(true);
+        setLogin("");
+        setPassword("");
+        setName("");
       }
     } catch (err) {
-      console.error("Ошибка при запросе:", err)
+      const errorMessage =
+        err instanceof Error ? err.message : "Произошла ошибка";
+      setError(errorMessage);
+      console.error("Ошибка при запросе:", err);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   // Варианты анимации для элементов
   const inputVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 20 }
-  }
+    exit: { opacity: 0, y: 20 },
+  };
 
   // Контейнер для stagger
   const containerVariants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } }
-  }
+    visible: { transition: { staggerChildren: 0.1 } },
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className=" rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl text-white">
-        <CardHeader >
-          <CardTitle className="flex justify-center text-2xl">{isLogin ? "Авторизация" : "Регистрация"}</CardTitle>
+        <CardHeader>
+          <CardTitle className="flex justify-center text-2xl">
+            {isLogin ? "Авторизация" : "Регистрация"}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -149,21 +172,40 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                       initial="hidden"
                       animate="visible"
                       exit="exit"
-                      transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeInOut",
+                        delay: 0.1,
+                      }}
                     >
                       <Field>
-                        <FieldLabel htmlFor="language">Выберите язык</FieldLabel>
+                        <FieldLabel htmlFor="language">
+                          Выберите язык
+                        </FieldLabel>
                         <Select value={language} onValueChange={setLanguage}>
                           <SelectTrigger id="language">
                             <SelectValue placeholder="Выберите язык" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="kk">Қазақ тілі</SelectItem>
                             <SelectItem value="ru">Русский</SelectItem>
                             <SelectItem value="en">English</SelectItem>
                           </SelectContent>
                         </Select>
                       </Field>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {error && (
+                    <motion.div
+                      key="error"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="text-red-400 text-sm text-center"
+                    >
+                      {error}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -176,8 +218,16 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                   transition={{ duration: 0.5, ease: "easeInOut", delay: 0.15 }}
                 >
                   <Field>
-                    <Button type="submit" onClick={handleSubmit} className="w-full bg-sky-400/80">
-                      {isLogin ? "Войти" : "Зарегистрироваться"}
+                    <Button
+                      type="submit"
+                      className="w-full bg-sky-400/80"
+                      disabled={isLoading}
+                    >
+                      {isLoading
+                        ? "Загрузка..."
+                        : isLogin
+                        ? "Войти"
+                        : "Зарегистрироваться"}
                     </Button>
 
                     <FieldDescription className="text-center mt-2">
@@ -213,5 +263,5 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

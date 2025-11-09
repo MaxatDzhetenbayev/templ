@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 // Один файл: страница-лендинг для обучения казахскому языку.
@@ -209,7 +210,7 @@ export default function Page() {
             <a className="hover:text-white" href="#rating">Рейтинг</a>
             <a className="hover:text-white" href="#reviews">Отзывы</a>
           </nav>
-          <a href="#cta" className="rounded-xl bg-sky-400 text-neutral-950 px-4 py-2 text-sm font-medium hover:bg-sky-300 transition">Начать</a>
+          <Link href="/auth" className="rounded-xl bg-sky-400 text-neutral-950 px-4 py-2 text-sm font-medium hover:bg-sky-300 transition">Начать</Link>
         </div>
       </header>
 
@@ -416,7 +417,7 @@ export default function Page() {
             <h3 className="text-2xl md:text-3xl font-semibold">Готовы начать?</h3>
             <p className="mt-2 text-white/70">Откройте доступ к первому модулю бесплатно. Без карты и обязательств.</p>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href="#" className="rounded-xl bg-sky-400 px-6 py-3 text-sm font-medium text-neutral-950 hover:bg-sky-300">Начать обучение</a>
+              <Link href="/auth" className="rounded-xl bg-sky-400 px-6 py-3 text-sm font-medium text-neutral-950 hover:bg-sky-300">Начать обучение</Link>
               <a href="#courses" className="rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm hover:bg-white/10">Выбрать курс</a>
             </div>
           </GlassCard>
