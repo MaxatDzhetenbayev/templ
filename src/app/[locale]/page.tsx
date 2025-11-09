@@ -21,8 +21,7 @@ import { getUsers } from "@/shared/lib/mock-auth";
 // Прокрутка по якорям, плавные анимации, современный минималистичный стиль.
 // Редизайн: преобладают светло-голубые оттенки (sky/cyan), аккуратные акценты.
 
-/* ========= Анимации ========= */
-const container: Variants = {
+const container = {
   hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
@@ -50,18 +49,16 @@ const shine = {
   },
 };
 
-/* ========= Бренд ========= */
 const brand = {
   primary: "#38bdf8",
   secondary: "#22d3ee",
   accent: "#93c5fd",
 };
 
-/* ========= Локализованный Link (без next-intl/link) ========= */
-type Locale = "ru" | "kk" | "en";
+const LOCALES = ["ru", "kk", "en"] as const;
+type Locale = (typeof LOCALES)[number];
 
 function stripLeadingLocale(path: string) {
-  // Убираем ведущую локаль, если она уже присутствует: /ru/..., /kk/..., /en/...
   return path.replace(/^\/(ru|kk|en)(?=\/|$)/, "");
 }
 
@@ -88,11 +85,7 @@ function LocalizedLink({
   );
 }
 
-/* ========= UI ========= */
-function GlassCard({
-  children,
-  className = "",
-}: React.PropsWithChildren<{ className?: string }>) {
+function GlassCard({ children, className = "" }: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div
       className={`rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur-xl shadow-xl dark:border-white/10 dark:bg-white/5 ${className}`}

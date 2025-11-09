@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "courses": "Courses",
+    "learning": "Learning",
     "materials": "Materials"
   },
   "auth": {
@@ -173,6 +174,115 @@
       "legal": "Privacy Policy · Terms of Use"
     }
   },
+  "historyPage": {
+    "title": "History",
+    "intro": "Materials about the history of the Kazakh people, important events and key figures.",
+    "back": "Back",
+    "empty": "Materials will be available soon.",
+    "breadcrumbs": {
+      "materials": "Materials"
+    },
+    "filters": {
+      "title": "Filters",
+      "article": "Articles",
+      "brief": "Brief",
+      "test": "Tests"
+    },
+    "footer": {
+      "legal": "All rights reserved"
+    },
+    "videosSection": {
+      "eyebrow": "Videos",
+      "title": "History of Kazakhstan — videos",
+      "desc": "A curated selection of key-topic clips",
+      "empty": "Videos coming soon"
+    },
+    "openPlaylist": "Open full playlist on YouTube",
+    "videos": {
+      "0": {
+        "id": "Q-QZTyBxf54",
+        "title": "History of Kazakhstan — Episode 1",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Intro to the key periods of Kazakhstan’s history."
+      },
+      "1": {
+        "id": "cfB-cFqUptA",
+        "title": "History of Kazakhstan — Episode 2",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Continuation: early Turkic tribes and states."
+      },
+      "2": {
+        "id": "_gEGcYpOD74",
+        "title": "History of Kazakhstan — Episode 3",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Nomads, migrations and regional dynamics."
+      },
+      "3": {
+        "id": "N-o1TaGoE70",
+        "title": "History of Kazakhstan — Episode 4",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "The formation of power and steppe alliances."
+      },
+      "4": {
+        "id": "J42pddtIa3U",
+        "title": "History of Kazakhstan — Episode 5",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Kazakh Khanate: rulers and influence."
+      },
+      "5": {
+        "id": "S9jEOT6Am8w",
+        "title": "History of Kazakhstan — Episode 6",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Economy, trade routes and culture."
+      },
+      "6": {
+        "id": "mltR66rez8k",
+        "title": "History of Kazakhstan — Episode 7",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Contacts with neighbors and major events."
+      },
+      "7": {
+        "id": "da_jqVAd1fE",
+        "title": "History of Kazakhstan — Episode 8",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Turning points that shaped the region."
+      },
+      "8": {
+        "id": "Y1h8qFqIqwg",
+        "title": "History of Kazakhstan — Episode 9",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "From the late period to the modern era."
+      }
+    },
+
+    "list": {
+      "0": {
+        "title": "Ancient History of Kazakhstan",
+        "desc": "Introduction to early eras and formation of tribes.",
+        "slug": "ancient-history",
+        "tag": "Article",
+        "level": "Beginner",
+        "length": "6 min"
+      },
+      "1": {
+        "title": "Turkic Khaganates",
+        "desc": "The rise and influence of Turkic states in Central Asia.",
+        "slug": "turkic-kaganates",
+        "tag": "Article",
+        "level": "Intermediate",
+        "length": "8 min"
+      }
+    }
+  },
   "materialsPage": {
     "hero": {
       "title": "Materials",
@@ -201,9 +311,12 @@
     },
     "grid": {
       "eyebrow": "Library",
-      "desc": "Choose a category and start exploring"
+      "desc": "Choose a category to get started"
     },
-    "labels": { "video": "video", "items": "materials" },
+    "labels": {
+      "video": "video",
+      "items": "items"
+    },
     "buttons": {
       "watch": "Watch",
       "openCourse": "Open course",
@@ -213,12 +326,12 @@
     },
     "empty": {
       "title": "Nothing found",
-      "desc": "Change your search query or try another category"
+      "desc": "Change the search query or try another category"
     },
     "collections": {
       "eyebrow": "Collections",
-      "title": "Ready playlists",
-      "desc": "We've collected the best materials by topics",
+      "title": "Ready-made playlists",
+      "desc": "We gathered the best materials by topic",
       "playlist": "Playlist",
       "playlistA": {
         "title": "Culture and traditions",
@@ -226,26 +339,27 @@
       },
       "playlistB": {
         "title": "History of Kazakhstan",
-        "desc": "From early kaganates to modernity"
+        "desc": "From early khaganates to modern times"
       }
     },
     "footer": {
       "legal": "All rights reserved. Materials are provided for educational purposes."
     },
+
     "history": {
       "0": {
         "title": "Nomadic empires",
-        "desc": "Brief overview of key periods and tribes"
+        "desc": "A brief overview of key periods and tribes"
       },
       "1": {
         "title": "Kazakh Khanate",
-        "desc": "Formation, rulers and influence on the region"
+        "desc": "Formation, rulers and regional influence"
       }
     },
     "traditions": {
       "0": {
-        "title": "Nauryz: customs",
-        "desc": "Main symbols of the holiday and rituals"
+        "title": "Nauryz customs",
+        "desc": "Main symbols and rituals of the celebration"
       },
       "1": {
         "title": "Turkic hospitality",
@@ -261,13 +375,13 @@
     "cuisine": {
       "0": {
         "title": "Traditional dishes",
-        "desc": "Besbarmak, kumys and baursaks"
+        "desc": "Beshbarmak, kumys and baursaks"
       }
     },
     "music": {
       "0": {
-        "title": "Dombra and kuys",
-        "desc": "History of the instrument and famous composers"
+        "title": "Dombra and kuy",
+        "desc": "Instrument history and famous composers"
       }
     },
     "geography": {
@@ -277,105 +391,260 @@
       }
     }
   },
-  "learning": {
-    "title": "Learning modules",
-    "subtitle": "Choose a module and start learning Kazakh",
-    "loading": "Loading...",
-    "level": "Level",
-    "task": "Task",
-    "tasksCount": "tasks",
-    "backToModules": "Back to modules",
-    "taskNumber": "Task {current} of {total}",
-    "moduleNotFound": "Module not found",
-    "tasks": {
-      "missingWord": "Missing word",
-      "listening": "Listening",
-      "riddle": "Riddle",
-      "aiChat": "AI Chat"
+  "traditionsPage": {
+    "title": "Traditions",
+    "back": "Back",
+    "breadcrumbs": {
+      "materials": "Materials"
     },
-    "taskExplanations": {
-      "missingWord": "Choose the correct word to fill in the blank in the sentence",
-      "listening": "Listen to the audio and choose the correct answer option",
-      "riddle": "Solve the riddle and choose the correct answer in Kazakh",
-      "aiChat": "Chat with AI on the module topic to practice conversational skills"
+    "videosSection": {
+      "eyebrow": "Videos",
+      "title": "Kazakh traditions — videos",
+      "desc": "A curated set of clips about Kazakh customs and rituals",
+      "empty": "Videos coming soon"
     },
-    "points": "points",
-    "totalPoints": "Total points",
-    "taskTitles": {
-      "missingWord": "Missing word",
-      "listening": "Listening",
-      "riddle": "Riddle",
-      "aiChat": "AI Chat"
+    "openPlaylist": "Open full playlist on YouTube",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLrsl6dUjLkmG1kHWc_0KByLc5-X1VaIN3",
+    "fallbackTitle": "Video",
+    "videos": {
+      "0": {
+        "title": "Kazakh traditions — Episode 1",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "The main Kazakh customs and cultural elements."
+      },
+      "1": {
+        "title": "Kazakh traditions — Episode 2",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Rituals, holidays and lifestyle basics."
+      },
+      "2": {
+        "title": "Kazakh traditions — Episode 3",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Development and meaning of traditional practices."
+      },
+      "3": {
+        "title": "Kazakh traditions — Episode 4",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Family traditions, hospitality and etiquette."
+      },
+      "4": {
+        "title": "Kazakh traditions — Episode 5",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Rituals, symbols and cultural foundations."
+      },
+      "5": {
+        "title": "Kazakh traditions — Episode 6",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Traditional practices preserved to this day."
+      }
     },
-    "buttons": {
-      "check": "Check",
-      "close": "Close"
-    },
-    "messages": {
-      "success": "Excellent! You earned {points} points!",
-      "error": "Unfortunately, the answer is incorrect. Please try again!",
-      "levelCompleted": "Level completed!",
-      "levelCompletedDescription": "Congratulations! You have successfully completed all tasks in the level.",
-      "allTasksCompleted": "All tasks completed!",
-      "audioHint": "Click the button to listen to the audio",
-      "selectAnswer": "Choose the correct answer in Kazakh:",
-      "aiChatPlaceholder": "AI chat feature will be implemented later",
-      "aiChatDescription": "Practice conversational skills by chatting with AI on the module topic",
-      "aiChatLoading": "Loading topic...",
-      "aiChatError": "Error loading topic. Please try again.",
-      "aiChatSend": "Send",
-      "aiChatPlaceholderInput": "Type your message in Kazakh...",
-      "aiChatSending": "Sending...",
-      "aiChatCheckGrammar": "Check grammar",
-      "aiChatComplete": "Complete task",
-      "aiChatGrammarTitle": "Grammar check",
-      "aiChatGrammarOriginal": "Original:",
-      "aiChatGrammarCorrected": "Corrected:",
-      "aiChatGrammarExplanation": "Explanation:"
+    "footer": {
+      "legal": "All rights reserved"
     }
   },
-  "dashboards": {
-    "title": "Analytics and Dashboards",
-    "subtitle": "Analyze statistics of all users and track overall platform activity",
-    "stats": {
-      "totalUsers": "Total Users",
-      "activeUsers": "Active Users",
-      "newRegistrations": "New Registrations",
-      "studyTime": "Study Time"
+  "languagePage": {
+    "title": "Language",
+    "back": "Back",
+    "breadcrumbs": { "materials": "Materials" },
+    "videosSection": {
+      "eyebrow": "Videos",
+      "title": "Kazakh language — videos",
+      "desc": "A curated set on alphabet, sounds, vocabulary, grammar and speaking practice",
+      "empty": "Videos coming soon"
     },
-    "charts": {
-      "days": {
-        "monday": "Mon",
-        "tuesday": "Tue",
-        "wednesday": "Wed",
-        "thursday": "Thu",
-        "friday": "Fri",
-        "saturday": "Sat",
-        "sunday": "Sun"
+    "openPlaylist": "Open full playlist on YouTube",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLzjHT6KjLRg3Qg_dvuZN05FxBuwWqRqHe",
+    "fallbackTitle": "Video",
+    "videos": {
+      "0": {
+        "id": "_HcG3vOIe1E",
+        "title": "Kazakh language — introduction",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Course overview and learning approach."
       },
-      "months": {
-        "january": "Jan",
-        "february": "Feb",
-        "march": "Mar",
-        "april": "Apr",
-        "may": "May",
-        "june": "Jun"
+      "1": {
+        "id": "efrRh4HptmY",
+        "title": "Alphabet and sounds",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Core letters and pronunciation features."
       },
-      "weeklyActivity": {
-        "title": "Weekly Activity",
-        "lessons": "Lessons"
+      "2": {
+        "id": "jBvnlISPovU",
+        "title": "Vowels and harmony",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Vowel harmony and its effect on words."
       },
-      "progress": {
-        "title": "Learning Progress",
-        "completed": "Completed",
-        "inProgress": "In Progress",
-        "notStarted": "Not Started"
+      "3": {
+        "id": "iarTeKGwRrk",
+        "title": "Consonants and reading",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Reading rules, clusters and common pairs."
       },
-      "activity": {
-        "title": "Monthly Activity",
-        "points": "Points",
-        "lessons": "Lessons"
+      "4": {
+        "id": "4bFtc1FVvso",
+        "title": "Basic vocabulary",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "A small everyday word list."
+      },
+      "5": {
+        "id": "synbpls4fEA",
+        "title": "Simple grammar",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Affixes, word order and core case patterns."
+      },
+      "6": {
+        "id": "SjTaMBuOBzY",
+        "title": "Useful phrases",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Greetings, introductions and polite forms."
+      },
+      "7": {
+        "id": "xNNbGYCQwrE",
+        "title": "Numbers and time",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Counting, dates and weekdays."
+      },
+      "8": {
+        "id": "0q2X61Ebr2w",
+        "title": "Reading practice",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Short texts and pronunciation walkthrough."
+      },
+      "9": {
+        "id": "kFUkbYz_ox4",
+        "title": "Everyday dialogues",
+        "channel": "YouTube Playlist",
+        "length": "",
+        "desc": "Role-play scenes and useful speech patterns."
       }
+    },
+    "footer": { "legal": "All rights reserved" }
+  },
+  "cuisinePage": {
+    "title": "Kazakh cuisine",
+    "back": "Back",
+    "breadcrumbs": {
+      "materials": "Materials"
+    },
+    "videosSection": {
+      "eyebrow": "Videos",
+      "title": "Kazakh cuisine — videos",
+      "desc": "A selection of videos about Kazakh dishes, food traditions, and culinary culture.",
+      "empty": "Videos will appear soon"
+    },
+    "openPlaylist": "Open playlist",
+    "playlistUrl": "",
+    "fallbackTitle": "Video",
+    "videos": {
+      "0": {
+        "url": "https://www.youtube.com/watch?v=7SMUQqf6GnE",
+        "title": "Traditional Kazakh dishes",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Overview of key dishes of Kazakh cuisine."
+      },
+      "1": {
+        "url": "https://www.youtube.com/watch?v=nyG3Obuvasg",
+        "title": "National dishes of Kazakhstan",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Popular national dishes and how they are prepared."
+      },
+      "2": {
+        "url": "https://www.youtube.com/watch?v=4NvRfH9oBPQ",
+        "title": "Kazakh food traditions",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Meal traditions and hospitality culture."
+      },
+      "3": {
+        "url": "https://www.youtube.com/watch?v=WWmuyN4Eti8",
+        "title": "History of Kazakh cuisine",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "How Kazakh cuisine was formed."
+      },
+      "4": {
+        "url": "https://www.youtube.com/watch?v=HDJxEj2zeR8",
+        "title": "Kazakh meat dishes",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Traditional meat dishes and their meaning."
+      },
+      "5": {
+        "url": "https://www.youtube.com/watch?v=m9gvfmd-UvM",
+        "title": "National drinks of Kazakhstan",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "Kymyz, shubat, ayran — iconic Kazakh drinks."
+      },
+      "6": {
+        "url": "https://www.youtube.com/watch?v=cjdF2ksuL-s",
+        "title": "Kazakh culinary culture",
+        "channel": "YouTube",
+        "length": "",
+        "desc": "More about Kazakh traditional cooking."
+      }
+    },
+    "footer": {
+      "legal": "All rights reserved"
     }
+  },
+  "musicPage": {
+    "title": "Music",
+    "back": "Back",
+    "breadcrumbs": { "materials": "Materials" },
+    "videosSection": {
+      "eyebrow": "Videos",
+      "title": "Kazakh music — videos",
+      "desc": "Dombra, kuis and modern interpretations",
+      "empty": "Videos coming soon"
+    },
+    "audiosSection": {
+      "eyebrow": "Audio",
+      "title": "Kuis — audio",
+      "desc": "A curated selection of traditional kui recordings",
+      "empty": "Audio coming soon",
+      "note": "Note: external mp3 may require proper CORS headers."
+    },
+    "fallbackTitle": "Video",
+    "fallbackAudioTitle": "Kui",
+    "videos": {},
+    "audios": {
+      "0": {
+        "title": "Adai",
+        "performer": "Kurmangazy",
+        "length": "2:57",
+        "src": "https://example.com/audio/kui/aday.mp3",
+        "cover": "https://example.com/covers/aday.jpg"
+      },
+      "1": {
+        "title": "Balbyrauyn",
+        "performer": "Kurmangazy",
+        "length": "3:10",
+        "src": "https://example.com/audio/kui/balbyraun.mp3"
+      },
+      "2": {
+        "title": "Saryarka",
+        "performer": "Kurmangazy",
+        "externalUrl": "https://open.spotify.com/track/..."
+      }
+    },
+    "footer": { "legal": "All rights reserved" }
   }
 }
