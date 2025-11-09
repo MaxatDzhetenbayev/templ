@@ -171,5 +171,49 @@
       "selectAnswer": "Choose the correct answer in Kazakh:",
       "aiChatPlaceholder": "AI chat feature will be implemented later"
     }
+  },
+  "dashboards": {
+    "title": "Analytics and Dashboards",
+    "subtitle": "Track your progress and analyze learning statistics",
+    "stats": {
+      "lessonsCompleted": "Lessons Completed",
+      "studyTime": "Study Time",
+      "currentStreak": "Current Streak",
+      "totalPoints": "Total Points"
+    },
+    "charts": {
+      "days": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat",
+        "sunday": "Sun"
+      },
+      "months": {
+        "january": "Jan",
+        "february": "Feb",
+        "march": "Mar",
+        "april": "Apr",
+        "may": "May",
+        "june": "Jun"
+      },
+      "weeklyActivity": {
+        "title": "Weekly Activity",
+        "lessons": "Lessons"
+      },
+      "progress": {
+        "title": "Learning Progress",
+        "completed": "Completed",
+        "inProgress": "In Progress",
+        "notStarted": "Not Started"
+      },
+      "activity": {
+        "title": "Monthly Activity",
+        "points": "Points",
+        "lessons": "Lessons"
+      }
+    }
   }
 }

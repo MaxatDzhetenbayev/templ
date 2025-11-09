@@ -171,5 +171,49 @@
       "selectAnswer": "Выберите правильный ответ на казахском языке:",
       "aiChatPlaceholder": "Функция чата с ИИ будет реализована позже"
     }
+  },
+  "dashboards": {
+    "title": "Аналитика и дэшборды",
+    "subtitle": "Отслеживайте свой прогресс и анализируйте статистику обучения",
+    "stats": {
+      "lessonsCompleted": "Завершено уроков",
+      "studyTime": "Время обучения",
+      "currentStreak": "Текущая серия",
+      "totalPoints": "Всего баллов"
+    },
+    "charts": {
+      "days": {
+        "monday": "Пн",
+        "tuesday": "Вт",
+        "wednesday": "Ср",
+        "thursday": "Чт",
+        "friday": "Пт",
+        "saturday": "Сб",
+        "sunday": "Вс"
+      },
+      "months": {
+        "january": "Янв",
+        "february": "Фев",
+        "march": "Мар",
+        "april": "Апр",
+        "may": "Май",
+        "june": "Июн"
+      },
+      "weeklyActivity": {
+        "title": "Недельная активность",
+        "lessons": "Уроки"
+      },
+      "progress": {
+        "title": "Прогресс обучения",
+        "completed": "Завершено",
+        "inProgress": "В процессе",
+        "notStarted": "Не начато"
+      },
+      "activity": {
+        "title": "Активность по месяцам",
+        "points": "Баллы",
+        "lessons": "Уроки"
+      }
+    }
   }
 }

@@ -171,5 +171,49 @@
       "selectAnswer": "Қазақ тілінде дұрыс жауапты таңдаңыз:",
       "aiChatPlaceholder": "ЖИ-мен чат функциясы кейінірек іске қосылады"
     }
+  },
+  "dashboards": {
+    "title": "Аналитика және дэшбордтар",
+    "subtitle": "Прогрессіңізді бақылаңыз және оқу статистикасын талдаңыз",
+    "stats": {
+      "lessonsCompleted": "Аяқталған сабақтар",
+      "studyTime": "Оқу уақыты",
+      "currentStreak": "Ағымдағы серия",
+      "totalPoints": "Барлығы ұпай"
+    },
+    "charts": {
+      "days": {
+        "monday": "Дүй",
+        "tuesday": "Сей",
+        "wednesday": "Сәр",
+        "thursday": "Бей",
+        "friday": "Жұм",
+        "saturday": "Сен",
+        "sunday": "Жек"
+      },
+      "months": {
+        "january": "Қаң",
+        "february": "Ақп",
+        "march": "Нау",
+        "april": "Сәу",
+        "may": "Мам",
+        "june": "Мау"
+      },
+      "weeklyActivity": {
+        "title": "Апталық белсенділік",
+        "lessons": "Сабақтар"
+      },
+      "progress": {
+        "title": "Оқу прогрессі",
+        "completed": "Аяқталған",
+        "inProgress": "Жалғасуда",
+        "notStarted": "Басталмаған"
+      },
+      "activity": {
+        "title": "Айлық белсенділік",
+        "points": "Ұпайлар",
+        "lessons": "Сабақтар"
+      }
+    }
   }
 }
