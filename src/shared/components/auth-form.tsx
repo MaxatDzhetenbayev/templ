@@ -87,7 +87,7 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className=" rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl text-white">
+      <Card className=" rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl">
         <CardHeader>
           <CardTitle className="flex justify-center text-2xl">
             {isLogin ? "Авторизация" : "Регистрация"}
@@ -254,11 +254,7 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                       className="w-full bg-sky-400/80"
                       disabled={isLoading}
                     >
-                      {isLoading
-                        ? "Загрузка..."
-                        : isLogin
-                        ? "Войти"
-                        : "Зарегистрироваться"}
+
                       {isLogin ? t("submit") : t("submitRegister")}
                     </Button>
 
