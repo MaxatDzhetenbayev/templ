@@ -431,8 +431,8 @@ export function LevelStepper({
         </DialogHeader>
 
         {/* Stepper Progress */}
-        <div className="flex items-center justify-between py-4">
-          {tasks.map((_, index) => (
+        <div className="flex items-start py-4">
+          {tasks.map((task, index) => (
             <React.Fragment key={index}>
               <div className="flex flex-col items-center">
                 <div
@@ -451,17 +451,33 @@ export function LevelStepper({
                     index + 1
                   )}
                 </div>
-                {index < tasks.length - 1 && (
-                  <div
+                <div className="mt-2 text-center">
+                  <p
                     className={cn(
-                      "mt-2 h-1 w-16 transition-all",
-                      isLevelCompleted || index < currentTaskIndex
-                        ? "bg-green-500"
-                        : "bg-gray-300 dark:bg-gray-700"
+                      "text-xs font-medium transition-colors",
+                      index === currentTaskIndex
+                        ? "text-primary dark:text-primary"
+                        : isLevelCompleted || index < currentTaskIndex
+                        ? "text-green-600 dark:text-green-400"
+                        : "text-gray-500 dark:text-gray-400"
                     )}
-                  />
-                )}
+                  >
+                    {t(
+                      `taskTitles.${getTaskTypeTranslationKey(task.type)}`
+                    )}
+                  </p>
+                </div>
               </div>
+              {index < tasks.length - 1 && (
+                <div
+                  className={cn(
+                    "mx-2 mt-5 h-1 flex-1 transition-all",
+                    isLevelCompleted || index < currentTaskIndex
+                      ? "bg-green-500"
+                      : "bg-gray-300 dark:bg-gray-700"
+                  )}
+                />
+              )}
             </React.Fragment>
           ))}
         </div>
