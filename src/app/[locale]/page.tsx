@@ -1,7 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
+import { getUsers } from "@/shared/lib/mock-auth";
+import { getLocalizedModules } from "@/modules/learning/utils/mock-data";
+import type { Module, UserProgress } from "@/modules/learning/schemas/learning.schema";
+import { getOverallProgress } from "@/modules/learning/utils/learning.utils";
 
 // Один файл: страница-лендинг для обучения казахскому языку.
 // Используются только React + framer-motion + Tailwind классы. Никаких внешних компонентов.
@@ -62,13 +67,140 @@ const TopBadge = () => (
   </span>
 );
 
-const ratingsData = [
-  { name: "Базовый курс A1", score: 5, votes: 412 },
-  { name: "Разговорная практика", score: 5, votes: 365 },
-  { name: "Казахский для работы", score: 4, votes: 298 },
-  { name: "Грамматика интенсив", score: 4, votes: 241 },
-  { name: "Подготовка к экзамену", score: 4, votes: 189 },
-];
+/**
+ * Интерфейс для данных рейтинга пользователя
+ */
+interface UserRating {
+  id: string;
+  name: string;
+  points: number;
+  completionPercent: number;
+  isRealUser: boolean;
+}
+
+/**
+ * Вычисляет максимальные баллы из всех модулей
+ */
+const calculateMaxPoints = (modules: Module[]): number => {
+  let maxPoints = 0;
+  modules.forEach((module) => {
+    module.levels.forEach((level) => {
+      // Для каждого уровня берем максимальные баллы из taskPool
+      // Учитываем, что за уровень показывается tasksPerLevel заданий
+      const sortedTasks = [...level.taskPool]
+        .sort((a, b) => b.points - a.points)
+        .slice(0, level.tasksPerLevel);
+      maxPoints += sortedTasks.reduce((sum, task) => sum + task.points, 0);
+    });
+  });
+  return maxPoints;
+};
+
+/**
+ * Вычисляет общее количество уроков
+ */
+const calculateTotalLessons = (modules: Module[]): number => {
+  return modules.reduce((total, module) => {
+    return total + module.levels.reduce((sum, level) => sum + level.tasksPerLevel, 0);
+  }, 0);
+};
+
+/**
+ * Получает прогресс пользователя из localStorage
+ */
+const getUserProgress = (userId: string): UserProgress | null => {
+  if (typeof window === "undefined") return null;
+  const PROGRESS_STORAGE_KEY = "learning_user_progress";
+  const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
+  if (!stored) return null;
+  try {
+    const progress = JSON.parse(stored) as UserProgress;
+    return progress.userId === userId ? progress : null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Создает моковых пользователей с реалистичными данными
+ */
+const createMockUsers = (modules: Module[], maxPoints: number, totalLessons: number): UserRating[] => {
+  const mockNames = [
+    "Айжан Нурланова",
+    "Ерлан Касымов",
+    "Алия Сейтжанова",
+    "Данияр Абдуллаев",
+    "Амина Жумабекова",
+    "Нурлан Токтаров",
+    "Сабина Омарова",
+    "Асхат Баймуратов",
+    "Жанар Калиева",
+    "Асылбек Нуртазин",
+  ];
+
+  return mockNames.map((name, index) => {
+    // Создаем реалистичное распределение прогресса
+    // Первые пользователи имеют больше прогресса
+    const progressMultiplier = 1 - index * 0.08; // От 100% до ~20%
+    const completionPercent = Math.max(15, Math.min(100, Math.round(progressMultiplier * 100)));
+    
+    // Баллы пропорциональны проценту завершения, но с небольшими вариациями
+    const basePoints = Math.round((maxPoints * completionPercent) / 100);
+    const variation = Math.round(basePoints * 0.1 * (Math.random() - 0.5)); // ±10% вариация
+    const points = Math.max(0, Math.min(maxPoints, basePoints + variation));
+
+    return {
+      id: `mock_user_${index}`,
+      name,
+      points,
+      completionPercent,
+      isRealUser: false,
+    };
+  });
+};
+
+/**
+ * Получает рейтинг пользователей (реальных + моковых)
+ */
+const getUserRatings = (): UserRating[] => {
+  if (typeof window === "undefined") return [];
+
+  const modules = getLocalizedModules("ru");
+  const maxPoints = calculateMaxPoints(modules);
+  const totalLessons = calculateTotalLessons(modules);
+
+  // Получаем реальных пользователей
+  const realUsers = getUsers();
+  const realUserRatings: UserRating[] = realUsers
+    .map((user) => {
+      const progress = getUserProgress(user.id);
+      if (!progress) return null;
+
+      const overallProgress = getOverallProgress(modules, progress);
+      return {
+        id: user.id,
+        name: user.name,
+        points: progress.totalPoints,
+        completionPercent: overallProgress.percent,
+        isRealUser: true,
+      };
+    })
+    .filter((rating): rating is UserRating => rating !== null);
+
+  // Создаем моковых пользователей
+  const mockUserRatings = createMockUsers(modules, maxPoints, totalLessons);
+
+  // Смешиваем и сортируем по баллам (при равных баллах - по проценту завершения)
+  const allRatings = [...realUserRatings, ...mockUserRatings].sort((a, b) => {
+    if (b.points !== a.points) {
+      return b.points - a.points;
+    }
+    return b.completionPercent - a.completionPercent;
+  });
+
+  // Возвращаем топ-10
+  return allRatings.slice(0, 10);
+};
 
 const features = [
   {
@@ -171,6 +303,12 @@ function SectionTitle({ eyebrow, title, desc }: { eyebrow?: string; title: strin
 }
 
 export default function Page() {
+  const [userRatings, setUserRatings] = useState<UserRating[]>([]);
+
+  useEffect(() => {
+    setUserRatings(getUserRatings());
+  }, []);
+
   return (
     <div className="min-h-screen w-full bg-neutral-950 text-white">
       {/* Фоновые градиенты (обновлены под голубую палитру) */}
@@ -342,39 +480,69 @@ export default function Page() {
       </section>
 
       <section id="rating" className="py-16 md:py-24">
-        <SectionTitle eyebrow="Рейтинг" title="ТОП‑5 популярных курсов" desc="Основано на оценках студентов и количестве завершений." />
+        <SectionTitle eyebrow="Рейтинг" title="ТОП‑10 студентов" desc="Рейтинг по баллам и проценту завершения курса." />
         <div className="mx-auto mt-10 max-w-4xl px-4">
           <div className="overflow-hidden rounded-2xl border border-white/10">
             <table className="w-full table-auto divide-y divide-white/10 bg-white/5">
               <thead>
                 <tr className="text-left text-sm text-white/70">
                   <th className="px-4 py-3">#</th>
-                  <th className="px-4 py-3">Курс</th>
-                  <th className="px-4 py-3">Оценка</th>
-                  <th className="px-4 py-3">Отклики</th>
+                  <th className="px-4 py-3">Имя</th>
+                  <th className="px-4 py-3">Баллы</th>
+                  <th className="px-4 py-3">Прогресс</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {ratingsData.map((r, i) => (
-                  <motion.tr
-                    key={r.name}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ delay: i * 0.04 }}
-                    className="hover:bg-white/5"
-                  >
-                    <td className="px-4 py-4 text-white/70">{i + 1}</td>
-                    <td className="px-4 py-4 font-medium">{r.name}</td>
-                    <td className="px-4 py-4">
-                      <div className="flex items-center gap-2">
-                        {stars(r.score)}
-                        <span className="text-sm text-white/70">{r.score}.0</span>
-                      </div>
+                {userRatings.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-4 py-8 text-center text-white/50">
+                      Загрузка рейтинга...
                     </td>
-                    <td className="px-4 py-4 text-white/70">{r.votes.toLocaleString()} оценок</td>
-                  </motion.tr>
-                ))}
+                  </tr>
+                ) : (
+                  userRatings.map((user, i) => (
+                    <motion.tr
+                      key={user.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ delay: i * 0.04 }}
+                      className={`hover:bg-white/5 ${user.isRealUser ? "bg-sky-400/5" : ""}`}
+                    >
+                      <td className="px-4 py-4 text-white/70">{i + 1}</td>
+                      <td className="px-4 py-4 font-medium">
+                        <div className="flex items-center gap-2">
+                          {user.name}
+                          {user.isRealUser && (
+                            <span className="rounded-full bg-sky-400/20 px-2 py-0.5 text-xs text-sky-300">
+                                Вы
+                              </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-sky-400">{user.points.toLocaleString()}</span>
+                          <span className="text-xs text-white/50">баллов</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+                            <motion.div
+                              className="h-full bg-gradient-to-r from-sky-400 to-cyan-400"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${user.completionPercent}%` }}
+                              viewport={{ once: true }}
+                              transition={{ delay: i * 0.04 + 0.2, duration: 0.5 }}
+                            />
+                          </div>
+                          <span className="text-sm text-white/70 min-w-[3rem] text-right">{user.completionPercent}%</span>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
