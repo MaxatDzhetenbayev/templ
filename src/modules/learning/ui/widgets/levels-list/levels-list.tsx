@@ -1,25 +1,25 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { ArrowLeft, Check, Lock } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 import { useRouter } from "@/shared/configs/i18/navigation";
 
 import { Button } from "@/shared/components/ui";
 import { cn } from "@/shared/lib/utils";
 
-import { LevelStepper } from "../../widgets";
 import { useLearningStore } from "../../../model/learning.store";
-import { mockModules } from "../../../utils/mock-data";
-import { getNextLevelTasks } from "../../../utils/task-randomizer";
-import type { Module, Level, Task } from "../../../schemas/learning.schema";
+import type { Level, Module, Task } from "../../../schemas/learning.schema";
 import {
-  getModuleProgress,
   getLevelProgress,
+  getModuleProgress,
   isLevelAvailable,
 } from "../../../utils/learning.utils";
+import { getMockUserProgress, mockModules } from "../../../utils/mock-data";
+import { getNextLevelTasks } from "../../../utils/task-randomizer";
+import { LevelStepper } from "../../widgets";
 
 /**
  * Виджет списка уровней модуля
@@ -34,9 +34,12 @@ export function LevelsList(): React.JSX.Element {
     modules,
     userProgress,
     setModules,
+    setUserProgress,
+    validateProgress,
     completeLevel,
     addPoints,
     subtractPoints,
+    updateLevelTaskProgress,
   } = useLearningStore();
 
   // Получаем функцию для доступа к актуальному состоянию store
@@ -46,13 +49,35 @@ export function LevelsList(): React.JSX.Element {
   const [isMounted, setIsMounted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   const [currentTasks, setCurrentTasks] = useState<Task[]>([]);
+  const initializedRef = React.useRef(false);
+  const validatedRef = React.useRef(false);
 
-  // Загружаем модули и находим нужный
+  // Инициализация: загружаем модули и прогресс только один раз
   useEffect(() => {
     setIsMounted(true);
+
+    if (initializedRef.current) return;
+
+    // Загружаем модули, если они еще не загружены
     if (modules.length === 0) {
       setModules(mockModules);
     }
+
+    // Загружаем прогресс, если он еще не загружен
+    if (!userProgress) {
+      const progress = getMockUserProgress();
+      setUserProgress(progress);
+    }
+
+    initializedRef.current = true;
+    // Включаем modules и userProgress в зависимости, но ref предотвращает повторную инициализацию
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modules.length, userProgress, setModules, setUserProgress]);
+
+  // Находим нужный модуль при изменении moduleId или modules
+  useEffect(() => {
+    if (!isMounted) return;
+
     const foundModule = modules.find((m) => m.id === moduleId);
     if (foundModule) {
       setModule(foundModule);
@@ -60,11 +85,32 @@ export function LevelsList(): React.JSX.Element {
       const mockModule = mockModules.find((m) => m.id === moduleId);
       if (mockModule) setModule(mockModule);
     }
-  }, [moduleId, modules, setModules]);
+  }, [moduleId, modules, isMounted]);
+
+  // Валидируем прогресс после загрузки модулей и прогресса (только один раз)
+  useEffect(() => {
+    if (
+      modules.length > 0 &&
+      userProgress &&
+      initializedRef.current &&
+      !validatedRef.current
+    ) {
+      // Валидируем прогресс с загруженными модулями
+      validateProgress();
+      validatedRef.current = true;
+    }
+    // validateProgress - стабильная функция из Zustand, не нужно добавлять в зависимости
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modules.length, userProgress]);
 
   const handleLevelClick = (level: Level, levelIndex: number) => {
     const moduleProgress = getModuleProgress(moduleId, userProgress);
-    const isAvailable = isLevelAvailable(level, levelIndex, moduleProgress);
+    const isAvailable = isLevelAvailable(
+      level,
+      levelIndex,
+      moduleProgress,
+      module || undefined
+    );
 
     if (!isAvailable) return;
 
@@ -79,8 +125,21 @@ export function LevelsList(): React.JSX.Element {
     setCurrentTasks(tasks);
   };
 
-  const handleTaskAnswer = (isCorrect: boolean, points: number) => {
+  const handleTaskAnswer = (
+    taskId: string,
+    isCorrect: boolean,
+    points: number
+  ) => {
     if (!selectedLevel || !module) return;
+
+    // Сохраняем прогресс задания в store
+    updateLevelTaskProgress(
+      moduleId,
+      selectedLevel.id,
+      taskId,
+      isCorrect ? "completed" : "available",
+      isCorrect ? points : undefined
+    );
 
     if (isCorrect) {
       // Начисляем баллы за правильный ответ
@@ -98,54 +157,83 @@ export function LevelsList(): React.JSX.Element {
   const handleLevelComplete = () => {
     if (!selectedLevel || !module || !module.levels) return;
 
-    // Сохраняем ID завершенного уровня и данные модуля перед сбросом состояния
+    // Сохраняем ID завершенного уровня
     const completedLevelId = selectedLevel.id;
-    const levels = module.levels;
-    const currentLevelIndex = levels.findIndex(
-      (l) => l.id === completedLevelId
-    );
 
-    // Завершаем уровень
-    completeLevel(moduleId, completedLevelId);
-    setSelectedLevel(null);
-    setCurrentTasks([]);
+    // Получаем список ID всех задач из текущего набора
+    // Это гарантирует, что все 4 задачи будут сохранены в tasksProgress
+    const completedTaskIds = currentTasks.map((task) => task.id);
 
-    // Открываем следующий уровень, если он есть
-    if (currentLevelIndex >= 0 && currentLevelIndex < levels.length - 1) {
-      const nextLevel = levels[currentLevelIndex + 1];
-      if (nextLevel) {
-        // Небольшая задержка для плавного перехода и получения актуального состояния
-        setTimeout(() => {
-          // Получаем актуальное состояние из store
-          const storeState = getStoreState();
-          const updatedUserProgress = storeState.userProgress;
-          
-          // Проверяем доступность следующего уровня с актуальным прогрессом
-          const moduleProgress = getModuleProgress(moduleId, updatedUserProgress);
-          const nextLevelIndex = currentLevelIndex + 1;
-          const isAvailable = isLevelAvailable(nextLevel, nextLevelIndex, moduleProgress);
-
-          if (isAvailable) {
-            const levelProgress = getLevelProgress(nextLevel.id, moduleProgress);
-            const tasks = getNextLevelTasks(
-              nextLevel.taskPool,
-              levelProgress || { tasksProgress: [] },
-              nextLevel.tasksPerLevel
-            );
-
-            setSelectedLevel(nextLevel);
-            setCurrentTasks(tasks);
-          }
-        }, 500);
-      }
-    }
+    // Завершаем уровень - это обновит store синхронно
+    // Передаем список выполненных задач, чтобы убедиться, что все они сохранены
+    // НЕ закрываем модальное окно - оно закроется при нажатии кнопки "Закрыть"
+    completeLevel(moduleId, completedLevelId, completedTaskIds);
   };
 
   const handleStepperClose = () => {
+    if (!selectedLevel || !module || !module.levels) {
+      setSelectedLevel(null);
+      setCurrentTasks([]);
+      return;
+    }
+
+    // Сохраняем информацию о текущем уровне перед закрытием
+    const closedLevelId = selectedLevel.id;
+    const levels = module.levels;
+    const currentLevelIndex = levels.findIndex((l) => l.id === closedLevelId);
+
+    // Получаем актуальное состояние из store для проверки завершенности уровня
+    const storeState = getStoreState();
+    const updatedUserProgress = storeState.userProgress;
+    const moduleProgress = getModuleProgress(moduleId, updatedUserProgress);
+    const levelProgress = getLevelProgress(closedLevelId, moduleProgress);
+    const wasCompleted = levelProgress?.isCompleted ?? false;
+
+    // Закрываем текущий уровень
     setSelectedLevel(null);
     setCurrentTasks([]);
-  };
 
+    // Если уровень был завершен и есть следующий уровень, открываем его
+    if (
+      wasCompleted &&
+      currentLevelIndex >= 0 &&
+      currentLevelIndex < levels.length - 1
+    ) {
+      const nextLevel = levels[currentLevelIndex + 1];
+      if (nextLevel) {
+        // Используем задержку для гарантированного закрытия предыдущего модального окна
+        setTimeout(() => {
+          // Используем requestAnimationFrame для гарантированного обновления DOM
+          requestAnimationFrame(() => {
+            // Получаем актуальное состояние из store после обновления
+            const currentStoreState = getStoreState();
+            const currentUserProgress = currentStoreState.userProgress;
+
+            // Получаем актуальный прогресс модуля
+            const updatedModuleProgress = getModuleProgress(
+              moduleId,
+              currentUserProgress
+            );
+
+            // Получаем прогресс следующего уровня (может быть undefined, если уровень еще не начинался)
+            const nextLevelProgress = getLevelProgress(
+              nextLevel.id,
+              updatedModuleProgress
+            );
+            const tasks = getNextLevelTasks(
+              nextLevel.taskPool,
+              nextLevelProgress || { tasksProgress: [] },
+              nextLevel.tasksPerLevel
+            );
+
+            // Открываем следующий уровень (это откроет новое модальное окно)
+            setSelectedLevel(nextLevel);
+            setCurrentTasks(tasks);
+          });
+        }, 150);
+      }
+    }
+  };
 
   // Предотвращаем гидратацию, пока данные не загружены
   if (!isMounted || !module) {
@@ -181,7 +269,12 @@ export function LevelsList(): React.JSX.Element {
         <div className="flex flex-col gap-4">
           {module.levels.map((level, index) => {
             const levelProgress = getLevelProgress(level.id, moduleProgress);
-            const isAvailable = isLevelAvailable(level, index, moduleProgress);
+            const isAvailable = isLevelAvailable(
+              level,
+              index,
+              moduleProgress,
+              module || undefined
+            );
             const isCompleted = levelProgress?.isCompleted ?? false;
 
             return (
@@ -194,8 +287,8 @@ export function LevelsList(): React.JSX.Element {
                   isCompleted
                     ? "border-green-500 bg-green-500/20 text-white"
                     : isAvailable
-                      ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
-                      : "border-gray-400/30 bg-gray-500/20 text-gray-300 cursor-not-allowed opacity-50"
+                    ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
+                    : "border-gray-400/30 bg-gray-500/20 text-gray-300 cursor-not-allowed opacity-50"
                 )}
               >
                 <div className="flex items-center gap-4">
@@ -205,8 +298,8 @@ export function LevelsList(): React.JSX.Element {
                       isCompleted
                         ? "bg-green-500"
                         : isAvailable
-                          ? "bg-white/20"
-                          : "bg-gray-500/30"
+                        ? "bg-white/20"
+                        : "bg-gray-500/30"
                     )}
                   >
                     {isCompleted ? (
@@ -245,4 +338,3 @@ export function LevelsList(): React.JSX.Element {
     </div>
   );
 }
-

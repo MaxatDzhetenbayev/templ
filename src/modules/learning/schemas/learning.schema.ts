@@ -164,4 +164,3 @@ export type LevelProgress = z.infer<typeof levelProgressSchema>;
 export type Module = z.infer<typeof moduleSchema>;
 export type ModuleProgress = z.infer<typeof moduleProgressSchema>;
 export type UserProgress = z.infer<typeof userProgressSchema>;
-

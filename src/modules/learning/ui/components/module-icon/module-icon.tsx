@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "@/shared/configs/i18/navigation";
 import { Check, Lock } from "lucide-react";
 import React from "react";
-import { useRouter } from "@/shared/configs/i18/navigation";
 
 import { cn } from "@/shared/lib/utils";
 

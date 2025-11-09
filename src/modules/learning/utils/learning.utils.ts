@@ -1,10 +1,9 @@
 import type {
-  Module,
-  Level,
-  Task,
-  TaskStatus,
-  ModuleProgress,
-  LevelProgress,
+	Level,
+	LevelProgress,
+	Module,
+	ModuleProgress,
+	Task
 } from "../schemas/learning.schema";
 
 /**
@@ -135,19 +134,41 @@ export const isModuleAvailable = (
  * @param level - Уровень
  * @param levelIndex - Индекс уровня в модуле
  * @param moduleProgress - Прогресс по модулю
+ * @param module - Модуль (для получения предыдущего уровня)
  * @returns true, если уровень доступен
  */
 export const isLevelAvailable = (
   level: Level,
   levelIndex: number,
-  moduleProgress: ModuleProgress | undefined
+  moduleProgress: ModuleProgress | undefined,
+  module?: Module
 ): boolean => {
   // Первый уровень всегда доступен
   if (levelIndex === 0) return true;
 
-  // Проверяем, завершен ли предыдущий уровень
-  if (!moduleProgress || !moduleProgress.levelsProgress) return false;
+  // Если нет прогресса модуля, уровень недоступен (кроме первого)
+  if (!moduleProgress) return false;
 
+  // Если нет массива levelsProgress, уровень недоступен
+  if (!moduleProgress.levelsProgress || moduleProgress.levelsProgress.length === 0) {
+    return false;
+  }
+
+  // Если модуль передан, находим предыдущий уровень по его ID
+  if (module && levelIndex > 0) {
+    const previousLevel = module.levels[levelIndex - 1];
+    if (previousLevel) {
+      const previousLevelProgress = moduleProgress.levelsProgress.find(
+        (lp) => lp.levelId === previousLevel.id
+      );
+      // Если предыдущий уровень найден, проверяем его завершенность
+      // Если не найден, уровень недоступен
+      return previousLevelProgress?.isCompleted ?? false;
+    }
+  }
+
+  // Fallback: поиск по индексу (для обратной совместимости)
+  // Это менее надежно, так как порядок в массиве может не совпадать с порядком уровней
   const previousLevelProgress = moduleProgress.levelsProgress.find(
     (lp, idx) => idx === levelIndex - 1
   );

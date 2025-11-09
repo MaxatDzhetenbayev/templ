@@ -136,6 +136,7 @@
   "learning": {
     "title": "Learning modules",
     "subtitle": "Choose a module and start learning Kazakh",
+    "loading": "Loading...",
     "tasks": {
       "missingWord": "Missing word",
       "listening": "Listening",

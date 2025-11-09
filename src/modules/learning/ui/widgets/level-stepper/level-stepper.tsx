@@ -1,8 +1,8 @@
 "use client";
 
-import { CheckCircle2, XCircle, Pause, Play } from "lucide-react";
-import React, { useState, useRef, useEffect } from "react";
+import { CheckCircle2, Pause, Play, XCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   Button,
@@ -23,7 +23,7 @@ export interface LevelStepperProps {
   tasks: Task[];
   onComplete: () => void;
   onClose: () => void;
-  onTaskAnswer: (isCorrect: boolean, points: number) => void;
+  onTaskAnswer: (taskId: string, isCorrect: boolean, points: number) => void;
   onTasksShuffle?: (shuffledTasks: Task[]) => void;
 }
 
@@ -70,14 +70,45 @@ export function LevelStepper({
   }, [currentTaskIndex, tasks, isLevelCompleted]);
 
   const handleSubmit = () => {
-    if (!selectedAnswerId || !currentTask) return;
+    if (!currentTask) return;
+
+    // Для ai-chat заданий не требуется выбранный ответ
+    if (currentTask.type === "ai-chat") {
+      const correct = true; // ai-chat всегда засчитывается как правильный
+      setIsCorrect(correct);
+      setIsSubmitted(true);
+
+      // Вызываем обработчик ответа
+      onTaskAnswer(currentTask.id, correct, currentTask.points);
+
+      // Обновляем результаты
+      const newResults = [...taskResults, true];
+      setTaskResults(newResults);
+
+      // Если все задания выполнены правильно
+      if (newResults.length === totalTasks) {
+        // Показываем финальное сообщение о завершении уровня
+        setTimeout(() => {
+          setIsLevelCompleted(true);
+        }, 1500);
+      } else {
+        // Переходим к следующему заданию
+        setTimeout(() => {
+          setCurrentTaskIndex(newResults.length);
+        }, 1500);
+      }
+      return;
+    }
+
+    // Для остальных типов заданий требуется выбранный ответ
+    if (!selectedAnswerId) return;
 
     const correct = checkAnswer(currentTask, selectedAnswerId);
     setIsCorrect(correct);
     setIsSubmitted(true);
 
     // Вызываем обработчик ответа
-    onTaskAnswer(correct, correct ? currentTask.points : 0);
+    onTaskAnswer(currentTask.id, correct, correct ? currentTask.points : 0);
 
     if (correct) {
       // Обновляем результаты
@@ -181,8 +212,8 @@ export function LevelStepper({
                         isCorrectOption
                           ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                           : isSelected && !isCorrectOption
-                            ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                            : "border-gray-300 dark:border-gray-700"
+                          ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                          : "border-gray-300 dark:border-gray-700"
                       )}
                     >
                       <div className="flex items-center justify-between">
@@ -267,8 +298,8 @@ export function LevelStepper({
                           isCorrectOption
                             ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                             : isSelected && !isCorrectOption
-                              ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                              : "border-gray-300 dark:border-gray-700"
+                            ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                            : "border-gray-300 dark:border-gray-700"
                         )}
                       >
                         <div className="flex items-center justify-between">
@@ -341,8 +372,8 @@ export function LevelStepper({
                         isCorrectOption
                           ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                           : isSelected && !isCorrectOption
-                            ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                            : "border-gray-300 dark:border-gray-700"
+                          ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                          : "border-gray-300 dark:border-gray-700"
                       )}
                     >
                       <div className="flex items-center justify-between">
@@ -361,6 +392,36 @@ export function LevelStepper({
           </div>
         );
 
+      case "ai-chat":
+        return (
+          <div className="space-y-6">
+            <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-6 text-center">
+              <div className="mb-4 flex items-center justify-center gap-2">
+                <span className="text-2xl">💬</span>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {t("taskTitles.aiChat")}
+                </h3>
+              </div>
+              <p className="text-lg text-gray-800 dark:text-gray-200">
+                {t("messages.aiChatPlaceholder")}
+              </p>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Тема: {currentTask.topic}
+              </p>
+            </div>
+            {isSubmitted && (
+              <div className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400">
+                <CheckCircle2 className="size-6" />
+                <span className="text-lg font-semibold">
+                  {t("messages.success", {
+                    points: currentTask.points || 0,
+                  })}
+                </span>
+              </div>
+            )}
+          </div>
+        );
+
       default:
         return null;
     }
@@ -372,7 +433,9 @@ export function LevelStepper({
         <DialogHeader>
           <DialogTitle>
             {level.title || `Уровень`}
-            {!isLevelCompleted && ` - ${t("taskTitles.missingWord")}`}
+            {!isLevelCompleted &&
+              currentTask &&
+              ` - ${t(`taskTitles.${currentTask.type}`)}`}
           </DialogTitle>
           <DialogDescription>
             {isLevelCompleted
@@ -392,8 +455,8 @@ export function LevelStepper({
                     isLevelCompleted || index < currentTaskIndex
                       ? "border-green-500 bg-green-500 text-white"
                       : index === currentTaskIndex
-                        ? "border-primary bg-primary text-white"
-                        : "border-gray-300 bg-gray-100 text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                      ? "border-primary bg-primary text-white"
+                      : "border-gray-300 bg-gray-100 text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
                   )}
                 >
                   {isLevelCompleted || index < currentTaskIndex ? (
@@ -429,7 +492,7 @@ export function LevelStepper({
             <p className="mb-6 text-center text-gray-600 dark:text-gray-400">
               {t("messages.levelCompletedDescription")}
             </p>
-            <Button onClick={onComplete} className="w-full sm:w-auto" size="lg">
+            <Button onClick={onClose} className="w-full sm:w-auto" size="lg">
               {t("buttons.close")}
             </Button>
           </div>
@@ -443,7 +506,9 @@ export function LevelStepper({
               {!isSubmitted ? (
                 <Button
                   onClick={handleSubmit}
-                  disabled={!selectedAnswerId}
+                  disabled={
+                    currentTask?.type !== "ai-chat" && !selectedAnswerId
+                  }
                   className="w-full sm:w-auto"
                 >
                   {t("buttons.check")}
@@ -476,4 +541,3 @@ export function LevelStepper({
     </Dialog>
   );
 }
-
