@@ -5,7 +5,6 @@ import NextLink from "next/link";
 import Header from "@/shared/components/header";
 import { useLocale, useTranslations } from "next-intl";
 
-/* ========= Анимации ========= */
 const container = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, ease: "easeOut", duration: 0.6 } },
@@ -19,19 +18,16 @@ const shine = {
   animate: { backgroundPosition: "-200% 0", transition: { repeat: Infinity, duration: 7, ease: "linear" } },
 };
 
-/* ========= Бренд ========= */
 const brand = {
   primary: "#38bdf8",
   secondary: "#22d3ee",
   accent: "#93c5fd",
 };
 
-/* ========= Локализованный Link (без next-intl/link) ========= */
 const LOCALES = ["ru", "kk", "en"] as const;
 type Locale = (typeof LOCALES)[number];
 
 function stripLeadingLocale(path: string) {
-  // Убираем ведущую локаль, если она уже присутствует: /ru/..., /kk/..., /en/...
   return path.replace(/^\/(ru|kk|en)(?=\/|$)/, "");
 }
 
@@ -58,7 +54,6 @@ function LocalizedLink({
   );
 }
 
-/* ========= UI ========= */
 function GlassCard({ children, className = "" }: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div className={`rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur-xl shadow-xl dark:border-white/10 dark:bg-white/5 ${className}`}>
@@ -95,7 +90,6 @@ const TopBadge = ({ text }: { text: string }) => (
   </span>
 );
 
-/* ========= Страница ========= */
 export default function Page() {
   const t = useTranslations("landing");
   const locale = useLocale();
