@@ -169,7 +169,19 @@
       "allTasksCompleted": "All tasks completed!",
       "audioHint": "Click the button to listen to the audio",
       "selectAnswer": "Choose the correct answer in Kazakh:",
-      "aiChatPlaceholder": "AI chat feature will be implemented later"
+      "aiChatPlaceholder": "AI chat feature will be implemented later",
+      "aiChatDescription": "Practice conversational skills by chatting with AI on the module topic",
+      "aiChatLoading": "Loading topic...",
+      "aiChatError": "Error loading topic. Please try again.",
+      "aiChatSend": "Send",
+      "aiChatPlaceholderInput": "Type your message in Kazakh...",
+      "aiChatSending": "Sending...",
+      "aiChatCheckGrammar": "Check grammar",
+      "aiChatComplete": "Complete task",
+      "aiChatGrammarTitle": "Grammar check",
+      "aiChatGrammarOriginal": "Original:",
+      "aiChatGrammarCorrected": "Corrected:",
+      "aiChatGrammarExplanation": "Explanation:"
     }
   },
   "dashboards": {

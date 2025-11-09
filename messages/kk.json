@@ -169,7 +169,19 @@
       "allTasksCompleted": "Барлық тапсырмалар аяқталды!",
       "audioHint": "Аудионы тыңдау үшін батырманы басыңыз",
       "selectAnswer": "Қазақ тілінде дұрыс жауапты таңдаңыз:",
-      "aiChatPlaceholder": "ЖИ-мен чат функциясы кейінірек іске қосылады"
+      "aiChatPlaceholder": "ЖИ-мен чат функциясы кейінірек іске қосылады",
+      "aiChatDescription": "Модуль тақырыбы бойынша ЖИ-мен сөйлесу арқылы сөйлеу дағдысын жаттығыңыз",
+      "aiChatLoading": "Тақырып жүктелуде...",
+      "aiChatError": "Тақырыпты жүктеу кезінде қате орын алды. Қайталап көріңіз.",
+      "aiChatSend": "Жіберу",
+      "aiChatPlaceholderInput": "Қазақ тілінде хабарламаңызды енгізіңіз...",
+      "aiChatSending": "Жіберілуде...",
+      "aiChatCheckGrammar": "Грамматиканы тексеру",
+      "aiChatComplete": "Тапсырманы аяқтау",
+      "aiChatGrammarTitle": "Грамматиканы тексеру",
+      "aiChatGrammarOriginal": "Түпнұсқа:",
+      "aiChatGrammarCorrected": "Түзетілген:",
+      "aiChatGrammarExplanation": "Түсіндірме:"
     }
   },
   "dashboards": {

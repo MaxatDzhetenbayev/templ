@@ -1,6 +1,9 @@
 export * from "./constants/learning.constants";
+export * from "./lib/chat-api";
 export * from "./model/learning.store";
 export * from "./schemas/learning.schema";
+export { AiChatTask } from "./ui/components/ai-chat-task";
+export type { AiChatTaskProps } from "./ui/components/ai-chat-task";
 export * from "./ui/components/module-card";
 export * from "./ui/components/module-icon";
 export * from "./ui/components/task-button";

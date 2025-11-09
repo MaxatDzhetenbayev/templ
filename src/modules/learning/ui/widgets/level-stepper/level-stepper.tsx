@@ -17,6 +17,7 @@ import { cn } from "@/shared/lib/utils";
 
 import type { Level, Task } from "../../../schemas/learning.schema";
 import { checkAnswer } from "../../../utils/learning.utils";
+import { AiChatTask } from "../../components/ai-chat-task";
 
 export interface LevelStepperProps {
   level: Level;
@@ -72,31 +73,8 @@ export function LevelStepper({
   const handleSubmit = () => {
     if (!currentTask) return;
 
-    // Для ai-chat заданий не требуется выбранный ответ
+    // Для ai-chat заданий логика обрабатывается внутри компонента AiChatTask
     if (currentTask.type === "ai-chat") {
-      const correct = true; // ai-chat всегда засчитывается как правильный
-      setIsCorrect(correct);
-      setIsSubmitted(true);
-
-      // Вызываем обработчик ответа
-      onTaskAnswer(currentTask.id, correct, currentTask.points);
-
-      // Обновляем результаты
-      const newResults = [...taskResults, true];
-      setTaskResults(newResults);
-
-      // Если все задания выполнены правильно
-      if (newResults.length === totalTasks) {
-        // Показываем финальное сообщение о завершении уровня
-        setTimeout(() => {
-          setIsLevelCompleted(true);
-        }, 1500);
-      } else {
-        // Переходим к следующему заданию
-        setTimeout(() => {
-          setCurrentTaskIndex(newResults.length);
-        }, 1500);
-      }
       return;
     }
 
@@ -394,32 +372,34 @@ export function LevelStepper({
 
       case "ai-chat":
         return (
-          <div className="space-y-6">
-            <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-6 text-center">
-              <div className="mb-4 flex items-center justify-center gap-2">
-                <span className="text-2xl">💬</span>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {t("taskTitles.aiChat")}
-                </h3>
-              </div>
-              <p className="text-lg text-gray-800 dark:text-gray-200">
-                {t("messages.aiChatPlaceholder")}
-              </p>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Тема: {currentTask.topic}
-              </p>
-            </div>
-            {isSubmitted && (
-              <div className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400">
-                <CheckCircle2 className="size-6" />
-                <span className="text-lg font-semibold">
-                  {t("messages.success", {
-                    points: currentTask.points || 0,
-                  })}
-                </span>
-              </div>
-            )}
-          </div>
+          <AiChatTask
+            task={currentTask}
+            onComplete={() => {
+              const correct = true; // ai-chat всегда засчитывается как правильный
+              setIsCorrect(correct);
+              setIsSubmitted(true);
+
+              // Вызываем обработчик ответа
+              onTaskAnswer(currentTask.id, correct, currentTask.points);
+
+              // Обновляем результаты
+              const newResults = [...taskResults, true];
+              setTaskResults(newResults);
+
+              // Если все задания выполнены правильно
+              if (newResults.length === totalTasks) {
+                // Показываем финальное сообщение о завершении уровня
+                setTimeout(() => {
+                  setIsLevelCompleted(true);
+                }, 1500);
+              } else {
+                // Переходим к следующему заданию
+                setTimeout(() => {
+                  setCurrentTaskIndex(newResults.length);
+                }, 1500);
+              }
+            }}
+          />
         );
 
       default:
@@ -503,16 +483,17 @@ export function LevelStepper({
 
             {/* Task Footer */}
             <DialogFooter>
-              {!isSubmitted ? (
+              {!isSubmitted && currentTask?.type !== "ai-chat" ? (
                 <Button
                   onClick={handleSubmit}
-                  disabled={
-                    currentTask?.type !== "ai-chat" && !selectedAnswerId
-                  }
+                  disabled={!selectedAnswerId}
                   className="w-full sm:w-auto"
                 >
                   {t("buttons.check")}
                 </Button>
+              ) : !isSubmitted && currentTask?.type === "ai-chat" ? (
+                // Для ai-chat заданий кнопка не показывается, логика обрабатывается внутри компонента
+                null
               ) : isCorrect ? (
                 <div className="flex w-full flex-col items-center gap-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400">

@@ -169,7 +169,19 @@
       "allTasksCompleted": "Все задания завершены!",
       "audioHint": "Нажмите кнопку, чтобы прослушать аудио",
       "selectAnswer": "Выберите правильный ответ на казахском языке:",
-      "aiChatPlaceholder": "Функция чата с ИИ будет реализована позже"
+      "aiChatPlaceholder": "Функция чата с ИИ будет реализована позже",
+      "aiChatDescription": "Практикуйте разговорную речь, общаясь с ИИ на тему модуля",
+      "aiChatLoading": "Загрузка темы...",
+      "aiChatError": "Ошибка загрузки темы. Попробуйте еще раз.",
+      "aiChatSend": "Отправить",
+      "aiChatPlaceholderInput": "Введите ваше сообщение на казахском...",
+      "aiChatSending": "Отправка...",
+      "aiChatCheckGrammar": "Проверить грамматику",
+      "aiChatComplete": "Завершить задание",
+      "aiChatGrammarTitle": "Проверка грамматики",
+      "aiChatGrammarOriginal": "Оригинал:",
+      "aiChatGrammarCorrected": "Исправлено:",
+      "aiChatGrammarExplanation": "Объяснение:"
     }
   },
   "dashboards": {
