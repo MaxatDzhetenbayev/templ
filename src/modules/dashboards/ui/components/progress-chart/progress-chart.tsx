@@ -21,16 +21,16 @@ export function ProgressChart() {
   const t = useTranslations("dashboards.charts");
 
   const data = [
-    { name: t("progress.completed"), value: 65, color: "hsl(var(--primary))" },
+    { name: t("progress.completed"), value: 65, color: "hsl(217, 91%, 60%)" },
     {
       name: t("progress.inProgress"),
       value: 25,
-      color: "hsl(var(--primary)) / 0.6",
+      color: "hsl(217, 91%, 70%)",
     },
     {
       name: t("progress.notStarted"),
       value: 10,
-      color: "hsl(var(--muted-foreground))",
+      color: "hsl(217, 91%, 85%)",
     },
   ];
 
@@ -54,7 +54,7 @@ export function ProgressChart() {
                 `${name}: ${(percent * 100).toFixed(0)}%`
               }
               outerRadius={80}
-              fill="#8884d8"
+              fill="hsl(217, 91%, 60%)"
               dataKey="value"
             >
               {data.map((entry, index) => (

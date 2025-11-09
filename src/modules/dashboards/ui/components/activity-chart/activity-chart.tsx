@@ -45,24 +45,24 @@ export function ActivityChart() {
               <linearGradient id="colorPoints" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="hsl(var(--primary))"
+                  stopColor="hsl(217, 91%, 60%)"
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor="hsl(var(--primary))"
+                  stopColor="hsl(217, 91%, 60%)"
                   stopOpacity={0}
                 />
               </linearGradient>
               <linearGradient id="colorLessons" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor="hsl(var(--primary))"
+                  stopColor="hsl(217, 91%, 60%)"
                   stopOpacity={0.4}
                 />
                 <stop
                   offset="95%"
-                  stopColor="hsl(var(--primary))"
+                  stopColor="hsl(217, 91%, 60%)"
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -84,7 +84,7 @@ export function ActivityChart() {
             <Area
               type="monotone"
               dataKey="points"
-              stroke="hsl(var(--primary))"
+              stroke="hsl(217, 91%, 60%)"
               fillOpacity={1}
               fill="url(#colorPoints)"
               name={t("activity.points")}
@@ -92,7 +92,7 @@ export function ActivityChart() {
             <Area
               type="monotone"
               dataKey="lessons"
-              stroke="hsl(var(--primary))"
+              stroke="hsl(217, 91%, 60%)"
               fillOpacity={1}
               fill="url(#colorLessons)"
               name={t("activity.lessons")}
