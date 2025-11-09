@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { getUsers } from "@/shared/lib/mock-auth";
-import { getLocalizedModules } from "@/modules/learning/utils/mock-data";
+import { getLocalizedModules, getUserProgressById } from "@/modules/learning/utils/mock-data";
 import type { Module, UserProgress } from "@/modules/learning/schemas/learning.schema";
 import { getOverallProgress } from "@/modules/learning/utils/learning.utils";
 
@@ -109,16 +109,7 @@ const calculateTotalLessons = (modules: Module[]): number => {
  * Получает прогресс пользователя из localStorage
  */
 const getUserProgress = (userId: string): UserProgress | null => {
-  if (typeof window === "undefined") return null;
-  const PROGRESS_STORAGE_KEY = "learning_user_progress";
-  const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
-  if (!stored) return null;
-  try {
-    const progress = JSON.parse(stored) as UserProgress;
-    return progress.userId === userId ? progress : null;
-  } catch {
-    return null;
-  }
+  return getUserProgressById(userId);
 };
 
 /**

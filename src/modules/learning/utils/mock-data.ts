@@ -507,6 +507,46 @@ export const mockModules: Module[] = getLocalizedModules("ru");
 const PROGRESS_STORAGE_KEY = "learning_user_progress";
 
 /**
+ * Тип для хранения прогресса всех пользователей
+ */
+type AllUsersProgress = Record<string, UserProgress>;
+
+/**
+ * Получает весь прогресс всех пользователей из localStorage
+ */
+const getAllUsersProgress = (): AllUsersProgress => {
+  if (typeof window === "undefined") return {};
+  const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
+  if (!stored) return {};
+  try {
+    // Проверяем, старый ли формат (один объект UserProgress)
+    const parsed = JSON.parse(stored);
+    // Если это старый формат (есть userId и modulesProgress напрямую)
+    if (parsed.userId && Array.isArray(parsed.modulesProgress)) {
+      // Мигрируем в новый формат
+      const oldProgress = parsed as UserProgress;
+      const newFormat: AllUsersProgress = {
+        [oldProgress.userId]: oldProgress,
+      };
+      localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(newFormat));
+      return newFormat;
+    }
+    // Новый формат (объект с ключами userId)
+    return parsed as AllUsersProgress;
+  } catch {
+    return {};
+  }
+};
+
+/**
+ * Сохраняет весь прогресс всех пользователей в localStorage
+ */
+const saveAllUsersProgress = (allProgress: AllUsersProgress): void => {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(allProgress));
+};
+
+/**
  * Получает моковый прогресс пользователя из localStorage или создает новый
  */
 export const getMockUserProgress = (): UserProgress => {
@@ -527,26 +567,26 @@ export const getMockUserProgress = (): UserProgress => {
     };
   }
 
-  // Пытаемся загрузить сохраненный прогресс
-  const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
-  if (stored) {
-    try {
-      const progress = JSON.parse(stored) as UserProgress;
-      // Проверяем, что прогресс принадлежит текущему пользователю
-      if (progress.userId === user.id) {
-        return progress;
-      }
-    } catch {
-      // Игнорируем ошибки парсинга
-    }
+  // Получаем весь прогресс всех пользователей
+  const allProgress = getAllUsersProgress();
+
+  // Проверяем, есть ли прогресс для текущего пользователя
+  if (allProgress[user.id]) {
+    return allProgress[user.id];
   }
 
   // Создаем новый прогресс
-  return {
+  const newProgress: UserProgress = {
     userId: user.id,
     modulesProgress: [],
     totalPoints: 0,
   };
+
+  // Сохраняем новый прогресс
+  allProgress[user.id] = newProgress;
+  saveAllUsersProgress(allProgress);
+
+  return newProgress;
 };
 
 /**
@@ -554,5 +594,29 @@ export const getMockUserProgress = (): UserProgress => {
  */
 export const saveMockUserProgress = (progress: UserProgress): void => {
   if (typeof window === "undefined") return;
-  localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
+
+  // Получаем весь прогресс
+  const allProgress = getAllUsersProgress();
+
+  // Обновляем прогресс текущего пользователя
+  allProgress[progress.userId] = progress;
+
+  // Сохраняем обратно
+  saveAllUsersProgress(allProgress);
+};
+
+/**
+ * Получает прогресс конкретного пользователя по его ID
+ */
+export const getUserProgressById = (userId: string): UserProgress | null => {
+  if (typeof window === "undefined") return null;
+  const allProgress = getAllUsersProgress();
+  return allProgress[userId] || null;
+};
+
+/**
+ * Получает прогресс всех пользователей
+ */
+export const getAllUsersProgressData = (): AllUsersProgress => {
+  return getAllUsersProgress();
 };
