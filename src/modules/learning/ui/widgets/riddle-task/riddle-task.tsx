@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -52,20 +52,36 @@ export function RiddleTaskWidget({
     const correct = checkAnswer(task, selectedAnswerId);
     setIsCorrect(correct);
     setIsSubmitted(true);
-
-    if (correct) {
-      onComplete(true, task.points);
-    }
   };
 
   const handleClose = () => {
-    if (isSubmitted && isCorrect) {
+    // Закрываем только если задание было проверено
+    if (!isSubmitted) {
+      // Если задание еще не было проверено, просто закрываем без вызова onComplete
+      onClose();
+      return;
+    }
+
+    if (isCorrect) {
+      // Вызываем onComplete только при закрытии после правильного ответа
+      // Важно: сначала закрываем модальное окно, затем обрабатываем завершение
+      onClose();
+      // Используем setTimeout для гарантии, что onComplete вызовется после закрытия
+      setTimeout(() => {
+        onComplete(true, task.points);
+      }, 0);
+    } else {
+      // При неправильном ответе просто закрываем без вызова onComplete
       onClose();
     }
   };
 
   return (
-    <Dialog open onOpenChange={handleClose}>
+    <Dialog open onOpenChange={(open) => {
+      if (!open) {
+        handleClose();
+      }
+    }}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>{t("taskTitles.riddle")}</DialogTitle>
@@ -164,9 +180,17 @@ export function RiddleTaskWidget({
               </Button>
             </div>
           ) : (
-            <Button onClick={onClose} variant="destructive" className="w-full sm:w-auto">
-              {t("buttons.close")}
-            </Button>
+            <div className="flex w-full flex-col items-center gap-4">
+              <div className="flex items-center gap-2 text-red-600 dark:text-red-400">
+                <XCircle className="size-6" />
+                <span className="text-lg font-semibold">
+                  {t("messages.error")}
+                </span>
+              </div>
+              <Button onClick={onClose} variant="destructive" className="w-full sm:w-auto">
+                {t("buttons.close")}
+              </Button>
+            </div>
           )}
         </DialogFooter>
       </DialogContent>

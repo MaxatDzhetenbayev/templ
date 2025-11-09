@@ -1,74 +1,11 @@
 import type {
   Module,
+  Level,
   Task,
-  TaskProgress,
   TaskStatus,
   ModuleProgress,
+  LevelProgress,
 } from "../schemas/learning.schema";
-
-/**
- * Получает статус задания для пользователя
- *
- * @param taskId - ID задания
- * @param moduleProgress - Прогресс по модулю
- * @returns Статус задания
- */
-export const getTaskStatus = (
-  taskId: string,
-  moduleProgress: ModuleProgress | undefined
-): TaskStatus => {
-  if (!moduleProgress) {
-    // Первое задание всегда доступно
-    return taskId === getFirstTaskId(moduleProgress) ? "available" : "locked";
-  }
-
-  const taskProgress = moduleProgress.tasksProgress.find(
-    (tp) => tp.taskId === taskId
-  );
-
-  if (taskProgress) {
-    return taskProgress.status;
-  }
-
-  // Проверяем, доступно ли задание (предыдущее должно быть завершено)
-  return isTaskAvailable(taskId, moduleProgress) ? "available" : "locked";
-};
-
-/**
- * Получает ID первого задания в модуле
- *
- * @param moduleProgress - Прогресс по модулю (опционально)
- * @returns ID первого задания
- */
-export const getFirstTaskId = (moduleProgress?: ModuleProgress): string => {
-  // Временная заглушка, будет заменена при загрузке модулей
-  return "task-1";
-};
-
-/**
- * Проверяет, доступно ли задание
- *
- * @param taskId - ID задания
- * @param moduleProgress - Прогресс по модулю
- * @returns true, если задание доступно
- */
-export const isTaskAvailable = (
-  taskId: string,
-  moduleProgress: ModuleProgress
-): boolean => {
-  // Если задание уже завершено, оно доступно
-  const taskProgress = moduleProgress.tasksProgress.find(
-    (tp) => tp.taskId === taskId
-  );
-  if (taskProgress?.status === "completed") {
-    return true;
-  }
-
-  // Первое задание всегда доступно
-  // Для остальных нужно проверить, завершено ли предыдущее
-  // Это упрощенная логика, в реальности нужно знать порядок заданий
-  return true;
-};
 
 /**
  * Получает прогресс по модулю
@@ -81,22 +18,51 @@ export const getModuleProgress = (
   moduleId: string,
   userProgress: { modulesProgress: ModuleProgress[] } | null
 ): ModuleProgress | undefined => {
-  if (!userProgress) return undefined;
+  if (!userProgress || !userProgress.modulesProgress) return undefined;
   return userProgress.modulesProgress.find((mp) => mp.moduleId === moduleId);
 };
 
 /**
- * Получает задание по ID из модуля
+ * Получает прогресс по уровню
+ *
+ * @param levelId - ID уровня
+ * @param moduleProgress - Прогресс по модулю
+ * @returns Прогресс по уровню или undefined
+ */
+export const getLevelProgress = (
+  levelId: string,
+  moduleProgress: ModuleProgress | undefined
+): LevelProgress | undefined => {
+  if (!moduleProgress || !moduleProgress.levelsProgress) return undefined;
+  return moduleProgress.levelsProgress.find((lp) => lp.levelId === levelId);
+};
+
+/**
+ * Получает уровень по ID из модуля
  *
  * @param module - Модуль
+ * @param levelId - ID уровня
+ * @returns Уровень или undefined
+ */
+export const getLevelFromModule = (
+  module: Module,
+  levelId: string
+): Level | undefined => {
+  return module.levels.find((level) => level.id === levelId);
+};
+
+/**
+ * Получает задание по ID из уровня
+ *
+ * @param level - Уровень
  * @param taskId - ID задания
  * @returns Задание или undefined
  */
-export const getTaskFromModule = (
-  module: Module,
+export const getTaskFromLevel = (
+  level: Level,
   taskId: string
 ): Task | undefined => {
-  return module.tasks.find((task) => task.id === taskId);
+  return level.taskPool.find((task) => task.id === taskId);
 };
 
 /**
@@ -130,3 +96,86 @@ export const checkAnswer = (
   return false;
 };
 
+/**
+ * Проверяет, доступен ли модуль для прохождения
+ *
+ * @param module - Модуль
+ * @param moduleIndex - Индекс модуля в списке
+ * @param allModules - Все модули (для проверки предыдущего)
+ * @param userProgress - Прогресс пользователя
+ * @returns true, если модуль доступен
+ */
+export const isModuleAvailable = (
+  module: Module,
+  moduleIndex: number,
+  allModules: Module[],
+  userProgress: { modulesProgress: ModuleProgress[] } | null
+): boolean => {
+  // Первый модуль всегда доступен
+  if (moduleIndex === 0) return true;
+
+  // Проверяем, завершен ли предыдущий модуль
+  if (moduleIndex > 0) {
+    const previousModule = allModules[moduleIndex - 1];
+    if (previousModule) {
+      const previousModuleProgress = getModuleProgress(
+        previousModule.id,
+        userProgress
+      );
+      return previousModuleProgress?.isCompleted ?? false;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Проверяет, доступен ли уровень для прохождения
+ *
+ * @param level - Уровень
+ * @param levelIndex - Индекс уровня в модуле
+ * @param moduleProgress - Прогресс по модулю
+ * @returns true, если уровень доступен
+ */
+export const isLevelAvailable = (
+  level: Level,
+  levelIndex: number,
+  moduleProgress: ModuleProgress | undefined
+): boolean => {
+  // Первый уровень всегда доступен
+  if (levelIndex === 0) return true;
+
+  // Проверяем, завершен ли предыдущий уровень
+  if (!moduleProgress || !moduleProgress.levelsProgress) return false;
+
+  const previousLevelProgress = moduleProgress.levelsProgress.find(
+    (lp, idx) => idx === levelIndex - 1
+  );
+
+  return previousLevelProgress?.isCompleted ?? false;
+};
+
+/**
+ * Вычисляет прогресс модуля в процентах
+ *
+ * @param module - Модуль
+ * @param moduleProgress - Прогресс по модулю
+ * @returns Процент выполнения (0-100)
+ */
+export const getModuleProgressPercent = (
+  module: Module,
+  moduleProgress: ModuleProgress | undefined
+): number => {
+  if (
+    !moduleProgress ||
+    !moduleProgress.levelsProgress ||
+    module.levels.length === 0
+  )
+    return 0;
+
+  const completedLevels = moduleProgress.levelsProgress.filter(
+    (lp) => lp.isCompleted
+  ).length;
+
+  return Math.round((completedLevels / module.levels.length) * 100);
+};

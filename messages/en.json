@@ -162,6 +162,10 @@
     },
     "messages": {
       "success": "Excellent! You earned {points} points!",
+      "error": "Unfortunately, the answer is incorrect. Please try again!",
+      "levelCompleted": "Level completed!",
+      "levelCompletedDescription": "Congratulations! You have successfully completed all tasks in the level.",
+      "allTasksCompleted": "All tasks completed!",
       "audioHint": "Click the button to listen to the audio",
       "selectAnswer": "Choose the correct answer in Kazakh:",
       "aiChatPlaceholder": "AI chat feature will be implemented later"

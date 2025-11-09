@@ -89,6 +89,20 @@ export const taskProgressSchema = z.object({
   status: taskStatusSchema,
   completedAt: z.string().optional(),
   score: z.number().nonnegative().optional(),
+  attempts: z.number().nonnegative().default(0), // Количество попыток
+  lastAttemptedTaskId: z.string().optional(), // ID последнего задания, которое показывалось
+});
+
+/**
+ * Уровень в модуле
+ */
+export const levelSchema = z.object({
+  id: z.string(),
+  moduleId: z.string(),
+  order: z.number().positive(),
+  title: z.string().optional(), // Название уровня (опционально)
+  taskPool: z.array(taskSchema).min(1), // Пул заданий для рандомизации
+  tasksPerLevel: z.number().positive().default(4), // Количество заданий, которые показываются за раз
 });
 
 /**
@@ -98,8 +112,21 @@ export const moduleSchema = z.object({
   id: z.string(),
   title: z.string(), // Название на языке пользователя
   description: z.string().optional(), // Описание на языке пользователя
-  tasks: z.array(taskSchema).length(4), // Всегда 4 задания
+  icon: z.string().optional(), // Иконка модуля (emoji или название)
+  color: z.string().optional(), // Цвет модуля
+  levels: z.array(levelSchema).min(1), // Уровни модуля
   order: z.number().positive(),
+});
+
+/**
+ * Прогресс пользователя по уровню
+ */
+export const levelProgressSchema = z.object({
+  levelId: z.string(),
+  tasksProgress: z.array(taskProgressSchema),
+  completedAt: z.string().optional(),
+  totalScore: z.number().nonnegative().default(0),
+  isCompleted: z.boolean().default(false),
 });
 
 /**
@@ -107,9 +134,10 @@ export const moduleSchema = z.object({
  */
 export const moduleProgressSchema = z.object({
   moduleId: z.string(),
-  tasksProgress: z.array(taskProgressSchema),
+  levelsProgress: z.array(levelProgressSchema),
   completedAt: z.string().optional(),
   totalScore: z.number().nonnegative().default(0),
+  isCompleted: z.boolean().default(false),
 });
 
 /**
@@ -131,6 +159,8 @@ export type RiddleTask = z.infer<typeof riddleTaskSchema>;
 export type AiChatTask = z.infer<typeof aiChatTaskSchema>;
 export type Task = z.infer<typeof taskSchema>;
 export type TaskProgress = z.infer<typeof taskProgressSchema>;
+export type Level = z.infer<typeof levelSchema>;
+export type LevelProgress = z.infer<typeof levelProgressSchema>;
 export type Module = z.infer<typeof moduleSchema>;
 export type ModuleProgress = z.infer<typeof moduleProgressSchema>;
 export type UserProgress = z.infer<typeof userProgressSchema>;
