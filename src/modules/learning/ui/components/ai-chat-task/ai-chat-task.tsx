@@ -60,11 +60,25 @@ export function AiChatTask({
     return "beginner";
   };
 
-  // Загружаем тему при монтировании
+  // Сбрасываем состояние при смене задания
+  useEffect(() => {
+    setGrammarCorrection(null);
+    setInputValue("");
+    setIsCompleted(false);
+    setError(null);
+    setIsSending(false);
+    setIsCheckingGrammar(false);
+  }, [task.id]);
+
+  // Загружаем тему при монтировании или изменении темы
   useEffect(() => {
     const loadTopic = async () => {
       setIsLoadingTopic(true);
       setError(null);
+      // Сбрасываем состояние проверки грамматики при загрузке новой темы
+      setGrammarCorrection(null);
+      setInputValue("");
+      setIsCompleted(false);
       try {
         const data = await getChatTopic(task.topic, getLevel());
         if (data.status === "success") {
@@ -191,20 +205,20 @@ export function AiChatTask({
   if (!topicData) return <div />;
 
   return (
-    <div className="flex h-[500px] flex-col space-y-4">
+    <div className="flex max-h-[600px] min-h-[400px] flex-col space-y-3">
       {/* Заголовок и описание */}
-      <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-4">
-        <div className="mb-2 flex items-center gap-2">
-          <MessageSquare className="size-5 text-purple-600 dark:text-purple-400" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-3">
+        <div className="mb-1 flex items-center gap-2">
+          <MessageSquare className="size-4 text-purple-600 dark:text-purple-400" />
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
             {topicData.title}
           </h3>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-xs text-gray-600 dark:text-gray-400">
           {topicData.description}
         </p>
         {topicData.vocabulary.length > 0 && (
-          <div className="mt-2">
+          <div className="mt-1.5">
             <p className="text-xs font-medium text-gray-500 dark:text-gray-500">
               Словарь: {topicData.vocabulary.join(", ")}
             </p>
@@ -213,7 +227,7 @@ export function AiChatTask({
       </div>
 
       {/* История сообщений */}
-      <div className="flex-1 space-y-3 overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4">
+      <div className="flex min-h-0 flex-1 flex-col space-y-2 overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-3">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -224,13 +238,15 @@ export function AiChatTask({
           >
             <div
               className={cn(
-                "max-w-[80%] rounded-lg px-4 py-2",
+                "max-w-[85%] rounded-lg px-3 py-2",
                 message.role === "user"
                   ? "bg-primary text-primary-foreground"
                   : "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
               )}
             >
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              <p className="text-xs sm:text-sm whitespace-pre-wrap break-words">
+                {message.content}
+              </p>
             </div>
           </div>
         ))}
@@ -246,33 +262,33 @@ export function AiChatTask({
 
       {/* Проверка грамматики */}
       {grammarCorrection && (
-        <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 p-4">
-          <h4 className="mb-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
+        <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 p-3">
+          <h4 className="mb-2 text-xs font-semibold text-gray-900 dark:text-gray-100">
             {t("messages.aiChatGrammarTitle")}
           </h4>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-1.5 text-xs">
             <div>
               <span className="font-medium text-gray-600 dark:text-gray-400">
-                {t("messages.aiChatGrammarOriginal")}
+                {t("messages.aiChatGrammarOriginal")}{" "}
               </span>
-              <p className="text-gray-900 dark:text-gray-100">
+              <p className="mt-0.5 text-gray-900 dark:text-gray-100">
                 {grammarCorrection.original}
               </p>
             </div>
             <div>
               <span className="font-medium text-gray-600 dark:text-gray-400">
-                {t("messages.aiChatGrammarCorrected")}
+                {t("messages.aiChatGrammarCorrected")}{" "}
               </span>
-              <p className="text-green-600 dark:text-green-400">
+              <p className="mt-0.5 text-green-600 dark:text-green-400">
                 {grammarCorrection.corrected}
               </p>
             </div>
             {grammarCorrection.explanation && (
               <div>
                 <span className="font-medium text-gray-600 dark:text-gray-400">
-                  {t("messages.aiChatGrammarExplanation")}
+                  {t("messages.aiChatGrammarExplanation")}{" "}
                 </span>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="mt-0.5 text-gray-700 dark:text-gray-300">
                   {grammarCorrection.explanation}
                 </p>
               </div>
@@ -283,49 +299,59 @@ export function AiChatTask({
 
       {/* Ошибка */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-3">
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <div className="rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-2">
+          <p className="text-xs text-red-600 dark:text-red-400">{error}</p>
         </div>
       )}
 
-      {/* Поле ввода */}
+      {/* Поле ввода и кнопки */}
       {!isCompleted && (
-        <div className="flex gap-2">
-          <Input
-            ref={inputRef}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder={t("messages.aiChatPlaceholderInput")}
-            disabled={isSending || isCheckingGrammar}
-            className="flex-1"
-          />
-          <Button
-            onClick={handleCheckGrammar}
-            variant="outline"
-            disabled={!inputValue.trim() || isSending || isCheckingGrammar}
-            size="sm"
-          >
-            {isCheckingGrammar ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              t("messages.aiChatCheckGrammar")
-            )}
-          </Button>
-          <Button
-            onClick={handleSend}
-            disabled={!inputValue.trim() || isSending || isCheckingGrammar}
-            size="sm"
-          >
-            {isSending ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <>
-                <Send className="mr-2 size-4" />
-                {t("messages.aiChatSend")}
-              </>
-            )}
-          </Button>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <Input
+              ref={inputRef}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={t("messages.aiChatPlaceholderInput")}
+              disabled={isSending || isCheckingGrammar}
+              className="min-w-0 flex-1"
+            />
+            <Button
+              onClick={handleCheckGrammar}
+              variant="outline"
+              disabled={!inputValue.trim() || isSending || isCheckingGrammar}
+              size="sm"
+              className="shrink-0"
+              title={t("messages.aiChatCheckGrammar")}
+            >
+              {isCheckingGrammar ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <span className="hidden text-xs sm:inline">
+                  {t("messages.aiChatCheckGrammar")}
+                </span>
+              )}
+              <span className="sm:hidden">✓</span>
+            </Button>
+            <Button
+              onClick={handleSend}
+              disabled={!inputValue.trim() || isSending || isCheckingGrammar}
+              size="sm"
+              className="shrink-0"
+            >
+              {isSending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <>
+                  <Send className="size-4 sm:mr-1" />
+                  <span className="hidden text-xs sm:inline">
+                    {t("messages.aiChatSend")}
+                  </span>
+                </>
+              )}
+            </Button>
+          </div>
         </div>
       )}
 
@@ -333,8 +359,9 @@ export function AiChatTask({
       {!isCompleted && messages.length >= 2 && (
         <Button
           onClick={handleComplete}
-          className="w-full"
+          className="w-full text-sm"
           disabled={isSending || isCheckingGrammar}
+          size="sm"
         >
           <CheckCircle2 className="mr-2 size-4" />
           {t("messages.aiChatComplete")}
@@ -343,9 +370,9 @@ export function AiChatTask({
 
       {/* Сообщение о завершении */}
       {isCompleted && (
-        <div className="flex items-center justify-center gap-2 rounded-lg bg-green-50 dark:bg-green-900/20 p-4">
-          <CheckCircle2 className="size-6 text-green-600 dark:text-green-400" />
-          <span className="text-lg font-semibold text-green-600 dark:text-green-400">
+        <div className="flex items-center justify-center gap-2 rounded-lg bg-green-50 dark:bg-green-900/20 p-3">
+          <CheckCircle2 className="size-5 text-green-600 dark:text-green-400" />
+          <span className="text-base font-semibold text-green-600 dark:text-green-400">
             {t("messages.success", { points: task.points || 0 })}
           </span>
         </div>

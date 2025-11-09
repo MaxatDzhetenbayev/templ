@@ -409,7 +409,7 @@ export function LevelStepper({
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[95vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>
             {level.title || `Уровень`}
@@ -479,7 +479,9 @@ export function LevelStepper({
         ) : (
           <>
             {/* Current Task */}
-            <div className="py-4">{renderTaskContent()}</div>
+            <div className="flex-1 min-h-0 py-4 overflow-y-auto">
+              {renderTaskContent()}
+            </div>
 
             {/* Task Footer */}
             <DialogFooter>
