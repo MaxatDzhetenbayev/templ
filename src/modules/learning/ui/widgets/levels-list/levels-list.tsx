@@ -70,8 +70,6 @@ export function LevelsList(): React.JSX.Element {
     }
 
     initializedRef.current = true;
-    // Включаем modules и userProgress в зависимости, но ref предотвращает повторную инициализацию
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modules.length, userProgress, setModules, setUserProgress]);
 
   // Находим нужный модуль при изменении moduleId или modules
@@ -168,6 +166,12 @@ export function LevelsList(): React.JSX.Element {
     // Передаем список выполненных задач, чтобы убедиться, что все они сохранены
     // НЕ закрываем модальное окно - оно закроется при нажатии кнопки "Закрыть"
     completeLevel(moduleId, completedLevelId, completedTaskIds);
+
+    // Валидируем прогресс после завершения уровня, чтобы убедиться,
+    // что модуль правильно помечается как завершенный
+    setTimeout(() => {
+      validateProgress();
+    }, 100);
   };
 
   const handleStepperClose = () => {
