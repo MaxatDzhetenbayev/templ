@@ -1,17 +1,21 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
 import { useLearningStore } from "../../../model/learning.store";
 import { isModuleAvailable } from "../../../utils/learning.utils";
-import { getMockUserProgress, mockModules } from "../../../utils/mock-data";
+import {
+  getLocalizedModules,
+  getMockUserProgress,
+} from "../../../utils/mock-data";
 import { ModuleIcon } from "../../components/module-icon";
 
 /**
  * Виджет списка модулей обучения
  */
 export function ModulesList(): React.JSX.Element {
+  const locale = useLocale();
   const t = useTranslations("learning");
   const { modules, userProgress, setModules, setUserProgress } =
     useLearningStore();
@@ -21,13 +25,16 @@ export function ModulesList(): React.JSX.Element {
   useEffect(() => {
     setIsMounted(true);
     if (modules.length === 0) {
-      setModules(mockModules);
+      const localizedModules = getLocalizedModules(
+        locale as "ru" | "en" | "kk"
+      );
+      setModules(localizedModules);
     }
     if (!userProgress) {
       const progress = getMockUserProgress();
       setUserProgress(progress);
     }
-  }, [modules.length, userProgress, setModules, setUserProgress]);
+  }, [modules.length, userProgress, setModules, setUserProgress, locale]);
 
   // Предотвращаем гидратацию, пока данные не загружены
   if (!isMounted) {

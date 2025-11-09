@@ -3,8 +3,8 @@
 import { useLearningStore } from "@/modules/learning/model/learning.store";
 import { getOverallProgress } from "@/modules/learning/utils/learning.utils";
 import {
+  getLocalizedModules,
   getMockUserProgress,
-  mockModules,
 } from "@/modules/learning/utils/mock-data";
 import { Link, useRouter } from "@/shared/configs/i18/navigation";
 import {
@@ -13,6 +13,7 @@ import {
   type MockUser,
 } from "@/shared/lib/mock-auth";
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
 // Брендовая палитра (светло-голубая)
@@ -27,7 +28,10 @@ const brand = {
  * @returns JSX элемент с шапкой приложения
  */
 export function Header(): React.JSX.Element {
+  const locale = useLocale();
   const router = useRouter();
+  const t = useTranslations("learning");
+  const tCommon = useTranslations();
   const [user, setUser] = useState<MockUser | null>(null);
   const { modules, userProgress, setModules, setUserProgress } =
     useLearningStore();
@@ -41,16 +45,22 @@ export function Header(): React.JSX.Element {
 
     // Инициализируем модули и прогресс, если они еще не загружены
     if (modules.length === 0) {
-      setModules(mockModules);
+      const localizedModules = getLocalizedModules(
+        locale as "ru" | "en" | "kk"
+      );
+      setModules(localizedModules);
     }
     if (!userProgress) {
       const progress = getMockUserProgress();
       setUserProgress(progress);
     }
-  }, [modules.length, userProgress, setModules, setUserProgress]);
+  }, [modules.length, userProgress, setModules, setUserProgress, locale]);
 
   // Используем модули из store или моковые данные
-  const allModules = modules.length > 0 ? modules : mockModules;
+  const allModules =
+    modules.length > 0
+      ? modules
+      : getLocalizedModules(locale as "ru" | "en" | "kk");
   const overallProgress = getOverallProgress(allModules, userProgress);
   const totalPoints = userProgress?.totalPoints || 0;
 
@@ -91,7 +101,7 @@ export function Header(): React.JSX.Element {
                   <span className="text-sm font-medium text-white/90">
                     {totalPoints}
                   </span>
-                  <span className="text-xs text-white/60">баллов</span>
+                  <span className="text-xs text-white/60">{t("points")}</span>
                 </div>
 
                 {/* Прогресс-бар */}
@@ -125,7 +135,7 @@ export function Header(): React.JSX.Element {
                 onClick={handleLogout}
                 className="rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/90 hover:bg-white/10 transition"
               >
-                Выйти
+                {tCommon("logout")}
               </button>
             </>
           )}

@@ -1,6 +1,7 @@
 {
   "welcome": "Welcome",
   "goodbye": "Goodbye",
+  "logout": "Logout",
   "landing": {
     "hero": {
       "title": "Learn Kazakh language easily and effectively",
@@ -137,6 +138,12 @@
     "title": "Learning modules",
     "subtitle": "Choose a module and start learning Kazakh",
     "loading": "Loading...",
+    "level": "Level",
+    "task": "Task",
+    "tasksCount": "tasks",
+    "backToModules": "Back to modules",
+    "taskNumber": "Task {current} of {total}",
+    "moduleNotFound": "Module not found",
     "tasks": {
       "missingWord": "Missing word",
       "listening": "Listening",

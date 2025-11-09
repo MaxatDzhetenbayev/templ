@@ -22,13 +22,11 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { cn } from "@/shared/lib/utils";
-import { useRouter } from "@i18/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { mockLogin, mockRegister } from "../lib/mock-auth";
 
 export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [login, setLogin] = useState("");
@@ -50,7 +48,11 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
       if (isLogin) {
         const user = await mockLogin(login, password);
         console.log("Login success:", user);
-        router.push("/modules");
+        // Перенаправляем на правильный locale в зависимости от языка пользователя
+        const userLocale =
+          user.language === "kk" ? "kk" : user.language === "en" ? "en" : "ru";
+        // Используем window.location для полного перенаправления на другой locale
+        window.location.href = `/${userLocale}/modules`;
       } else {
         const user = await mockRegister(name, login, password, language);
         console.log("Register success:", user);

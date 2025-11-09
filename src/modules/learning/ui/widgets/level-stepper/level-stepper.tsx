@@ -16,7 +16,10 @@ import {
 import { cn } from "@/shared/lib/utils";
 
 import type { Level, Task } from "../../../schemas/learning.schema";
-import { checkAnswer } from "../../../utils/learning.utils";
+import {
+  checkAnswer,
+  getTaskTypeTranslationKey,
+} from "../../../utils/learning.utils";
 import { AiChatTask } from "../../components/ai-chat-task";
 
 export interface LevelStepperProps {
@@ -412,15 +415,18 @@ export function LevelStepper({
       <DialogContent className="max-w-4xl max-h-[95vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>
-            {level.title || `Уровень`}
+            {level.title || t("level")}
             {!isLevelCompleted &&
               currentTask &&
-              ` - ${t(`taskTitles.${currentTask.type}`)}`}
+              ` - ${t(`taskTitles.${getTaskTypeTranslationKey(currentTask.type)}`)}`}
           </DialogTitle>
           <DialogDescription>
             {isLevelCompleted
               ? t("messages.allTasksCompleted")
-              : `Задание ${currentTaskIndex + 1} из ${totalTasks}`}
+              : t("taskNumber", {
+                  current: currentTaskIndex + 1,
+                  total: totalTasks,
+                })}
           </DialogDescription>
         </DialogHeader>
 

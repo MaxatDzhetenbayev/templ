@@ -4,7 +4,24 @@ import type {
   Module,
   ModuleProgress,
   Task,
+  TaskType,
 } from "../schemas/learning.schema";
+
+/**
+ * Маппинг типов задач на ключи переводов
+ *
+ * @param taskType - Тип задачи (например, "missing-word")
+ * @returns Ключ перевода (например, "missingWord")
+ */
+export const getTaskTypeTranslationKey = (taskType: TaskType): string => {
+  const mapping: Record<TaskType, string> = {
+    "missing-word": "missingWord",
+    listening: "listening",
+    riddle: "riddle",
+    "ai-chat": "aiChat",
+  };
+  return mapping[taskType] || taskType;
+};
 
 /**
  * Получает прогресс по модулю

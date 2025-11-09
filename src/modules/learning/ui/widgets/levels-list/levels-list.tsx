@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, Check, Lock } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -17,7 +17,10 @@ import {
   getModuleProgress,
   isLevelAvailable,
 } from "../../../utils/learning.utils";
-import { getMockUserProgress, mockModules } from "../../../utils/mock-data";
+import {
+  getLocalizedModules,
+  getMockUserProgress,
+} from "../../../utils/mock-data";
 import { getNextLevelTasks } from "../../../utils/task-randomizer";
 import { LevelStepper } from "../../widgets";
 
@@ -25,6 +28,7 @@ import { LevelStepper } from "../../widgets";
  * Виджет списка уровней модуля
  */
 export function LevelsList(): React.JSX.Element {
+  const locale = useLocale();
   const t = useTranslations("learning");
   const params = useParams();
   const router = useRouter();
@@ -60,7 +64,10 @@ export function LevelsList(): React.JSX.Element {
 
     // Загружаем модули, если они еще не загружены
     if (modules.length === 0) {
-      setModules(mockModules);
+      const localizedModules = getLocalizedModules(
+        locale as "ru" | "en" | "kk"
+      );
+      setModules(localizedModules);
     }
 
     // Загружаем прогресс, если он еще не загружен
@@ -70,7 +77,7 @@ export function LevelsList(): React.JSX.Element {
     }
 
     initializedRef.current = true;
-  }, [modules.length, userProgress, setModules, setUserProgress]);
+  }, [modules.length, userProgress, setModules, setUserProgress, locale]);
 
   // Находим нужный модуль при изменении moduleId или modules
   useEffect(() => {
@@ -79,11 +86,14 @@ export function LevelsList(): React.JSX.Element {
     const foundModule = modules.find((m) => m.id === moduleId);
     if (foundModule) {
       setModule(foundModule);
-    } else if (mockModules.length > 0) {
-      const mockModule = mockModules.find((m) => m.id === moduleId);
+    } else {
+      const localizedModules = getLocalizedModules(
+        locale as "ru" | "en" | "kk"
+      );
+      const mockModule = localizedModules.find((m) => m.id === moduleId);
       if (mockModule) setModule(mockModule);
     }
-  }, [moduleId, modules, isMounted]);
+  }, [moduleId, modules, isMounted, locale]);
 
   // Валидируем прогресс после загрузки модулей и прогресса (только один раз)
   useEffect(() => {
@@ -245,7 +255,7 @@ export function LevelsList(): React.JSX.Element {
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-500 via-purple-600 to-blue-700">
         <div className="text-center">
           <p className="text-white text-xl">
-            {!isMounted ? t("loading") || "Загрузка..." : "Модуль не найден"}
+            {!isMounted ? t("loading") : t("moduleNotFound")}
           </p>
         </div>
       </div>
@@ -264,7 +274,7 @@ export function LevelsList(): React.JSX.Element {
             className="mb-4 text-white hover:bg-white/20"
           >
             <ArrowLeft className="mr-2 size-4" />
-            Назад к модулям
+            {t("backToModules")}
           </Button>
           <h1 className="mb-2 text-3xl font-bold text-white">{module.title}</h1>
           <p className="text-white/90">{module.description}</p>
@@ -316,10 +326,10 @@ export function LevelsList(): React.JSX.Element {
                   </div>
                   <div>
                     <p className="font-semibold">
-                      {level.title || `Уровень ${index + 1}`}
+                      {level.title || `${t("level")} ${index + 1}`}
                     </p>
                     <p className="text-sm opacity-80">
-                      {level.tasksPerLevel} заданий
+                      {level.tasksPerLevel} {t("tasksCount")}
                     </p>
                   </div>
                 </div>

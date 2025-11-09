@@ -1,14 +1,64 @@
 import { getCurrentUser } from "@/shared/lib/mock-auth";
+import type { LocaleType } from "@/shared/types/locale.type";
 import type { Module, UserProgress } from "../schemas/learning.schema";
 
 /**
- * Моковые данные для модулей обучения с уровнями
+ * Мультиязычные данные для модулей
  */
-export const mockModules: Module[] = [
+interface LocalizedText {
+  ru: string;
+  en: string;
+  kk: string;
+}
+
+interface LocalizedModuleData {
+  id: string;
+  title: LocalizedText;
+  description: LocalizedText;
+  icon: string;
+  color: string;
+  order: number;
+  levels: Array<{
+    id: string;
+    moduleId: string;
+    order: number;
+    title?: LocalizedText;
+    tasksPerLevel: number;
+    taskPool: Array<{
+      id: string;
+      type: "missing-word" | "listening" | "riddle" | "ai-chat";
+      sentence?: string;
+      audioUrl?: string;
+      question?: LocalizedText;
+      riddle?: LocalizedText;
+      topic?: LocalizedText;
+      options?: Array<{
+        id: string;
+        text: string;
+        isCorrect: boolean;
+      }>;
+      correctAnswerId?: string;
+      points: number;
+    }>;
+  }>;
+}
+
+/**
+ * Моковые данные для модулей обучения с уровнями (мультиязычные)
+ */
+const mockModulesData: LocalizedModuleData[] = [
   {
     id: "module-1",
-    title: "Приветствия и знакомство",
-    description: "Изучите основы приветствия и знакомства на казахском языке",
+    title: {
+      ru: "Приветствия и знакомство",
+      en: "Greetings and acquaintance",
+      kk: "Сәлемдесу және танысу",
+    },
+    description: {
+      ru: "Изучите основы приветствия и знакомства на казахском языке",
+      en: "Learn the basics of greetings and acquaintance in Kazakh",
+      kk: "Қазақ тіліндегі сәлемдесу және танысу негіздерін үйреніңіз",
+    },
     icon: "👋",
     color: "purple",
     order: 1,
@@ -49,7 +99,11 @@ export const mockModules: Module[] = [
             id: "task-1-1-3",
             type: "listening",
             audioUrl: "/audio/greetings.mp3",
-            question: "Выберите правильный вариант приветствия",
+            question: {
+              ru: "Выберите правильный вариант приветствия",
+              en: "Choose the correct greeting option",
+              kk: "Дұрыс сәлемдесу нұсқасын таңдаңыз",
+            },
             options: [
               { id: "opt-1", text: "Сәлеметсіз бе", isCorrect: true },
               { id: "opt-2", text: "Сау болыңыз", isCorrect: false },
@@ -62,7 +116,11 @@ export const mockModules: Module[] = [
           {
             id: "task-1-1-4",
             type: "riddle",
-            riddle: "Это слово используется для приветствия утром",
+            riddle: {
+              ru: "Это слово используется для приветствия утром",
+              en: "This word is used for greeting in the morning",
+              kk: "Бұл сөз таңертең сәлемдесу үшін қолданылады",
+            },
             options: [
               { id: "opt-1", text: "Қайырлы таң", isCorrect: true },
               { id: "opt-2", text: "Қайырлы кеш", isCorrect: false },
@@ -88,7 +146,11 @@ export const mockModules: Module[] = [
           {
             id: "task-1-1-6",
             type: "ai-chat",
-            topic: "Приветствия и знакомство",
+            topic: {
+              ru: "Приветствия и знакомство",
+              en: "Greetings and acquaintance",
+              kk: "Сәлемдесу және танысу",
+            },
             points: 25,
           },
         ],
@@ -116,7 +178,11 @@ export const mockModules: Module[] = [
             id: "task-1-2-2",
             type: "listening",
             audioUrl: "/audio/greetings-2.mp3",
-            question: "Выберите правильный ответ на вопрос 'Как дела?'",
+            question: {
+              ru: "Выберите правильный ответ на вопрос 'Как дела?'",
+              en: "Choose the correct answer to the question 'How are you?'",
+              kk: "'Қалайсыз?' сұрағына дұрыс жауапты таңдаңыз",
+            },
             options: [
               { id: "opt-1", text: "Рақмет, жақсы", isCorrect: true },
               { id: "opt-2", text: "Сау болыңыз", isCorrect: false },
@@ -129,7 +195,11 @@ export const mockModules: Module[] = [
           {
             id: "task-1-2-3",
             type: "riddle",
-            riddle: "Это слово используется для прощания на казахском языке",
+            riddle: {
+              ru: "Это слово используется для прощания на казахском языке",
+              en: "This word is used for saying goodbye in Kazakh",
+              kk: "Бұл сөз қазақ тілінде қоштасу үшін қолданылады",
+            },
             options: [
               { id: "opt-1", text: "Сау болыңыз", isCorrect: true },
               { id: "opt-2", text: "Сәлеметсіз бе", isCorrect: false },
@@ -142,7 +212,11 @@ export const mockModules: Module[] = [
           {
             id: "task-1-2-4",
             type: "ai-chat",
-            topic: "Приветствия и знакомство",
+            topic: {
+              ru: "Приветствия и знакомство",
+              en: "Greetings and acquaintance",
+              kk: "Сәлемдесу және танысу",
+            },
             points: 25,
           },
         ],
@@ -151,8 +225,16 @@ export const mockModules: Module[] = [
   },
   {
     id: "module-2",
-    title: "Семья и друзья",
-    description: "Изучите слова и фразы о семье и друзьях",
+    title: {
+      ru: "Семья и друзья",
+      en: "Family and friends",
+      kk: "Отбасы және достар",
+    },
+    description: {
+      ru: "Изучите слова и фразы о семье и друзьях",
+      en: "Learn words and phrases about family and friends",
+      kk: "Отбасы және достар туралы сөздер мен сөйлемдерді үйреніңіз",
+    },
     icon: "👨‍👩‍👧‍👦",
     color: "yellow",
     order: 2,
@@ -180,7 +262,11 @@ export const mockModules: Module[] = [
             id: "task-2-1-2",
             type: "listening",
             audioUrl: "/audio/family.mp3",
-            question: "Выберите правильный вариант",
+            question: {
+              ru: "Выберите правильный вариант",
+              en: "Choose the correct option",
+              kk: "Дұрыс нұсқаны таңдаңыз",
+            },
             options: [
               { id: "opt-1", text: "Әке", isCorrect: true },
               { id: "opt-2", text: "Ана", isCorrect: false },
@@ -193,7 +279,11 @@ export const mockModules: Module[] = [
           {
             id: "task-2-1-3",
             type: "riddle",
-            riddle: "Это слово означает 'мама' на казахском",
+            riddle: {
+              ru: "Это слово означает 'мама' на казахском",
+              en: "This word means 'mom' in Kazakh",
+              kk: "Бұл сөз қазақ тілінде 'ана' дегенді білдіреді",
+            },
             options: [
               { id: "opt-1", text: "Әке", isCorrect: false },
               { id: "opt-2", text: "Ана", isCorrect: true },
@@ -219,7 +309,11 @@ export const mockModules: Module[] = [
           {
             id: "task-2-1-5",
             type: "ai-chat",
-            topic: "Семья и друзья",
+            topic: {
+              ru: "Семья и друзья",
+              en: "Family and friends",
+              kk: "Отбасы және достар",
+            },
             points: 25,
           },
         ],
@@ -228,8 +322,16 @@ export const mockModules: Module[] = [
   },
   {
     id: "module-3",
-    title: "Еда и напитки",
-    description: "Изучите названия еды и напитков на казахском",
+    title: {
+      ru: "Еда и напитки",
+      en: "Food and drinks",
+      kk: "Тағам және сусындар",
+    },
+    description: {
+      ru: "Изучите названия еды и напитков на казахском",
+      en: "Learn the names of food and drinks in Kazakh",
+      kk: "Қазақ тіліндегі тағам мен сусындардың атауларын үйреніңіз",
+    },
     icon: "🍔",
     color: "orange",
     order: 3,
@@ -257,7 +359,11 @@ export const mockModules: Module[] = [
             id: "task-3-1-2",
             type: "listening",
             audioUrl: "/audio/food.mp3",
-            question: "Выберите правильный вариант",
+            question: {
+              ru: "Выберите правильный вариант",
+              en: "Choose the correct option",
+              kk: "Дұрыс нұсқаны таңдаңыз",
+            },
             options: [
               { id: "opt-1", text: "Ет", isCorrect: true },
               { id: "opt-2", text: "Балық", isCorrect: false },
@@ -270,7 +376,11 @@ export const mockModules: Module[] = [
           {
             id: "task-3-1-3",
             type: "riddle",
-            riddle: "Это слово означает 'хлеб' на казахском",
+            riddle: {
+              ru: "Это слово означает 'хлеб' на казахском",
+              en: "This word means 'bread' in Kazakh",
+              kk: "Бұл сөз қазақ тілінде 'нан' дегенді білдіреді",
+            },
             options: [
               { id: "opt-1", text: "Нан", isCorrect: true },
               { id: "opt-2", text: "Сүт", isCorrect: false },
@@ -296,7 +406,11 @@ export const mockModules: Module[] = [
           {
             id: "task-3-1-5",
             type: "ai-chat",
-            topic: "Еда и напитки",
+            topic: {
+              ru: "Еда и напитки",
+              en: "Food and drinks",
+              kk: "Тағам және сусындар",
+            },
             points: 25,
           },
         ],
@@ -304,6 +418,91 @@ export const mockModules: Module[] = [
     ],
   },
 ];
+
+/**
+ * Преобразует мультиязычные данные модулей в локализованные модули
+ *
+ * @param locale - Локаль для получения переводов
+ * @returns Массив локализованных модулей
+ */
+export const getLocalizedModules = (locale: LocaleType[number]): Module[] => {
+  return mockModulesData.map((moduleData) => ({
+    id: moduleData.id,
+    title: moduleData.title[locale] || moduleData.title.ru,
+    description: moduleData.description[locale] || moduleData.description.ru,
+    icon: moduleData.icon,
+    color: moduleData.color,
+    order: moduleData.order,
+    levels: moduleData.levels.map((levelData) => ({
+      id: levelData.id,
+      moduleId: levelData.moduleId,
+      order: levelData.order,
+      title: levelData.title
+        ? levelData.title[locale] || levelData.title.ru
+        : undefined,
+      tasksPerLevel: levelData.tasksPerLevel,
+      taskPool: levelData.taskPool.map((taskData) => {
+        if (taskData.type === "missing-word") {
+          return {
+            id: taskData.id,
+            type: "missing-word" as const,
+            sentence: taskData.sentence || "",
+            options: taskData.options || [],
+            correctAnswerId: taskData.correctAnswerId || "",
+            points: taskData.points,
+          };
+        }
+
+        if (taskData.type === "listening") {
+          return {
+            id: taskData.id,
+            type: "listening" as const,
+            audioUrl: taskData.audioUrl || "",
+            question: taskData.question
+              ? taskData.question[locale] || taskData.question.ru
+              : "",
+            options: taskData.options || [],
+            correctAnswerId: taskData.correctAnswerId || "",
+            points: taskData.points,
+          };
+        }
+
+        if (taskData.type === "riddle") {
+          return {
+            id: taskData.id,
+            type: "riddle" as const,
+            riddle: taskData.riddle
+              ? taskData.riddle[locale] || taskData.riddle.ru
+              : "",
+            options: taskData.options || [],
+            correctAnswerId: taskData.correctAnswerId || "",
+            points: taskData.points,
+          };
+        }
+
+        if (taskData.type === "ai-chat") {
+          return {
+            id: taskData.id,
+            type: "ai-chat" as const,
+            topic: taskData.topic
+              ? taskData.topic[locale] || taskData.topic.ru
+              : "",
+            points: taskData.points,
+          };
+        }
+
+        // Fallback (не должно произойти)
+        throw new Error(`Unknown task type: ${taskData.type}`);
+      }),
+    })),
+  }));
+};
+
+/**
+ * @deprecated Используйте getLocalizedModules вместо этого
+ * Моковые данные для модулей обучения с уровнями
+ */
+export const mockModules: Module[] = getLocalizedModules("ru");
 
 const PROGRESS_STORAGE_KEY = "learning_user_progress";
 
