@@ -1,9 +1,9 @@
 import type {
-	Level,
-	LevelProgress,
-	Module,
-	ModuleProgress,
-	Task
+  Level,
+  LevelProgress,
+  Module,
+  ModuleProgress,
+  Task,
 } from "../schemas/learning.schema";
 
 /**
@@ -71,10 +71,7 @@ export const getTaskFromLevel = (
  * @param selectedAnswerId - Выбранный ответ
  * @returns true, если ответ правильный
  */
-export const checkAnswer = (
-  task: Task,
-  selectedAnswerId: string
-): boolean => {
+export const checkAnswer = (task: Task, selectedAnswerId: string): boolean => {
   if (task.type === "ai-chat") {
     // Для чата с ИИ всегда возвращаем true (будет реализовано позже)
     return true;
@@ -150,7 +147,10 @@ export const isLevelAvailable = (
   if (!moduleProgress) return false;
 
   // Если нет массива levelsProgress, уровень недоступен
-  if (!moduleProgress.levelsProgress || moduleProgress.levelsProgress.length === 0) {
+  if (
+    !moduleProgress.levelsProgress ||
+    moduleProgress.levelsProgress.length === 0
+  ) {
     return false;
   }
 
@@ -199,4 +199,70 @@ export const getModuleProgressPercent = (
   ).length;
 
   return Math.round((completedLevels / module.levels.length) * 100);
+};
+
+/**
+ * Вычисляет общий прогресс по всем модулям и заданиям
+ *
+ * @param modules - Все модули
+ * @param userProgress - Прогресс пользователя
+ * @returns Объект с общим количеством заданий, завершенными заданиями и процентом
+ */
+export const getOverallProgress = (
+  modules: Module[],
+  userProgress: { modulesProgress: ModuleProgress[] } | null
+): {
+  totalTasks: number;
+  completedTasks: number;
+  percent: number;
+} => {
+  if (!userProgress || modules.length === 0) {
+    return {
+      totalTasks: 0,
+      completedTasks: 0,
+      percent: 0,
+    };
+  }
+
+  // Подсчитываем общее количество заданий во всех модулях
+  let totalTasks = 0;
+  let completedTasks = 0;
+
+  modules.forEach((module) => {
+    module.levels.forEach((level) => {
+      // Добавляем количество заданий на уровень
+      totalTasks += level.tasksPerLevel;
+
+      // Находим прогресс по этому модулю
+      const moduleProgress = userProgress.modulesProgress.find(
+        (mp) => mp.moduleId === module.id
+      );
+
+      if (moduleProgress) {
+        // Находим прогресс по этому уровню
+        const levelProgress = moduleProgress.levelsProgress.find(
+          (lp) => lp.levelId === level.id
+        );
+
+        if (levelProgress) {
+          // Подсчитываем завершенные задания в этом уровне
+          const completedInLevel = levelProgress.tasksProgress.filter(
+            (tp) => tp.status === "completed"
+          ).length;
+
+          // Добавляем количество завершенных заданий (но не больше, чем tasksPerLevel)
+          completedTasks += Math.min(completedInLevel, level.tasksPerLevel);
+        }
+      }
+    });
+  });
+
+  const percent =
+    totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+  return {
+    totalTasks,
+    completedTasks,
+    percent,
+  };
 };

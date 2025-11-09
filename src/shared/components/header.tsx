@@ -1,5 +1,11 @@
 "use client";
 
+import { useLearningStore } from "@/modules/learning/model/learning.store";
+import { getOverallProgress } from "@/modules/learning/utils/learning.utils";
+import {
+  getMockUserProgress,
+  mockModules,
+} from "@/modules/learning/utils/mock-data";
 import { Link, useRouter } from "@/shared/configs/i18/navigation";
 import {
   getCurrentUser,
@@ -23,12 +29,30 @@ const brand = {
 export function Header(): React.JSX.Element {
   const router = useRouter();
   const [user, setUser] = useState<MockUser | null>(null);
+  const { modules, userProgress, setModules, setUserProgress } =
+    useLearningStore();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     // Получаем текущего пользователя при монтировании
     const currentUser = getCurrentUser();
     setUser(currentUser);
-  }, []);
+    setIsMounted(true);
+
+    // Инициализируем модули и прогресс, если они еще не загружены
+    if (modules.length === 0) {
+      setModules(mockModules);
+    }
+    if (!userProgress) {
+      const progress = getMockUserProgress();
+      setUserProgress(progress);
+    }
+  }, [modules.length, userProgress, setModules, setUserProgress]);
+
+  // Используем модули из store или моковые данные
+  const allModules = modules.length > 0 ? modules : mockModules;
+  const overallProgress = getOverallProgress(allModules, userProgress);
+  const totalPoints = userProgress?.totalPoints || 0;
 
   /**
    * Обработчик выхода из системы
@@ -58,8 +82,39 @@ export function Header(): React.JSX.Element {
         </Link>
 
         <div className="flex items-center gap-4">
-          {user && (
+          {user && isMounted && (
             <>
+              {/* Баллы и прогресс-бар */}
+              <div className="hidden items-center gap-4 md:flex">
+                {/* Баллы */}
+                <div className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 ring-1 ring-inset ring-white/10">
+                  <span className="text-sm font-medium text-white/90">
+                    {totalPoints}
+                  </span>
+                  <span className="text-xs text-white/60">баллов</span>
+                </div>
+
+                {/* Прогресс-бар */}
+                <div className="flex min-w-[120px] flex-col gap-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-white/70">
+                      {overallProgress.completedTasks}/
+                      {overallProgress.totalTasks}
+                    </span>
+                    <span className="text-white/70">
+                      {overallProgress.percent}%
+                    </span>
+                  </div>
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-300"
+                      style={{ width: `${overallProgress.percent}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Аватар и имя */}
               <div className="hidden items-center gap-3 md:flex">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-400/10 text-sm font-medium text-white ring-1 ring-inset ring-sky-400/20">
                   {user.name[0].toUpperCase()}
