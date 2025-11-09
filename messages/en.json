@@ -101,137 +101,305 @@
       },
       "countries": {
         "value": "45+",
-        "label": "Countries around the world"
-      }
-    },
-    "cta": {
-      "title": "Ready to start?",
-      "subtitle": "Join thousands of students who are already learning Kazakh",
-      "button": "Start for free"
-    },
-    "footer": {
-      "about": {
-        "title": "About us",
-        "description": "Platform for learning Kazakh language with modern teaching methods"
-      },
-      "links": {
-        "title": "Links",
-        "courses": "Courses",
-        "pricing": "Pricing",
-        "about": "About us"
-      },
-      "support": {
-        "title": "Support",
-        "help": "Help",
-        "contact": "Contact"
-      },
-      "social": {
-        "title": "Social networks",
-        "facebook": "Facebook",
-        "instagram": "Instagram",
-        "telegram": "Telegram"
-      },
-      "copyright": "© 2024 Kazakh language learning. All rights reserved."
-    }
-  },
-  "learning": {
-    "title": "Learning modules",
-    "subtitle": "Choose a module and start learning Kazakh",
-    "loading": "Loading...",
-    "level": "Level",
-    "task": "Task",
-    "tasksCount": "tasks",
-    "backToModules": "Back to modules",
-    "taskNumber": "Task {current} of {total}",
-    "moduleNotFound": "Module not found",
-    "tasks": {
-      "missingWord": "Missing word",
-      "listening": "Listening",
-      "riddle": "Riddle",
-      "aiChat": "AI Chat"
-    },
-    "taskExplanations": {
-      "missingWord": "Choose the correct word to fill in the blank in the sentence",
-      "listening": "Listen to the audio and choose the correct answer option",
-      "riddle": "Solve the riddle and choose the correct answer in Kazakh",
-      "aiChat": "Chat with AI on the module topic to practice conversational skills"
-    },
-    "points": "points",
-    "totalPoints": "Total points",
-    "taskTitles": {
-      "missingWord": "Missing word",
-      "listening": "Listening",
-      "riddle": "Riddle",
-      "aiChat": "AI Chat"
-    },
-    "buttons": {
-      "check": "Check",
-      "close": "Close"
-    },
-    "messages": {
-      "success": "Excellent! You earned {points} points!",
-      "error": "Unfortunately, the answer is incorrect. Please try again!",
-      "levelCompleted": "Level completed!",
-      "levelCompletedDescription": "Congratulations! You have successfully completed all tasks in the level.",
-      "allTasksCompleted": "All tasks completed!",
-      "audioHint": "Click the button to listen to the audio",
-      "selectAnswer": "Choose the correct answer in Kazakh:",
-      "aiChatPlaceholder": "AI chat feature will be implemented later",
-      "aiChatDescription": "Practice conversational skills by chatting with AI on the module topic",
-      "aiChatLoading": "Loading topic...",
-      "aiChatError": "Error loading topic. Please try again.",
-      "aiChatSend": "Send",
-      "aiChatPlaceholderInput": "Type your message in Kazakh...",
-      "aiChatSending": "Sending...",
-      "aiChatCheckGrammar": "Check grammar",
-      "aiChatComplete": "Complete task",
-      "aiChatGrammarTitle": "Grammar check",
-      "aiChatGrammarOriginal": "Original:",
-      "aiChatGrammarCorrected": "Corrected:",
-      "aiChatGrammarExplanation": "Explanation:"
-    }
-  },
-  "dashboards": {
-    "title": "Analytics and Dashboards",
-    "subtitle": "Analyze statistics of all users and track overall platform activity",
-    "stats": {
-      "totalUsers": "Total Users",
-      "activeUsers": "Active Users",
-      "newRegistrations": "New Registrations",
-      "studyTime": "Study Time"
-    },
-    "charts": {
-      "days": {
-        "monday": "Mon",
-        "tuesday": "Tue",
-        "wednesday": "Wed",
-        "thursday": "Thu",
-        "friday": "Fri",
-        "saturday": "Sat",
-        "sunday": "Sun"
-      },
-      "months": {
-        "january": "Jan",
-        "february": "Feb",
-        "march": "Mar",
-        "april": "Apr",
-        "may": "May",
-        "june": "Jun"
-      },
-      "weeklyActivity": {
-        "title": "Weekly Activity",
-        "lessons": "Lessons"
-      },
-      "progress": {
-        "title": "Learning Progress",
-        "completed": "Completed",
-        "inProgress": "In Progress",
-        "notStarted": "Not Started"
-      },
-      "activity": {
-        "title": "Monthly Activity",
-        "points": "Points",
-        "lessons": "Lessons"
+        "label": "Countries around the world",
+        "brand": "Kazakh Learn",
+        "nav": {
+          "home": "Home",
+          "courses": "Courses",
+          "materials": "Materials"
+        },
+        "auth": {
+          "login": "Log in",
+          "signup": "Sign up",
+          "title": "Authorization",
+          "titleRegister": "Registration",
+          "name": "Name",
+          "namePlaceholder": "Enter your name",
+          "loginLabel": "Login",
+          "loginPlaceholder": "Enter login",
+          "password": "Password",
+          "passwordPlaceholder": "Enter password",
+          "language": "Select language",
+          "languagePlaceholder": "Select language",
+          "submit": "Log in",
+          "submitRegister": "Sign up",
+          "noAccount": "Don't have an account?",
+          "hasAccount": "Already have an account?",
+          "switchToRegister": "Sign up",
+          "switchToLogin": "Log in"
+        },
+        "user": {
+          "rating": "Rating:",
+          "profile": "Profile",
+          "settings": "Settings",
+          "logout": "Log out"
+        },
+        "theme": {
+          "toLight": "Switch to light theme",
+          "toDark": "Switch to dark theme"
+        },
+        "landing": {
+          "hero": {
+            "badge": "Students' Choice",
+            "title": "Kazakh: lessons, tests, and AI practice — all in one place",
+            "text": "Learn 15 minutes a day: launch lessons, take tests, and practice in live dialogues with AI. Plus — a library of materials: history, traditions, culture.",
+            "metrics": "25,000+ students • Average rating 4.8/5 • Certificate upon completion",
+            "ctaPrimary": "Try for free",
+            "ctaSecondary": "Open materials"
+          },
+          "mini": {
+            "lessonLabel": "Mini lesson",
+            "title": "Salem! Qalyń qalai?",
+            "phraseLabel": "Phrase",
+            "phrase": {
+              "kz": "Menіń atym Alіia",
+              "ru": "My name is Aliya"
+            },
+            "aiPracticeLabel": "AI Practice",
+            "ai": {
+              "kz": "Salem, tanysqanyma quanyshtymyn!",
+              "ru": "Nice to meet you!"
+            },
+            "quizLabel": "Mini quiz",
+            "quizQuestion": "How do you translate «Salem»?",
+            "options": ["Hello", "Thank you", "Please"],
+            "timeLabel": "Lesson time",
+            "startLesson": "Start lesson"
+          },
+          "featuresEyebrow": "Why us",
+          "featuresTitle": "Fast, practical, modern",
+          "featuresDesc": "Focus on speaking practice, visual examples, and clear lesson structure. No waiting — start learning right away.",
+          "features": [
+            {
+              "title": "15-minute lessons",
+              "desc": "Concise modules, mini-tests, and checkpoints for steady progress every day."
+            },
+            {
+              "title": "Speech training",
+              "desc": "AI dialogues: speak, get feedback, corrections, and tips."
+            },
+            {
+              "title": "Quality materials",
+              "desc": "Modern video lessons, structured breakdowns, and visual explanations."
+            },
+            {
+              "title": "Start immediately",
+              "desc": "Come in, launch lessons, take tests, and practice with AI — no schedule."
+            }
+          ],
+          "libraryEyebrow": "Library",
+          "libraryTitle": "Materials: history, traditions, culture",
+          "libraryDesc": "Read articles, watch videos, and reinforce language in context.",
+          "materials": [
+            { "tag": "History", "title": "Kazakh Khanate: a brief overview" },
+            { "tag": "Traditions", "title": "Toy: what it is and how it goes" },
+            { "tag": "Culture", "title": "Kuis and dombra — musical codes" },
+            { "tag": "Language", "title": "Phonetics: specific sounds" }
+          ],
+          "video": "Video",
+          "open": "Open",
+          "gamificationEyebrow": "Gamification",
+          "topTitle": "TOP 5 students",
+          "topDesc": "Points for lessons, tests, and tasks. Maintain your streak of days.",
+          "top": {
+            "table": {
+              "student": "Student",
+              "points": "Points",
+              "streak": "Streak",
+              "daysShort": "days"
+            }
+          },
+          "reviewsEyebrow": "Student experience",
+          "reviewsTitle": "What graduates say",
+          "reviewsDesc": "You can also add your review below.",
+          "testimonials": [
+            {
+              "name": "Alina",
+              "role": "HR Manager",
+              "text": "Lessons are short and dynamic. After a month, I'm already comfortably communicating with colleagues."
+            },
+            {
+              "name": "Yermek",
+              "role": "Student",
+              "text": "I liked the AI speech practice and mentor support. Progress is consistently felt."
+            },
+            {
+              "name": "Maria",
+              "role": "Marketer",
+              "text": "Great interface, relevant tasks. The rating helped me choose a course for my goal."
+            }
+          ],
+          "review": {
+            "form": {
+              "name": "Name",
+              "namePh": "Your name",
+              "role": "Role (optional)",
+              "rolePh": "Student, Marketer...",
+              "text": "Review",
+              "textPh": "Share your experience...",
+              "submit": "Add review",
+              "defaultRole": "Student",
+              "errors": { "required": "Please fill in name and review." },
+              "success": "Thank you! Your review has been added."
+            }
+          },
+          "cta": {
+            "title": "Ready to start?",
+            "subtitle": "Join thousands of students who are already learning Kazakh",
+            "button": "Start for free"
+          },
+          "footer": {
+            "about": {
+              "title": "About us",
+              "description": "Platform for learning Kazakh language with modern teaching methods"
+            },
+            "links": {
+              "title": "Links",
+              "courses": "Courses",
+              "pricing": "Pricing",
+              "about": "About us"
+            },
+            "support": {
+              "title": "Support",
+              "help": "Help",
+              "contact": "Contact"
+            },
+            "social": {
+              "title": "Social networks",
+              "facebook": "Facebook",
+              "instagram": "Instagram",
+              "telegram": "Telegram"
+            },
+            "copyright": "© 2024 Kazakh language learning. All rights reserved."
+          }
+        },
+        "learning": {
+          "title": "Learning modules",
+          "subtitle": "Choose a module and start learning Kazakh",
+          "loading": "Loading...",
+          "level": "Level",
+          "task": "Task",
+          "tasksCount": "tasks",
+          "backToModules": "Back to modules",
+          "taskNumber": "Task {current} of {total}",
+          "moduleNotFound": "Module not found",
+          "tasks": {
+            "missingWord": "Missing word",
+            "listening": "Listening",
+            "riddle": "Riddle",
+            "aiChat": "AI Chat"
+          },
+          "taskExplanations": {
+            "missingWord": "Choose the correct word to fill in the blank in the sentence",
+            "listening": "Listen to the audio and choose the correct answer option",
+            "riddle": "Solve the riddle and choose the correct answer in Kazakh",
+            "aiChat": "Chat with AI on the module topic to practice conversational skills"
+          },
+          "points": "points",
+          "totalPoints": "Total points",
+          "taskTitles": {
+            "missingWord": "Missing word",
+            "listening": "Listening",
+            "riddle": "Riddle",
+            "aiChat": "AI Chat"
+          },
+          "buttons": {
+            "check": "Check",
+            "close": "Close"
+          },
+          "messages": {
+            "success": "Excellent! You earned {points} points!",
+            "error": "Unfortunately, the answer is incorrect. Please try again!",
+            "levelCompleted": "Level completed!",
+            "levelCompletedDescription": "Congratulations! You have successfully completed all tasks in the level.",
+            "allTasksCompleted": "All tasks completed!",
+            "audioHint": "Click the button to listen to the audio",
+            "selectAnswer": "Choose the correct answer in Kazakh:",
+            "aiChatPlaceholder": "AI chat feature will be implemented later",
+            "aiChatDescription": "Practice conversational skills by chatting with AI on the module topic",
+            "aiChatLoading": "Loading topic...",
+            "aiChatError": "Error loading topic. Please try again.",
+            "aiChatSend": "Send",
+            "aiChatPlaceholderInput": "Type your message in Kazakh...",
+            "aiChatSending": "Sending...",
+            "aiChatCheckGrammar": "Check grammar",
+            "aiChatComplete": "Complete task",
+            "aiChatGrammarTitle": "Grammar check",
+            "aiChatGrammarOriginal": "Original:",
+            "aiChatGrammarCorrected": "Corrected:",
+            "aiChatGrammarExplanation": "Explanation:"
+          }
+        },
+        "dashboards": {
+          "title": "Analytics and Dashboards",
+          "subtitle": "Analyze statistics of all users and track overall platform activity",
+          "stats": {
+            "totalUsers": "Total Users",
+            "activeUsers": "Active Users",
+            "newRegistrations": "New Registrations",
+            "studyTime": "Study Time"
+          },
+          "charts": {
+            "days": {
+              "monday": "Mon",
+              "tuesday": "Tue",
+              "wednesday": "Wed",
+              "thursday": "Thu",
+              "friday": "Fri",
+              "saturday": "Sat",
+              "sunday": "Sun"
+            },
+            "months": {
+              "january": "Jan",
+              "february": "Feb",
+              "march": "Mar",
+              "april": "Apr",
+              "may": "May",
+              "june": "Jun"
+            },
+            "weeklyActivity": {
+              "title": "Weekly Activity",
+              "lessons": "Lessons"
+            },
+            "progress": {
+              "title": "Learning Progress",
+              "completed": "Completed",
+              "inProgress": "In Progress",
+              "notStarted": "Not Started"
+            },
+            "activity": {
+              "title": "Monthly Activity",
+              "points": "Points",
+              "lessons": "Lessons"
+            },
+            "text": "Get free access to the first module. No card or commitments.",
+            "primary": "Open materials",
+            "secondary": "Choose course"
+          },
+          "signup": {
+            "title": "Sign up for a course",
+            "text": "Leave your contacts — we'll guide you to start and help with selection.",
+            "form": {
+              "name": "Name",
+              "namePh": "Your name",
+              "email": "Email",
+              "emailPh": "you@example.com",
+              "course": "Course",
+              "submit": "Submit application",
+              "errors": { "required": "Please provide name and email." },
+              "success": "Application submitted. We'll contact you soon."
+            }
+          },
+          "courses": {
+            "a1": "A1 — Beginner",
+            "a2": "A2 — Upper Beginner",
+            "b1": "B1 — Intermediate",
+            "b2": "B2 — Upper Intermediate"
+          },
+          "footer": {
+            "legal": "Privacy Policy · Terms of Use"
+          }
+        }
       }
     }
   }
