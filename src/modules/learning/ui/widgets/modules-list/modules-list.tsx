@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
-import { getCurrentUser } from "@/shared/lib/mock-auth";
 import { useLearningStore } from "../../../model/learning.store";
 import { isModuleAvailable } from "../../../utils/learning.utils";
 import { getMockUserProgress, mockModules } from "../../../utils/mock-data";
@@ -44,22 +43,12 @@ export function ModulesList(): React.JSX.Element {
     );
   }
 
-  const user = getCurrentUser();
-  const totalPoints = userProgress?.totalPoints || 0;
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-600 to-blue-700 py-8">
       <div className="container mx-auto px-4">
         <div className="mb-8">
           <h1 className="mb-2 text-3xl font-bold text-white">{t("title")}</h1>
           <p className="text-white/90">{t("subtitle")}</p>
-          {user && (
-            <div className="mt-4 inline-block rounded-lg bg-white/20 backdrop-blur px-4 py-2">
-              <span className="font-semibold text-white">
-                {t("totalPoints")}: {totalPoints} {t("points")}
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
