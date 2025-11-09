@@ -200,7 +200,6 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
                     >
                       <Field>
                         <FieldLabel htmlFor="language">
-                          Выберите язык
                         </FieldLabel>
                         <FieldLabel
                           htmlFor="language"
