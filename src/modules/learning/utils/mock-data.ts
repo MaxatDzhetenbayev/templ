@@ -87,10 +87,10 @@ const mockModulesData: LocalizedModuleData[] = [
             type: "missing-word",
             sentence: "Сәлеметсіз бе! Мен ___ .",
             options: [
-              { id: "opt-1", text: "студент", isCorrect: true },
-              { id: "opt-2", text: "мұғалім", isCorrect: false },
-              { id: "opt-3", text: "дәрігер", isCorrect: false },
-              { id: "opt-4", text: "инженер", isCorrect: false },
+              { id: "opt-1", text: "студентпін", isCorrect: true },
+              { id: "opt-2", text: "мұғалімпін", isCorrect: false },
+              { id: "opt-3", text: "дәрігерпін", isCorrect: false },
+              { id: "opt-4", text: "инженерпін", isCorrect: false },
             ],
             correctAnswerId: "opt-1",
             points: 10,
@@ -117,9 +117,9 @@ const mockModulesData: LocalizedModuleData[] = [
             id: "task-1-1-4",
             type: "riddle",
             riddle: {
-              ru: "Это слово используется для приветствия утром",
-              en: "This word is used for greeting in the morning",
-              kk: "Бұл сөз таңертең сәлемдесу үшін қолданылады",
+              ru: "Какое приветствие говорят утром?",
+              en: "What greeting is said in the morning?",
+              kk: "Таңертең қандай сәлемдесу айтылады?",
             },
             options: [
               { id: "opt-1", text: "Қайырлы таң", isCorrect: true },
@@ -166,10 +166,10 @@ const mockModulesData: LocalizedModuleData[] = [
             type: "missing-word",
             sentence: "Сіз қалайсыз? Мен ___ .",
             options: [
-              { id: "opt-1", text: "жақсы", isCorrect: true },
-              { id: "opt-2", text: "нашар", isCorrect: false },
-              { id: "opt-3", text: "қызық", isCorrect: false },
-              { id: "opt-4", text: "әдемі", isCorrect: false },
+              { id: "opt-1", text: "жақсымын", isCorrect: true },
+              { id: "opt-2", text: "студентпін", isCorrect: false },
+              { id: "opt-3", text: "қызықпын", isCorrect: false },
+              { id: "opt-4", text: "әдемімін", isCorrect: false },
             ],
             correctAnswerId: "opt-1",
             points: 10,
@@ -196,9 +196,9 @@ const mockModulesData: LocalizedModuleData[] = [
             id: "task-1-2-3",
             type: "riddle",
             riddle: {
-              ru: "Это слово используется для прощания на казахском языке",
-              en: "This word is used for saying goodbye in Kazakh",
-              kk: "Бұл сөз қазақ тілінде қоштасу үшін қолданылады",
+              ru: "Какое слово говорят при прощании?",
+              en: "What word is said when saying goodbye?",
+              kk: "Қоштасқанда қандай сөз айтылады?",
             },
             options: [
               { id: "opt-1", text: "Сау болыңыз", isCorrect: true },
@@ -248,14 +248,14 @@ const mockModulesData: LocalizedModuleData[] = [
           {
             id: "task-2-1-1",
             type: "missing-word",
-            sentence: "Менің ___ екі бауырым бар.",
+            sentence: "Менің ___ қарындасым бар.",
             options: [
-              { id: "opt-1", text: "ата-ана", isCorrect: false },
-              { id: "opt-2", text: "отбасы", isCorrect: false },
-              { id: "opt-3", text: "қарындасы", isCorrect: true },
-              { id: "opt-4", text: "дос", isCorrect: false },
+              { id: "opt-1", text: "бір", isCorrect: true },
+              { id: "opt-2", text: "екі", isCorrect: false },
+              { id: "opt-3", text: "үш", isCorrect: false },
+              { id: "opt-4", text: "төрт", isCorrect: false },
             ],
-            correctAnswerId: "opt-3",
+            correctAnswerId: "opt-1",
             points: 10,
           },
           {
@@ -280,9 +280,9 @@ const mockModulesData: LocalizedModuleData[] = [
             id: "task-2-1-3",
             type: "riddle",
             riddle: {
-              ru: "Это слово означает 'мама' на казахском",
-              en: "This word means 'mom' in Kazakh",
-              kk: "Бұл сөз қазақ тілінде 'ана' дегенді білдіреді",
+              ru: "Кто родил тебя на свет?",
+              en: "Who gave birth to you?",
+              kk: "Сені кім туған?",
             },
             options: [
               { id: "opt-1", text: "Әке", isCorrect: false },
@@ -296,14 +296,14 @@ const mockModulesData: LocalizedModuleData[] = [
           {
             id: "task-2-1-4",
             type: "missing-word",
-            sentence: "Менің ___ үлкен отбасым бар.",
+            sentence: "Менің ___ отбасым бар.",
             options: [
-              { id: "opt-1", text: "ата-ана", isCorrect: false },
-              { id: "opt-2", text: "отбасы", isCorrect: true },
-              { id: "opt-3", text: "қарындасы", isCorrect: false },
-              { id: "opt-4", text: "дос", isCorrect: false },
+              { id: "opt-1", text: "үлкен", isCorrect: true },
+              { id: "opt-2", text: "кіші", isCorrect: false },
+              { id: "opt-3", text: "студент", isCorrect: false },
+              { id: "opt-4", text: "мұғалім", isCorrect: false },
             ],
-            correctAnswerId: "opt-2",
+            correctAnswerId: "opt-1",
             points: 10,
           },
           {
@@ -377,9 +377,9 @@ const mockModulesData: LocalizedModuleData[] = [
             id: "task-3-1-3",
             type: "riddle",
             riddle: {
-              ru: "Это слово означает 'хлеб' на казахском",
-              en: "This word means 'bread' in Kazakh",
-              kk: "Бұл сөз қазақ тілінде 'нан' дегенді білдіреді",
+              ru: "Что пекут в печи?",
+              en: "What is baked in the oven?",
+              kk: "Пеште не пісіріледі?",
             },
             options: [
               { id: "opt-1", text: "Нан", isCorrect: true },

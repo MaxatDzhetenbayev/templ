@@ -5,9 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Input } from "@/shared/components/ui";
+import { getCurrentUser } from "@/shared/lib/mock-auth";
 import { cn } from "@/shared/lib/utils";
 
-import type { AiChatTask } from "../../../schemas/learning.schema";
 import {
   checkGrammar,
   getChatTopic,
@@ -16,6 +16,7 @@ import {
   type GrammarCorrection,
   type TopicData,
 } from "../../../lib/chat-api";
+import type { AiChatTask } from "../../../schemas/learning.schema";
 
 export interface AiChatTaskProps {
   task: AiChatTask;
@@ -53,6 +54,19 @@ export function AiChatTask({
     if (locale === "kk") return "kk";
     if (locale === "en") return "en";
     return "ru";
+  };
+
+  // Получаем язык носителя пользователя
+  const getNativeLanguage = (): "kk" | "ru" | "en" => {
+    const user = getCurrentUser();
+    if (user?.language) {
+      const userLang = user.language.toLowerCase();
+      if (userLang === "kk" || userLang === "kazakh") return "kk";
+      if (userLang === "en" || userLang === "english") return "en";
+      if (userLang === "ru" || userLang === "russian") return "ru";
+    }
+    // Если пользователь не найден или язык не определен, используем язык интерфейса
+    return getLanguageCode();
   };
 
   // Определяем уровень сложности (можно улучшить, добавив в задание)
@@ -156,7 +170,10 @@ export function AiChatTask({
     setError(null);
 
     try {
-      const correction = await checkGrammar(inputValue.trim(), getLanguageCode());
+      const correction = await checkGrammar(
+        inputValue.trim(),
+        getNativeLanguage()
+      );
       setGrammarCorrection(correction);
     } catch (err) {
       console.error("Error checking grammar:", err);
@@ -380,4 +397,3 @@ export function AiChatTask({
     </div>
   );
 }
-
